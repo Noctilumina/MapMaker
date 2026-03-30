@@ -29,7 +29,7 @@ export default function PropertiesPanel() {
   const [bgSearch, setBgSearch] = useState('');
 
   useEffect(() => {
-    fetch('/textures/manifest.json')
+    fetch(`${import.meta.env.BASE_URL}textures/manifest.json`)
       .then(r => r.json())
       .then(data => setTextures(data.textures || []))
       .catch(() => {});
@@ -153,16 +153,17 @@ export default function PropertiesPanel() {
                       <button
                         key={t.id}
                         onClick={() => {
-                          setGrid({ backgroundImage: t.path, backgroundTile: true });
+                          const base = import.meta.env.BASE_URL;
+                          setGrid({ backgroundImage: base + t.path.replace(/^\//, ''), backgroundTile: true });
                           setShowBgPicker(false);
                         }}
                         title={t.name}
                         style={{
-                          aspectRatio: '1', border: grid.backgroundImage === t.path ? '2px solid #cba6f7' : '2px solid transparent',
+                          aspectRatio: '1', border: grid.backgroundImage?.endsWith(t.path.replace(/^\//, '')) ? '2px solid #cba6f7' : '2px solid transparent',
                           borderRadius: 4, cursor: 'pointer', padding: 0, overflow: 'hidden', background: '#313244',
                         }}
                       >
-                        <img src={t.path} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                        <img src={import.meta.env.BASE_URL + t.path.replace(/^\//, '')} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
                       </button>
                     ))}
                 </div>

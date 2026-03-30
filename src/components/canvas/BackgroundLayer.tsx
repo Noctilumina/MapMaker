@@ -26,7 +26,9 @@ export default function BackgroundLayer() {
       return;
     }
     const img = new window.Image();
-    img.src = grid.backgroundImage;
+    img.src = grid.backgroundImage.startsWith('http') || grid.backgroundImage.startsWith('data:')
+      ? grid.backgroundImage
+      : import.meta.env.BASE_URL + grid.backgroundImage.replace(/^\//, '');
     img.onload = () => setBgImage(img);
   }, [grid.backgroundImage]);
 

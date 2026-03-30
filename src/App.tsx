@@ -60,20 +60,21 @@ export default function App() {
     const pc = cs;
 
     // === REGISTER TEXTURES ===
+    const base = import.meta.env.BASE_URL;
     const tex = (id: string, src: string, name: string) => {
-      if (!store.assets[id]) store.registerAsset(id, { src, category: 'floors', gridSize: [1, 1], name, source: 'preset' });
+      if (!store.assets[id]) store.registerAsset(id, { src: base + src.replace(/^\//, ''), category: 'floors', gridSize: [1, 1], name, source: 'preset' });
       return id;
     };
-    const concrete = tex('t:concrete', '/textures/misc/stone 1.png', 'Concrete');
-    tex('t:asphalt', '/textures/misc/stone 2.png', 'Asphalt');
-    const tiles = tex('t:tiles', '/textures/paving/paving 5.png', 'Floor Tiles');
-    const tilesAlt = tex('t:tilesAlt', '/textures/paving/paving 6.png', 'Floor Tiles Alt');
-    const metal = tex('t:metal', '/textures/misc/stone 3.png', 'Metal');
+    const concrete = tex('t:concrete', 'textures/misc/stone 1.png', 'Concrete');
+    tex('t:asphalt', 'textures/misc/stone 2.png', 'Asphalt');
+    const tiles = tex('t:tiles', 'textures/paving/paving 5.png', 'Floor Tiles');
+    const tilesAlt = tex('t:tilesAlt', 'textures/paving/paving 6.png', 'Floor Tiles Alt');
+    const metal = tex('t:metal', 'textures/misc/stone 3.png', 'Metal');
 
     // === REGISTER OBJECT ASSETS ===
     const obj = (path: string, name: string, gw = 1, gh = 1) => {
       const id = `o:${path.replace(/[\s,()]/g, '-')}`;
-      if (!store.assets[id]) store.registerAsset(id, { src: `/assets/${path}`, category: 'objects', gridSize: [gw, gh], name, source: 'preset' });
+      if (!store.assets[id]) store.registerAsset(id, { src: `${base}assets/${path}`, category: 'objects', gridSize: [gw, gh], name, source: 'preset' });
       return id;
     };
     // Furniture

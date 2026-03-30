@@ -185,7 +185,7 @@ export const DEFAULT_GRID: GridConfig = {
   scale: '2m',
   visible: true,
   backgroundColor: '#1a1a1a',
-  backgroundImage: '/textures/misc/stone 2.png',
+  backgroundImage: 'textures/misc/stone 2.png',
   backgroundTile: true,
   backgroundTileSize: 1,
   backgroundOffsetX: 0,

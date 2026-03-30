@@ -6,6 +6,11 @@ import ImportDialog from '../dialogs/ImportDialog';
 
 import type { ToolName } from '../../stores/editorStore';
 
+const BASE = import.meta.env.BASE_URL;
+function withBase(path: string): string {
+  return path.startsWith('/') ? BASE + path.slice(1) : BASE + path;
+}
+
 const CATEGORIES = ['all', 'floors', 'walls', 'furniture', 'props', 'doors'];
 const TEXTURE_CATEGORIES = ['all', 'drawn', 'grass', 'ground', 'rock', 'stone-wall', 'wood', 'paving', 'roof', 'misc', 'numbered'];
 const OBJECT_CATEGORIES = [
@@ -52,15 +57,16 @@ export default function AssetBrowser() {
   const [tagMap, setTagMap] = useState<Record<string, string[]>>({});
 
   useEffect(() => {
-    fetch('/textures/manifest.json')
+    const base = import.meta.env.BASE_URL;
+    fetch(`${base}textures/manifest.json`)
       .then(r => r.json())
       .then(data => setTextures(data.textures || []))
       .catch(() => {});
-    fetch('/assets/manifest.json')
+    fetch(`${base}assets/manifest.json`)
       .then(r => r.json())
       .then(data => setObjects(data.assets || []))
       .catch(() => {});
-    fetch('/assets/tags.json')
+    fetch(`${base}assets/tags.json`)
       .then(r => r.json())
       .then((tags: Array<{ rel_path: string; vibe_tags?: string[] }>) => {
         const map: Record<string, string[]> = {};
@@ -117,7 +123,7 @@ export default function AssetBrowser() {
     // Register the texture as an asset if not already registered
     if (!assets[assetId]) {
       useMapStore.getState().registerAsset(assetId, {
-        src: tex.path,
+        src: withBase(tex.path),
         category: 'floors',
         gridSize: [1, 1],
         name: tex.name,
@@ -131,7 +137,7 @@ export default function AssetBrowser() {
     const assetId = `object:${obj.id}`;
     if (!assets[assetId]) {
       useMapStore.getState().registerAsset(assetId, {
-        src: obj.path,
+        src: withBase(obj.path),
         category: obj.category,
         gridSize: obj.gridSize,
         name: obj.name,
@@ -306,7 +312,7 @@ export default function AssetBrowser() {
             {filteredObjects.map((obj) => (
               <button key={obj.id} onClick={() => handleObjectSelect(obj)} title={`${obj.name} (${obj.gridSize[0]}x${obj.gridSize[1]})`}
                 style={{ height: 80, border: stampAssetId === `object:${obj.id}` ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', padding: 4, background: '#313244', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                <img src={obj.path} alt={obj.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} loading="lazy" />
+                <img src={withBase(obj.path)} alt={obj.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} loading="lazy" />
                 <span style={{ position: 'absolute', bottom: 2, right: 3, fontSize: 8, color: '#cdd6f4', background: 'rgba(0,0,0,0.6)', borderRadius: 2, padding: '0 3px', lineHeight: '14px' }}>{obj.gridSize[0]}x{obj.gridSize[1]}</span>
               </button>
             ))}
@@ -339,7 +345,7 @@ export default function AssetBrowser() {
                 title={tex.name}
                 style={{ aspectRatio: '1', border: stampAssetId === `texture:${tex.id}` ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', padding: 0, overflow: 'hidden', background: '#313244' }}
               >
-                <img src={tex.path} alt={tex.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                <img src={withBase(tex.path)} alt={tex.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
               </button>
             ))}
             {filteredTextures.length === 0 && (
