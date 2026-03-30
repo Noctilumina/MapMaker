@@ -1,0 +1,18 @@
+{
+  "assets": [
+    { "id": "floor-concrete", "name": "Concrete", "category": "floors", "color": "#585b70", "gridSize": [1, 1] },
+    { "id": "floor-tile", "name": "Tile Floor", "category": "floors", "color": "#45475a", "gridSize": [1, 1] },
+    { "id": "floor-wood", "name": "Wood", "category": "floors", "color": "#8B7355", "gridSize": [1, 1] },
+    { "id": "floor-metal", "name": "Metal Grate", "category": "floors", "color": "#6c7086", "gridSize": [1, 1] },
+    { "id": "wall-basic", "name": "Wall", "category": "walls", "color": "#313244", "gridSize": [1, 1] },
+    { "id": "wall-reinforced", "name": "Reinforced", "category": "walls", "color": "#1e1e2e", "gridSize": [1, 1] },
+    { "id": "wall-glass", "name": "Glass Wall", "category": "walls", "color": "#74c7ec", "gridSize": [1, 1] },
+    { "id": "furniture-desk", "name": "Desk", "category": "furniture", "color": "#a6703e", "gridSize": [2, 1] },
+    { "id": "furniture-chair", "name": "Chair", "category": "furniture", "color": "#7f849c", "gridSize": [1, 1] },
+    { "id": "furniture-table", "name": "Table", "category": "furniture", "color": "#8B6914", "gridSize": [2, 2] },
+    { "id": "prop-crate", "name": "Crate", "category": "props", "color": "#a68a5b", "gridSize": [1, 1] },
+    { "id": "prop-barrel", "name": "Barrel", "category": "props", "color": "#7f6840", "gridSize": [1, 1] },
+    { "id": "door-single", "name": "Door", "category": "doors", "color": "#fab387", "gridSize": [1, 1] },
+    { "id": "door-double", "name": "Double Door", "category": "doors", "color": "#f9e2af", "gridSize": [2, 1] }
+  ]
+}

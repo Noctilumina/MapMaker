@@ -1,0 +1,110 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root { height: 100%; width: 100%; overflow: hidden; }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  font-family: system-ui, sans-serif;
+}
+
+.toolbar {
+  height: 40px;
+  background: #1e1e2e;
+  border-bottom: 1px solid #45475a;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.tool-sidebar {
+  width: 48px;
+  background: #1e1e2e;
+  border-right: 1px solid #45475a;
+  flex-shrink: 0;
+}
+
+.asset-panel {
+  min-width: 160px;
+  max-width: 500px;
+  background: #181825;
+  border-right: 1px solid #45475a;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.canvas-area {
+  flex: 1;
+  background: #11111b;
+  overflow: hidden;
+  position: relative;
+}
+
+.right-panel {
+  min-width: 160px;
+  max-width: 500px;
+  background: #181825;
+  border-left: 1px solid #45475a;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-bar {
+  height: 24px;
+  background: #1e1e2e;
+  border-top: 1px solid #45475a;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 11px;
+  color: #6c7086;
+}
+
+/* Resize handles */
+.resize-handle {
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 10;
+}
+.resize-handle:hover, .resize-handle.active {
+  background: rgba(203, 166, 247, 0.3);
+}
+.resize-handle-right { right: -2px; }
+.resize-handle-left { left: -2px; }
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #45475a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6c7086;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #45475a transparent;
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Asset Tag Editor</title>
+<style>
+body { background: #1e1e2e; color: #cdd6f4; font-family: system-ui; margin: 0; padding: 20px; }
+h1 { color: #cba6f7; margin-bottom: 8px; }
+.controls { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.controls input { background: #313244; color: #cdd6f4; border: 1px solid #45475a; border-radius: 4px; padding: 6px 12px; font-size: 13px; width: 250px; }
+.controls select { background: #313244; color: #cdd6f4; border: 1px solid #45475a; border-radius: 4px; padding: 6px 8px; font-size: 12px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.card { background: #313244; border-radius: 8px; padding: 6px; cursor: pointer; position: relative; transition: outline 0.1s; }
+.card:hover { outline: 2px solid #45475a; }
+.card.has-bulk { outline: 2px solid #a6e3a1; }
+.card img { width: 100%; height: 80px; object-fit: contain; background: #1e1e2e; border-radius: 4px; pointer-events: none; }
+.card .name { font-size: 9px; color: #cdd6f4; margin: 3px 0 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; pointer-events: none; }
+.card .cat { font-size: 8px; color: #6c7086; pointer-events: none; }
+.tags { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 8px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 8px; cursor: pointer; background: #cba6f7; color: #1e1e2e; font-weight: 500; }
+.tag:hover { background: #f38ba8; }
+.add-tag { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 4px; }
+.add-tag button { background: #45475a; color: #a6adc8; border: none; border-radius: 6px; padding: 5px 0; font-size: 10px; cursor: pointer; font-weight: 500; text-align: center; }
+.add-tag button:hover { background: #a6e3a1; color: #1e1e2e; }
+.add-tag button.active-on { background: #cba6f7; color: #1e1e2e; }
+#count { color: #a6adc8; font-size: 13px; }
+.save-btn { background: #a6e3a1; color: #1e1e2e; border: none; border-radius: 4px; padding: 8px 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
+.save-btn:hover { background: #94e2d5; }
+.stats { font-size: 11px; color: #6c7086; margin: 6px 0; }
+.pagination { display: flex; gap: 6px; align-items: center; justify-content: center; margin: 16px 0; }
+.pagination button { background: #313244; color: #cdd6f4; border: 1px solid #45475a; border-radius: 4px; padding: 6px 14px; cursor: pointer; font-size: 12px; }
+.pagination button:hover { background: #45475a; }
+.pagination button.current { background: #cba6f7; color: #1e1e2e; border-color: #cba6f7; }
+.pagination button:disabled { opacity: 0.3; cursor: default; }
+.page-info { color: #a6adc8; font-size: 12px; }
+
+/* Bulk mode bar */
+.bulk-bar { background: #313244; border: 2px solid #a6e3a1; border-radius: 8px; padding: 10px 16px; margin-bottom: 12px; display: flex; gap: 10px; align-items: center; }
+.bulk-bar .label { color: #a6e3a1; font-weight: bold; font-size: 13px; }
+.bulk-bar button { border: none; border-radius: 6px; padding: 6px 16px; font-size: 13px; cursor: pointer; font-weight: bold; }
+.bulk-bar button.vibe-btn { background: #45475a; color: #cdd6f4; }
+.bulk-bar button.vibe-btn.selected { background: #cba6f7; color: #1e1e2e; }
+.bulk-bar button.off-btn { background: #f38ba8; color: #1e1e2e; margin-left: auto; }
+.bulk-hint { color: #6c7086; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>Asset Tag Editor</h1>
+<div class="controls">
+  <input type="text" id="search" placeholder="Search assets..." oninput="goToPage(1)">
+  <select id="catFilter" onchange="goToPage(1)"><option value="all">All categories</option></select>
+  <select id="vibeFilter" onchange="goToPage(1)"><option value="all">All vibes</option></select>
+  <button class="save-btn" onclick="saveData()">Save tags.json</button>
+  <span id="count"></span>
+</div>
+<div class="stats" id="stats"></div>
+
+<div class="bulk-bar">
+  <span class="label">Bulk tag:</span>
+  <span class="bulk-hint">Select a vibe, then click assets to toggle it</span>
+  <button class="vibe-btn" id="bulk-fantasy" onclick="setBulk('fantasy')">Fantasy</button>
+  <button class="vibe-btn" id="bulk-modern" onclick="setBulk('modern')">Modern</button>
+  <button class="vibe-btn" id="bulk-sci-fi" onclick="setBulk('sci-fi')">Sci-fi</button>
+  <button class="vibe-btn" id="bulk-generic" onclick="setBulk('generic')">Generic</button>
+  <button class="off-btn" onclick="setBulk(null)">Off</button>
+</div>
+
+<div class="pagination" id="paginationTop"></div>
+<div class="grid" id="grid"></div>
+<div class="pagination" id="paginationBottom"></div>
+
+<script>
+const VIBES = ['fantasy', 'modern', 'sci-fi', 'generic'];
+const PER_PAGE = 80;
+let currentPage = 1;
+let data = [];
+let filtered = [];
+let bulkVibe = null;
+
+async function loadData() {
+  try {
+    const res = await fetch('/assets/tags.json');
+    if (res.ok) data = await res.json();
+  } catch(e) {}
+
+  if (data.length === 0) {
+    const manifestRes = await fetch('/assets/manifest.json');
+    const manifest = await manifestRes.json();
+    data = manifest.assets.map(a => ({
+      rel_path: a.path.replace('/assets/', ''),
+      name: a.name,
+      category: a.category,
+      vibe_tags: ['generic'],
+    }));
+  }
+
+  const cats = [...new Set(data.map(d => d.category))].sort();
+  const catSel = document.getElementById('catFilter');
+  cats.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; catSel.appendChild(o); });
+
+  const vibeSel = document.getElementById('vibeFilter');
+  VIBES.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; vibeSel.appendChild(o); });
+
+  goToPage(1);
+  updateStats();
+}
+
+function setBulk(vibe) {
+  bulkVibe = vibe;
+  document.querySelectorAll('.bulk-bar .vibe-btn').forEach(b => b.classList.remove('selected'));
+  if (vibe) document.getElementById('bulk-' + vibe)?.classList.add('selected');
+  // Update card highlights
+  document.querySelectorAll('.card').forEach(card => {
+    const idx = parseInt(card.dataset.idx);
+    if (!vibe) { card.classList.remove('has-bulk'); return; }
+    card.classList.toggle('has-bulk', (data[idx].vibe_tags || []).includes(vibe));
+  });
+}
+
+function cardClick(globalIdx) {
+  if (!bulkVibe) return;
+  const tags = data[globalIdx].vibe_tags || [];
+  if (tags.includes(bulkVibe)) {
+    data[globalIdx].vibe_tags = tags.filter(t => t !== bulkVibe);
+  } else {
+    data[globalIdx].vibe_tags = [...tags, bulkVibe];
+  }
+  updateCard(globalIdx);
+  updateStats();
+}
+
+function getFiltered() {
+  const search = document.getElementById('search').value.toLowerCase();
+  const catFilter = document.getElementById('catFilter').value;
+  const vibeFilter = document.getElementById('vibeFilter').value;
+  let f = data;
+  if (search) f = f.filter(d => d.name.toLowerCase().includes(search) || d.rel_path.toLowerCase().includes(search));
+  if (catFilter !== 'all') f = f.filter(d => d.category === catFilter);
+  if (vibeFilter !== 'all') f = f.filter(d => (d.vibe_tags || []).includes(vibeFilter));
+  return f;
+}
+
+function goToPage(page) {
+  filtered = getFiltered();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+  currentPage = Math.max(1, Math.min(page, totalPages));
+  render();
+  window.scrollTo(0, 0);
+}
+
+function render() {
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+  const start = (currentPage - 1) * PER_PAGE;
+  const pageItems = filtered.slice(start, start + PER_PAGE);
+
+  document.getElementById('count').textContent = `${filtered.length} / ${data.length} assets`;
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = pageItems.map((d) => {
+    const globalIdx = data.indexOf(d);
+    const hasBulk = bulkVibe && (d.vibe_tags || []).includes(bulkVibe);
+    return `
+    <div class="card ${hasBulk ? 'has-bulk' : ''}" data-idx="${globalIdx}" onclick="cardClick(${globalIdx})">
+      <img src="/assets/${encodeURI(d.rel_path)}" alt="${d.name}">
+      <div class="name" title="${d.rel_path}">${d.name}</div>
+      <div class="cat">${d.category}</div>
+      <div class="add-tag">
+        ${VIBES.map(v => `<button class="${(d.vibe_tags||[]).includes(v) ? 'active-on' : ''}" onclick="event.stopPropagation(); addTag(${globalIdx},'${v}')">${v}</button>`).join('')}
+      </div>
+      <div class="tags">
+        ${(d.vibe_tags || []).map(t => `<span class="tag" onclick="event.stopPropagation(); removeTag(${globalIdx},'${t}')">${t} ×</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  const paginationHtml = renderPagination(totalPages);
+  document.getElementById('paginationTop').innerHTML = paginationHtml;
+  document.getElementById('paginationBottom').innerHTML = paginationHtml;
+}
+
+function renderPagination(totalPages) {
+  if (totalPages <= 1) return '';
+  let html = `<button ${currentPage <= 1 ? 'disabled' : ''} onclick="goToPage(${currentPage - 1})">← Prev</button>`;
+  const pages = [];
+  pages.push(1);
+  if (currentPage > 3) pages.push('...');
+  for (let p = Math.max(2, currentPage - 1); p <= Math.min(totalPages - 1, currentPage + 1); p++) pages.push(p);
+  if (currentPage < totalPages - 2) pages.push('...');
+  if (totalPages > 1) pages.push(totalPages);
+  for (const p of pages) {
+    if (p === '...') html += `<span class="page-info">...</span>`;
+    else html += `<button class="${p === currentPage ? 'current' : ''}" onclick="goToPage(${p})">${p}</button>`;
+  }
+  html += `<button ${currentPage >= totalPages ? 'disabled' : ''} onclick="goToPage(${currentPage + 1})">Next →</button>`;
+  html += `<span class="page-info">${(currentPage-1)*PER_PAGE+1}-${Math.min(currentPage*PER_PAGE, filtered.length)} of ${filtered.length}</span>`;
+  return html;
+}
+
+function addTag(idx, tag) {
+  if (!data[idx].vibe_tags) data[idx].vibe_tags = [];
+  if (!data[idx].vibe_tags.includes(tag)) data[idx].vibe_tags.push(tag);
+  updateCard(idx);
+  updateStats();
+}
+
+function removeTag(idx, tag) {
+  if (data[idx].vibe_tags) data[idx].vibe_tags = data[idx].vibe_tags.filter(t => t !== tag);
+  updateCard(idx);
+  updateStats();
+}
+
+function updateCard(globalIdx) {
+  const el = document.querySelector(`[data-idx="${globalIdx}"]`);
+  if (!el) return;
+  const d = data[globalIdx];
+  el.querySelector('.add-tag').innerHTML = VIBES.map(v => `<button class="${(d.vibe_tags||[]).includes(v) ? 'active-on' : ''}" onclick="event.stopPropagation(); addTag(${globalIdx},'${v}')">${v}</button>`).join('');
+  el.querySelector('.tags').innerHTML = (d.vibe_tags || []).map(t => `<span class="tag" onclick="event.stopPropagation(); removeTag(${globalIdx},'${t}')">${t} ×</span>`).join('');
+  if (bulkVibe) el.classList.toggle('has-bulk', (d.vibe_tags || []).includes(bulkVibe));
+}
+
+function updateStats() {
+  const vibeStats = {};
+  VIBES.forEach(v => vibeStats[v] = data.filter(d => (d.vibe_tags||[]).includes(v)).length);
+  document.getElementById('stats').textContent = VIBES.map(v => `${v}: ${vibeStats[v]}`).join(' | ');
+}
+
+function saveData() {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'tags.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  alert('tags.json downloaded! Place it in public/assets/ to use in the app.');
+}
+
+loadData();
+</script>
+</body>
+</html>
