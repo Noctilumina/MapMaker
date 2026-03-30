@@ -143,7 +143,8 @@ function ElementNode({ element, depth }: { element: MapElement; depth: number })
   const select = useEditorStore((s) => s.select);
   const selectedIds = useEditorStore((s) => s.selectedElementIds);
   const isSelected = selectedIds.includes(element.id);
-  const asset = assets[element.assetId];
+  const assetId = 'assetId' in element ? element.assetId : undefined;
+  const asset = assetId ? assets[assetId] : undefined;
 
   const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.setData('mapmaker/element', element.id);
@@ -162,7 +163,7 @@ function ElementNode({ element, depth }: { element: MapElement; depth: number })
       onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = '#313244'; }}
       onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = 'transparent'; }}>
       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-        {asset?.name || element.assetId}
+        {asset?.name || assetId || element.type}
       </span>
     </div>
   );

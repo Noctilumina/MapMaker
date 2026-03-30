@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { migrateProject } from './migration';
+import type { TileElement } from '../types';
 
 describe('migrateProject', () => {
   it('migrates v1 project to v2 — converts grid coords to pixels', () => {
@@ -16,10 +17,10 @@ describe('migrateProject', () => {
 
     const v2 = migrateProject(v1);
     expect(v2.version).toBe(2);
-    expect(v2.elements[0].x).toBe(192);
-    expect(v2.elements[0].y).toBe(320);
+    expect((v2.elements[0] as TileElement).x).toBe(192);
+    expect((v2.elements[0] as TileElement).y).toBe(320);
     expect(v2.elements[0].groupId).toBeNull();
-    expect(v2.elements[0].opacity).toBe(1.0);
+    expect((v2.elements[0] as TileElement).opacity).toBe(1.0);
     expect(v2.groups).toEqual([]);
     expect(v2.grid.backgroundColor).toBe('#11111b');
     expect(v2.grid.backgroundImage).toBeNull();
@@ -41,7 +42,7 @@ describe('migrateProject', () => {
     };
 
     const result = migrateProject(v2);
-    expect(result.elements[0].x).toBe(192);
+    expect((result.elements[0] as TileElement).x).toBe(192);
     expect(result.version).toBe(2);
   });
 

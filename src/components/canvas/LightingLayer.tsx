@@ -1,9 +1,8 @@
 import { Layer, Rect, Line, Group } from 'react-konva';
-import { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useMapStore } from '../../stores/mapStore';
 import { computeVisibilityPolygon, getWallSegments } from '../../utils/visibility';
 import type { PolygonElement, LightSource } from '../../types';
-import type Konva from 'konva';
 
 function getAmbientLight(time: number): { color: string; darkness: number } {
   if (time >= 10 && time <= 16) return { color: 'rgba(0,0,0,0)', darkness: 0 };
@@ -59,32 +58,17 @@ function hexToRgb(hex: string): string {
   return `${r}, ${g}, ${b}`;
 }
 
-// Check if a point is inside a polygon
-function pointInPolygon(px: number, py: number, polyPoints: number[]): boolean {
-  const n = polyPoints.length / 2;
-  let inside = false;
-  for (let i = 0, j = n - 1; i < n; j = i++) {
-    const xi = polyPoints[i * 2], yi = polyPoints[i * 2 + 1];
-    const xj = polyPoints[j * 2], yj = polyPoints[j * 2 + 1];
-    if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) {
-      inside = !inside;
-    }
-  }
-  return inside;
-}
+
 
 // Render a single light — with wall occlusion if inside a building, full circle if outside
-function LightWithOcclusion({ light, wallSegments, darkness, polygons }: {
+function LightWithOcclusion({ light, wallSegments, darkness }: {
   light: LightSource;
   wallSegments: ReturnType<typeof getWallSegments>;
   darkness: number;
-  polygons: PolygonElement[];
+  polygons?: PolygonElement[];
 }) {
   const effectiveIntensity = light.intensity * (0.3 + darkness * 0.7);
   if (effectiveIntensity < 0.05) return null;
-
-  // Check if light is inside any building
-  const isInsideBuilding = polygons.some(p => pointInPolygon(light.x, light.y, p.points));
 
   // Use all wall segments — visibility algorithm handles inside/outside correctly
   const useOcclusion = wallSegments.length > 0;
@@ -108,7 +92,7 @@ function LightWithOcclusion({ light, wallSegments, darkness, polygons }: {
   const shape = light.lightShape || 'point';
 
   // Generate light gradient element(s) based on shape
-  let lightElements: JSX.Element;
+  let lightElements: React.JSX.Element;
 
   if (shape === 'point') {
     lightElements = (

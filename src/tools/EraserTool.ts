@@ -25,7 +25,7 @@ export class EraserTool implements Tool {
     this.erasing = false;
   }
 
-  private eraseAt(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
+  private eraseAt(_gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
     const target = e.target;
     const elementId = target.id?.();
     const activeLayerId = useEditorStore.getState().activeLayerId;

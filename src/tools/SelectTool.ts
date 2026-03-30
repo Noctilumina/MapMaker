@@ -53,7 +53,7 @@ export class SelectTool implements Tool {
     }
   }
 
-  onMouseMove(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
+  onMouseMove(_gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
     if (this.boxing) {
       const stage = e.target.getStage();
       const pointer = stage?.getPointerPosition();
@@ -119,10 +119,24 @@ export class SelectTool implements Tool {
         const { elements } = useMapStore.getState();
         const { cellSize } = useMapStore.getState().grid;
         const hits = elements.filter((el) => {
+          if (el.type === 'polygon') {
+            const xs = el.points.filter((_, i) => i % 2 === 0);
+            const ys = el.points.filter((_, i) => i % 2 === 1);
+            const minX = Math.min(...xs), maxX = Math.max(...xs);
+            const minY = Math.min(...ys), maxY = Math.max(...ys);
+            return minX < box.x + box.width && maxX > box.x && minY < box.y + box.height && maxY > box.y;
+          }
+          if (el.type === 'path') {
+            const xs = el.pathPoints.map(p => p.x);
+            const ys = el.pathPoints.map(p => p.y);
+            const minX = Math.min(...xs), maxX = Math.max(...xs);
+            const minY = Math.min(...ys), maxY = Math.max(...ys);
+            return minX < box.x + box.width && maxX > box.x && minY < box.y + box.height && maxY > box.y;
+          }
           const elX = el.x;
           const elY = el.y;
-          const elW = el.width * cellSize;
-          const elH = el.height * cellSize;
+          const elW = (el.type === 'tile' ? el.width : 1) * cellSize;
+          const elH = (el.type === 'tile' ? el.height : 1) * cellSize;
           return elX < box.x + box.width && elX + elW > box.x && elY < box.y + box.height && elY + elH > box.y;
         });
         useEditorStore.getState().select(hits.map((el) => el.id));

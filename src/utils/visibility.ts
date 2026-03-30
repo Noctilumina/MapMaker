@@ -58,19 +58,6 @@ function raycast(
  * Compute the visibility polygon from a light source.
  * Returns a flat array of [x1,y1, x2,y2, ...] forming the visible area polygon.
  */
-// Check if a point is inside a polygon (ray casting)
-function pointInPolygon(px: number, py: number, polyPoints: number[]): boolean {
-  const n = polyPoints.length / 2;
-  let inside = false;
-  for (let i = 0, j = n - 1; i < n; j = i++) {
-    const xi = polyPoints[i * 2], yi = polyPoints[i * 2 + 1];
-    const xj = polyPoints[j * 2], yj = polyPoints[j * 2 + 1];
-    if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) {
-      inside = !inside;
-    }
-  }
-  return inside;
-}
 
 export function computeVisibilityPolygon(
   lightX: number,

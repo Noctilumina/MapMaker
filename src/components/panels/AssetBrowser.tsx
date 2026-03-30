@@ -99,7 +99,7 @@ export default function AssetBrowser() {
   const mapAssetEntries = useMemo(() => {
     const usageMap: Record<string, number> = {};
     for (const el of elements) {
-      usageMap[el.assetId] = (usageMap[el.assetId] ?? 0) + 1;
+      if ('assetId' in el) usageMap[el.assetId] = (usageMap[el.assetId] ?? 0) + 1;
     }
     return Object.entries(usageMap)
       .map(([id, count]) => ({ id, count, asset: assets[id] }))

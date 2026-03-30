@@ -303,7 +303,7 @@ export default function PropertiesPanel() {
 
   // --- Multi-selection ---
   if (selectedIds.length > 1) {
-    const selectedElements = elements.filter(el => selectedIds.includes(el.id));
+    const selectedElements = elements.filter(el => selectedIds.includes(el.id)) as any[];
 
     const handleGroup = () => {
       useHistoryStore.getState().captureSnapshot();
@@ -510,13 +510,12 @@ export default function PropertiesPanel() {
     useHistoryStore.getState().captureSnapshot();
     updateElement(el.id, updates as Partial<typeof el>);
   };
-  const rotations = [0, 90, 180, 270];
-  const opacityPct = Math.round((el.opacity ?? 1) * 100);
+  const opacityPct = Math.round(('opacity' in el ? (el.opacity ?? 1) : 1) * 100);
 
   return (
     <div style={{ padding: 12, fontSize: 12, color: '#a6adc8' }}>
       <div style={{ color: '#a6e3a1', fontWeight: 'bold', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6 }}>Properties</div>
-      {assets[el.assetId] && (
+      {'assetId' in el && assets[el.assetId] && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, padding: '4px 6px', background: '#313244', borderRadius: 4 }}>
           <img src={assets[el.assetId].src} alt="" style={{ width: 24, height: 24, borderRadius: 3, objectFit: 'contain', background: '#1e1e2e' }} />
           <span style={{ color: '#cdd6f4', fontSize: 11, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{assets[el.assetId].name}</span>
@@ -864,11 +863,11 @@ export default function PropertiesPanel() {
         <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           <input
             type="color"
-            value={el.tint ?? '#ffffff'}
-            onChange={(e) => updateElement(el.id, { tint: e.target.value })}
+            value={('tint' in el ? el.tint : null) ?? '#ffffff'}
+            onChange={(e) => updateElement(el.id, { tint: e.target.value } as any)}
             style={{ width: 32, height: 24, padding: 0, border: '1px solid #45475a', borderRadius: 3, background: 'none', cursor: 'pointer' }}
           />
-          {el.tint && (
+          {'tint' in el && el.tint && (
             <button
               onClick={() => handleUpdate({ tint: null })}
               style={{ background: '#313244', color: '#a6adc8', border: 'none', borderRadius: 3, padding: '2px 6px', fontSize: 11, cursor: 'pointer' }}

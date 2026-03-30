@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { useMapStore } from './mapStore';
+import type { TileElement } from '../types';
 
 const testElement = {
   type: 'tile' as const,
@@ -31,8 +32,8 @@ describe('mapStore', () => {
     useMapStore.getState().addElement(testElement);
     const { elements } = useMapStore.getState();
     expect(elements).toHaveLength(1);
-    expect(elements[0].x).toBe(192);
-    expect(elements[0].opacity).toBe(1.0);
+    expect((elements[0] as TileElement).x).toBe(192);
+    expect((elements[0] as TileElement).opacity).toBe(1.0);
     expect(elements[0].groupId).toBeNull();
   });
 
@@ -40,7 +41,7 @@ describe('mapStore', () => {
     useMapStore.getState().addElement(testElement);
     const id = useMapStore.getState().elements[0].id;
     useMapStore.getState().moveElement(id, 256, 384);
-    expect(useMapStore.getState().elements[0].x).toBe(256);
+    expect((useMapStore.getState().elements[0] as TileElement).x).toBe(256);
   });
 
   it('removes an element', () => {
@@ -55,8 +56,8 @@ describe('mapStore', () => {
     const id = useMapStore.getState().elements[0].id;
     useMapStore.getState().updateElement(id, { rotation: 90, opacity: 0.5 });
     const el = useMapStore.getState().elements[0];
-    expect(el.rotation).toBe(90);
-    expect(el.opacity).toBe(0.5);
+    expect((el as TileElement).rotation).toBe(90);
+    expect((el as TileElement).opacity).toBe(0.5);
   });
 
   it('updates a layer', () => {
@@ -126,7 +127,7 @@ describe('mapStore', () => {
     useMapStore.getState().duplicateGroup(groupId, { x: 100, y: 0 });
     expect(useMapStore.getState().groups).toHaveLength(2);
     expect(useMapStore.getState().elements).toHaveLength(2);
-    expect(useMapStore.getState().elements[1].x).toBe(292);
+    expect((useMapStore.getState().elements[1] as TileElement).x).toBe(292);
     expect(useMapStore.getState().groups[1].name).toBe('Room (copy)');
   });
 });

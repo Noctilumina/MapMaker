@@ -14,8 +14,8 @@ export default function Toolbar({ onExportPng, onNewProject }: Props) {
   const redo = useHistoryStore((s) => s.redo);
 
   const handleExportJson = () => {
-    const { id, name, grid, layers, elements, assets } = useMapStore.getState();
-    exportProjectToFile({ id, name, grid, layers, elements, assets });
+    const { id, name, version, grid, layers, elements, assets, groups } = useMapStore.getState();
+    exportProjectToFile({ id, name, version, grid, layers, elements, assets, groups });
   };
 
   const handleImportJson = async () => {

@@ -3,14 +3,14 @@ import { useMapStore } from '../stores/mapStore';
 import { saveProject } from '../utils/storage';
 
 export function useAutoSave(debounceMs = 2000) {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     const unsub = useMapStore.subscribe(() => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        const { id, name, grid, layers, elements, assets } = useMapStore.getState();
-        saveProject({ id, name, grid, layers, elements, assets });
+        const { id, name, version, grid, layers, elements, assets, groups } = useMapStore.getState();
+        saveProject({ id, name, version, grid, layers, elements, assets, groups });
       }, debounceMs);
     });
 

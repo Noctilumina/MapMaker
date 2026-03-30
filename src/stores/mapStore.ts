@@ -1,9 +1,13 @@
 import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
-import type { MapElement, Layer, GridConfig, AssetDef, Group } from '../types';
+import type { MapElement, TileElement, PolygonElement, PathElement, LightSource, Layer, GridConfig, AssetDef, Group } from '../types';
 import { DEFAULT_GRID, DEFAULT_LAYERS } from '../types';
 
-type ElementInput = Omit<MapElement, 'id'>;
+export type ElementInput =
+  | Omit<TileElement, 'id'>
+  | Omit<PolygonElement, 'id'>
+  | Omit<PathElement, 'id'>
+  | Omit<LightSource, 'id'>;
 
 interface MapState {
   id: string;
@@ -66,7 +70,7 @@ export const useMapStore = create<MapState>((set, get) => ({
 
   addElement: (input) =>
     set((state) => ({
-      elements: [...state.elements, { ...input, id: uuidv4() }],
+      elements: [...state.elements, { ...input, id: uuidv4() } as MapElement],
     })),
 
   moveElement: (id, x, y) =>
@@ -149,7 +153,7 @@ export const useMapStore = create<MapState>((set, get) => ({
   updateElement: (id, updates) =>
     set((state) => ({
       elements: state.elements.map((el) =>
-        el.id === id ? { ...el, ...updates } : el
+        el.id === id ? { ...el, ...updates } as MapElement : el
       ),
     })),
 
@@ -181,7 +185,7 @@ export const useMapStore = create<MapState>((set, get) => ({
       const { [id]: _, ...rest } = state.assets;
       return {
         assets: rest,
-        elements: state.elements.filter((el) => el.assetId !== id),
+        elements: state.elements.filter((el) => !('assetId' in el) || el.assetId !== id),
       };
     }),
 
@@ -289,13 +293,16 @@ export const useMapStore = create<MapState>((set, get) => ({
     const elementsInGroup = state.elements.filter(
       el => el.groupId && allGroupIds.includes(el.groupId)
     );
-    const newElements: MapElement[] = elementsInGroup.map(el => ({
-      ...el,
-      id: uuidv4(),
-      groupId: el.groupId ? groupIdMap[el.groupId] : null,
-      x: el.x + offset.x,
-      y: el.y + offset.y,
-    }));
+    const newElements = elementsInGroup.map(el => {
+      const base = { ...el, id: uuidv4(), groupId: el.groupId ? groupIdMap[el.groupId] : null };
+      if (el.type === 'polygon') {
+        return { ...base, points: el.points.map((v, i) => i % 2 === 0 ? v + offset.x : v + offset.y) };
+      }
+      if (el.type === 'path') {
+        return { ...base, pathPoints: el.pathPoints.map(pt => ({ ...pt, x: pt.x + offset.x, y: pt.y + offset.y })) };
+      }
+      return { ...base, x: el.x + offset.x, y: el.y + offset.y };
+    }) as MapElement[];
 
     set((s) => ({
       groups: [...s.groups, ...newGroups],

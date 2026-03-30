@@ -1,4 +1,4 @@
-import { Circle, Line, Rect } from 'react-konva';
+import { Circle, Line } from 'react-konva';
 import type { LightSource } from '../../types';
 import { useEditorStore } from '../../stores/editorStore';
 

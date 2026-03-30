@@ -1,5 +1,5 @@
 import { Line, Circle, Group, Image as KonvaImage, Rect } from 'react-konva';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { PolygonElement as PolygonElementType } from '../../types';
 import { useMapStore } from '../../stores/mapStore';
 import { useEditorStore } from '../../stores/editorStore';
@@ -330,7 +330,7 @@ export default function PolygonElement({ element }: Props) {
       {(() => {
         const openings = element.openings || [];
         const numVerts = element.points.length / 2;
-        const edges: JSX.Element[] = [];
+        const edges: React.JSX.Element[] = [];
 
         for (let i = 0; i < numVerts; i++) {
           const nextI = (i + 1) % numVerts;

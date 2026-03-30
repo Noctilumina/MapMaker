@@ -13,7 +13,7 @@ export class PathTool implements Tool {
 
   getCursor() { return 'crosshair'; }
 
-  onMouseDown(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
+  onMouseDown(_gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
     const stage = e.target.getStage();
     if (!stage) return;
     const pointer = stage.getPointerPosition();

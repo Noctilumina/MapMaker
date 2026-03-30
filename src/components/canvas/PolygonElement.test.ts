@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { useMapStore } from '../../stores/mapStore';
-import { useEditorStore } from '../../stores/editorStore';
 
 // Test polygon data model behavior — rendering is visual but we can verify
 // the store handles polygon properties correctly for border and fill rotation
@@ -20,6 +19,9 @@ const basePolygon = {
   tension: 0,
   borderWidth: 0,
   borderColor: '#000000',
+  wallsBlockLight: true,
+  openings: [],
+  innerWalls: [],
   tint: null,
   opacity: 1.0,
 };

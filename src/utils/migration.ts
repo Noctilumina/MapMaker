@@ -50,6 +50,8 @@ export function migrateProject(project: V1Project): MapProject {
     backgroundRotation: (project.grid.backgroundRotation as number) ?? 0,
     backgroundRandomize: (project.grid.backgroundRandomize as boolean) ?? false,
     backgroundRandomSeed: (project.grid.backgroundRandomSeed as number) ?? 42,
+    timeOfDay: (project.grid.timeOfDay as number) ?? 20,
+    lightingEnabled: (project.grid.lightingEnabled as boolean) ?? true,
   };
 
   const assets: Record<string, AssetDef> = {};

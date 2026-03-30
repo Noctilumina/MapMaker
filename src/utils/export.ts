@@ -11,7 +11,7 @@ interface ExportOptions {
 }
 
 export function exportToPng(stage: Konva.Stage, options: ExportOptions): void {
-  const { dpi, gridWidthCells, gridHeightCells, cellSizePx, includeGrid, includeGmNotes, backgroundColor } = options;
+  const { dpi, gridWidthCells, gridHeightCells, cellSizePx, includeGrid, includeGmNotes } = options;
 
   const pixelsPerCell = dpi;
   const scale = pixelsPerCell / cellSizePx;

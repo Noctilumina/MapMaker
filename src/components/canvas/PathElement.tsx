@@ -5,7 +5,6 @@ import type { PathElement as PathElementType, PathPoint } from '../../types';
 import { useMapStore } from '../../stores/mapStore';
 import { useEditorStore } from '../../stores/editorStore';
 import { useHistoryStore } from '../../stores/historyStore';
-import type Konva from 'konva';
 
 interface Props {
   element: PathElementType;
@@ -84,22 +83,6 @@ function buildRoadOutline(
   ctx.closePath();
 }
 
-// Draw the bezier centerline as a stroke
-function drawCenterline(ctx: any, points: PathPoint[], closed: boolean) {
-  if (points.length < 2) return;
-  ctx.beginPath();
-  ctx.moveTo(points[0].x, points[0].y);
-
-  for (let i = 0; i < points.length - (closed ? 0 : 1); i++) {
-    const p0 = points[i];
-    const p1 = points[(i + 1) % points.length];
-    ctx.bezierCurveTo(
-      p0.x + p0.handleOutX, p0.y + p0.handleOutY,
-      p1.x + p1.handleInX, p1.y + p1.handleInY,
-      p1.x, p1.y
-    );
-  }
-}
 
 export default function PathElement({ element }: Props) {
   const asset = useMapStore((s) => s.assets[element.assetId]);

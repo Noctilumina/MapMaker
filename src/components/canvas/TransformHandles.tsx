@@ -47,7 +47,7 @@ export default function TransformHandles({ element }: Props) {
     }
   }, [snapshotTaken]);
 
-  const handleScaleDrag = useCallback((cornerIdx: number, e: Konva.KonvaEventObject<DragEvent>) => {
+  const handleScaleDrag = useCallback((_cornerIdx: number, e: Konva.KonvaEventObject<DragEvent>) => {
     e.cancelBubble = true;
     captureOnce();
 

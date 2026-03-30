@@ -65,7 +65,7 @@ export default function App() {
       return id;
     };
     const concrete = tex('t:concrete', '/textures/misc/stone 1.png', 'Concrete');
-    const asphalt = tex('t:asphalt', '/textures/misc/stone 2.png', 'Asphalt');
+    tex('t:asphalt', '/textures/misc/stone 2.png', 'Asphalt');
     const tiles = tex('t:tiles', '/textures/paving/paving 5.png', 'Floor Tiles');
     const tilesAlt = tex('t:tilesAlt', '/textures/paving/paving 6.png', 'Floor Tiles Alt');
     const metal = tex('t:metal', '/textures/misc/stone 3.png', 'Metal');
@@ -78,7 +78,7 @@ export default function App() {
     };
     // Furniture
     const bed = obj('furniture/Bed A.png', 'Bed');
-    const bedCot = obj('furniture/Bed - Pattern 5 - Cot.png', 'Cot');
+    obj('furniture/Bed - Pattern 5 - Cot.png', 'Cot');
     const couch = obj('furniture/Chair - Couch.png', 'Couch');
     const armchair = obj('furniture/Chair - Armchair.png', 'Armchair');
     const chairC = obj('furniture/Chair C.png', 'Chair');
@@ -134,8 +134,8 @@ export default function App() {
     // Road tiles
     const roadStraight = obj('street/City Street Tile - Straight - 10x10.jpg', 'Road Straight', 10, 10);
     const roadEnd = obj('street/City Street Tile - End - 10x10.jpg', 'Road End', 10, 10);
-    const roadBend = obj('street/City Street Tile - Bend - 10x10.jpg', 'Road Bend', 10, 10);
-    const roadIntersection = obj('street/City Street Tile - Intersection - 10x10.jpg', 'Road Intersection', 10, 10);
+    obj('street/City Street Tile - Bend - 10x10.jpg', 'Road Bend', 10, 10);
+    obj('street/City Street Tile - Intersection - 10x10.jpg', 'Road Intersection', 10, 10);
     const roadJunction = obj('street/City Street Tile - Junction - 10x10.jpg', 'Road Junction', 10, 10);
     const roadBase = obj('street/City Street Tile - Base - 10x10.jpg', 'Road Base', 10, 10);
 
@@ -405,28 +405,28 @@ export default function App() {
     // ========================================
     // Street lights — cold white sodium
     const sl = (x: number, y: number) =>
-      store.addElement({ type: 'light', layerId: 'objects', groupId: null, x: x*pc, y: y*pc, radius: pc*5, color: '#ddeeff', intensity: 0.7, flickerAmount: 0 });
+      store.addElement({ type: 'light', layerId: 'objects', groupId: null, x: x*pc, y: y*pc, radius: pc*5, color: '#ddeeff', intensity: 0.7, flickerAmount: 0, lightShape: 'point' });
     sl(6, 14); sl(18, 14); sl(36, 14); sl(46, 14);
     sl(10, 26); sl(28, 26); sl(42, 26);
 
     // Apt 1 interior
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 5*pc, y: 5*pc, radius: pc*4, color: '#ffeecc', intensity: 0.7, flickerAmount: 0 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 5*pc, y: 10*pc, radius: pc*4, color: '#cceeff', intensity: 0.6, flickerAmount: 0 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 10*pc, y: 5*pc, radius: pc*3, color: '#ffeecc', intensity: 0.6, flickerAmount: 0 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 15*pc, y: 6*pc, radius: pc*4, color: '#cceeff', intensity: 0.7, flickerAmount: 0 });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 5*pc, y: 5*pc, radius: pc*4, color: '#ffeecc', intensity: 0.7, flickerAmount: 0, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 5*pc, y: 10*pc, radius: pc*4, color: '#cceeff', intensity: 0.6, flickerAmount: 0, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 10*pc, y: 5*pc, radius: pc*3, color: '#ffeecc', intensity: 0.6, flickerAmount: 0, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt1, x: 15*pc, y: 6*pc, radius: pc*4, color: '#cceeff', intensity: 0.7, flickerAmount: 0, lightShape: 'point' });
 
     // Apt 2 interior
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt2, x: 31*pc, y: 5*pc, radius: pc*4, color: '#ffeecc', intensity: 0.7, flickerAmount: 0 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt2, x: 31*pc, y: 10*pc, radius: pc*3, color: '#ffeecc', intensity: 0.5, flickerAmount: 0 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: apt2, x: 35*pc, y: 5*pc, radius: pc*4, color: '#cceeff', intensity: 0.6, flickerAmount: 0 });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt2, x: 31*pc, y: 5*pc, radius: pc*4, color: '#ffeecc', intensity: 0.7, flickerAmount: 0, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt2, x: 31*pc, y: 10*pc, radius: pc*3, color: '#ffeecc', intensity: 0.5, flickerAmount: 0, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: apt2, x: 35*pc, y: 5*pc, radius: pc*4, color: '#cceeff', intensity: 0.6, flickerAmount: 0, lightShape: 'point' });
 
     // Bar — neon pink outside + purple inside
-    store.addElement({ type: 'light', layerId: 'objects', groupId: barId, x: 8*pc, y: 26.5*pc, radius: pc*4, color: '#ff0088', intensity: 0.9, flickerAmount: 0.15 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: barId, x: 5*pc, y: 32*pc, radius: pc*5, color: '#7700dd', intensity: 0.6, flickerAmount: 0.1 });
-    store.addElement({ type: 'light', layerId: 'objects', groupId: barId, x: 13*pc, y: 31*pc, radius: pc*4, color: '#ff2200', intensity: 0.4, flickerAmount: 0.2 });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: barId, x: 8*pc, y: 26.5*pc, radius: pc*4, color: '#ff0088', intensity: 0.9, flickerAmount: 0.15, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: barId, x: 5*pc, y: 32*pc, radius: pc*5, color: '#7700dd', intensity: 0.6, flickerAmount: 0.1, lightShape: 'point' });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: barId, x: 13*pc, y: 31*pc, radius: pc*4, color: '#ff2200', intensity: 0.4, flickerAmount: 0.2, lightShape: 'point' });
 
     // Ruin — single flickering bulb
-    store.addElement({ type: 'light', layerId: 'objects', groupId: ruinId, x: 32*pc, y: 32*pc, radius: pc*5, color: '#ffaa44', intensity: 0.4, flickerAmount: 0.5 });
+    store.addElement({ type: 'light', layerId: 'objects', groupId: ruinId, x: 32*pc, y: 32*pc, radius: pc*5, color: '#ffaa44', intensity: 0.4, flickerAmount: 0.5, lightShape: 'point' });
 
     /* Old scene removed */
   }, []);
