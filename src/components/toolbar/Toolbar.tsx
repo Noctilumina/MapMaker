@@ -1,6 +1,9 @@
 import { useHistoryStore } from '../../stores/historyStore';
 import { useMapStore } from '../../stores/mapStore';
 import { exportProjectToFile, importProjectFromFile } from '../../utils/storage';
+import { theme } from '../../theme';
+import { useTheme } from '../../context/ThemeContext';
+import ChipButton from '../ChipButton';
 
 interface Props {
   onExportPng: () => void;
@@ -8,6 +11,7 @@ interface Props {
 }
 
 export default function Toolbar({ onExportPng, onNewProject }: Props) {
+  const { mode, toggle } = useTheme();
   const canUndo = useHistoryStore((s) => s.canUndo);
   const canRedo = useHistoryStore((s) => s.canRedo);
   const undo = useHistoryStore((s) => s.undo);
@@ -25,18 +29,41 @@ export default function Toolbar({ onExportPng, onNewProject }: Props) {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: 16 }}>
-      <span style={{ color: '#cba6f7', fontWeight: 'bold', fontSize: 14 }}>MapMaker</span>
-      <div style={{ display: 'flex', gap: 2 }}>
-        <button onClick={onNewProject} style={{ background: '#313244', color: '#cdd6f4', border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 11, cursor: 'pointer' }}>New</button>
-        <button onClick={handleImportJson} style={{ background: '#313244', color: '#cdd6f4', border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 11, cursor: 'pointer' }}>Open</button>
-        <button onClick={handleExportJson} style={{ background: '#313244', color: '#cdd6f4', border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 11, cursor: 'pointer' }}>Save As</button>
+      <span style={{ color: theme.primary, fontWeight: 'bold', fontSize: 14, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.1em', position: 'relative', paddingLeft: 14 }}>
+        <span style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%) rotate(45deg)', width: 8, height: 8, background: theme.primary }} />
+        MapMaker
+      </span>
+      <div style={{ display: 'flex', gap: 4 }}>
+        <ChipButton variant="secondary" onClick={onNewProject} style={{ padding: '4px 10px', fontSize: 11 }}>New</ChipButton>
+        <ChipButton variant="secondary" onClick={handleImportJson} style={{ padding: '4px 10px', fontSize: 11 }}>Open</ChipButton>
+        <ChipButton variant="secondary" onClick={handleExportJson} style={{ padding: '4px 10px', fontSize: 11 }}>Save As</ChipButton>
       </div>
       <div style={{ flex: 1 }} />
       <div style={{ display: 'flex', gap: 6 }}>
-        <button onClick={undo} disabled={!canUndo} style={{ background: '#45475a', color: canUndo ? '#cdd6f4' : '#6c7086', border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 11, cursor: canUndo ? 'pointer' : 'default' }}>Undo</button>
-        <button onClick={redo} disabled={!canRedo} style={{ background: '#45475a', color: canRedo ? '#cdd6f4' : '#6c7086', border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 11, cursor: canRedo ? 'pointer' : 'default' }}>Redo</button>
+        <ChipButton variant="secondary" onClick={undo} disabled={!canUndo} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Undo</ChipButton>
+        <ChipButton variant="secondary" onClick={redo} disabled={!canRedo} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Redo</ChipButton>
       </div>
-      <button onClick={onExportPng} style={{ background: '#a6e3a1', color: '#1e1e2e', border: 'none', borderRadius: 4, padding: '4px 12px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>Export PNG</button>
+      <ChipButton variant="success" selected onClick={onExportPng} style={{ padding: '4px 12px', fontSize: 11, fontWeight: 'bold', boxShadow: theme.shadowSm }}>Export PNG</ChipButton>
+      <button
+        onClick={toggle}
+        title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}
+        style={{
+          background: 'transparent',
+          border: theme.borderLight,
+          borderRadius: theme.radius,
+          color: theme.textMuted,
+          cursor: 'pointer',
+          width: 28,
+          height: 24,
+          fontSize: 14,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'color 0.15s',
+        }}
+      >
+        {mode === 'dark' ? '☀' : '🌙'}
+      </button>
     </div>
   );
 }

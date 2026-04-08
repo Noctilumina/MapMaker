@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import './App.css';
+import { useTheme } from './context/ThemeContext';
 import MapCanvas, { getStageInstance } from './components/canvas/MapCanvas';
 import AssetBrowser from './components/panels/AssetBrowser';
 import PropertiesPanel from './components/panels/PropertiesPanel';
@@ -13,15 +14,21 @@ import NewProjectDialog from './components/dialogs/NewProjectDialog';
 import { useMapStore } from './stores/mapStore';
 import { loadPresetAssets } from './utils/assetLoader';
 import { exportToPng } from './utils/export';
+import { computeOcclusionHull } from './utils/convexHull';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useAutoSave } from './hooks/useAutoSave';
+import DiagonalStripes from './components/DiagonalStripes';
 
 export default function App() {
+  const { mode } = useTheme();
   const [showExport, setShowExport] = useState(false);
   const [showNewProject, setShowNewProject] = useState(false);
   const [assetPanelWidth, setAssetPanelWidth] = useState(260);
   const [rightPanelWidth, setRightPanelWidth] = useState(240);
   const dragRef = useRef<{ target: 'asset' | 'right'; startX: number; startWidth: number } | null>(null);
+
+  // Compute stripe color based on theme mode (canvas 2D context can't use CSS variables)
+  const stripeColor = mode === 'dark' ? 'rgba(255, 64, 129, 0.18)' : 'rgba(233, 30, 99, 0.15)';
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!dragRef.current) return;
@@ -127,6 +134,7 @@ export default function App() {
     const car1 = obj('vehicles/Car - Stinger - 2x4.png', 'Car Stinger', 2, 4);
     const car2 = obj('vehicles/Car - Iron Giant - 2x4.png', 'Car Iron Giant', 2, 4);
     const car3 = obj('vehicles/Car - Tagger - 2x4.png', 'Car Tagger', 2, 4);
+
     // Scrap
     const shoppingCart = obj('scrap-debris/Scrap - Shopping Cart 1 - Colorful.webp', 'Shopping Cart');
     const scrapDoor = obj('scrap-debris/Scrap - Door - Colorful.webp', 'Scrap Door');
@@ -432,6 +440,23 @@ export default function App() {
     /* Old scene removed */
   }, []);
 
+  // Compute convex hulls for all object assets
+  useEffect(() => {
+    const store = useMapStore.getState();
+    const assetsToProcess = Object.entries(store.assets).filter(([_id, asset]) =>
+      asset.category !== 'floors' && !asset.occlusionHull
+    );
+
+    assetsToProcess.forEach(([id, asset]) => {
+      computeOcclusionHull(asset.src)
+        .then(hull => {
+          if (hull.length >= 6) {
+            store.setAssetHull(id, hull);
+          }
+        });
+    });
+  }, []);
+
   useKeyboardShortcuts();
   useAutoSave();
 
@@ -443,6 +468,7 @@ export default function App() {
       <div className="workspace">
         <aside className="tool-sidebar">
           <ToolSidebar />
+          <DiagonalStripes count={4} thickness={12} gap={24} color={stripeColor} angle={-45} />
         </aside>
         <aside className="asset-panel" style={{ width: assetPanelWidth }}>
           <AssetBrowser />
@@ -455,7 +481,7 @@ export default function App() {
         <aside className="right-panel" style={{ width: rightPanelWidth, display: 'flex', flexDirection: 'column' }}>
           <div className="resize-handle resize-handle-left"
             onMouseDown={(e) => { dragRef.current = { target: 'right', startX: e.clientX, startWidth: rightPanelWidth }; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; }} />
-          <div style={{ flex: 1, borderBottom: '1px solid #313244', overflow: 'auto' }}>
+          <div style={{ flex: 1, borderBottom: 'var(--border-light)', overflow: 'auto' }}>
             <PropertiesPanel />
           </div>
           <LayerBar />

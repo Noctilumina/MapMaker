@@ -51,6 +51,7 @@ export interface TileElement {
   flipY: boolean;
   tint: string | null;
   opacity: number;
+  blocksLight?: boolean;
 }
 
 export interface PolygonElement {
@@ -149,6 +150,7 @@ export interface AssetDef {
   gridSize: [number, number];
   name: string;
   source: 'preset' | 'imported';
+  occlusionHull?: number[];  // normalized [x0,y0, x1,y1, ...], convex hull of opaque pixels
 }
 
 export interface Group {

@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { theme } from '../../theme';
 
 interface Props {
   onConfirm: (options: { name: string; width: number; height: number; scale: string }) => void;
   onClose: () => void;
 }
+
+const labelStyle: React.CSSProperties = { color: theme.textMuted, fontSize: 13, fontFamily: theme.fontBody };
+const inputStyle: React.CSSProperties = { display: 'block', marginTop: 4, width: '100%', background: theme.surface, color: theme.text, border: theme.borderLight, borderRadius: theme.radius, padding: '6px 8px' };
+const btnBase: React.CSSProperties = { border: theme.borderMedium, borderRadius: theme.radius, padding: '6px 16px', cursor: 'pointer', fontSize: 11, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: theme.shadowSm };
 
 export default function NewProjectDialog({ onConfirm, onClose }: Props) {
   const [name, setName] = useState('Untitled Map');
@@ -13,26 +18,26 @@ export default function NewProjectDialog({ onConfirm, onClose }: Props) {
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={onClose}>
-      <div style={{ background: '#1e1e2e', borderRadius: 8, padding: 24, minWidth: 300, border: '1px solid #45475a' }} onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ color: '#cdd6f4', marginBottom: 16, fontSize: 16 }}>New Map</h3>
+      <div style={{ background: theme.bg, borderRadius: theme.radius, padding: 24, minWidth: 300, border: theme.borderHeavy, boxShadow: theme.shadowLg }} onClick={(e) => e.stopPropagation()}>
+        <h3 style={{ color: theme.text, marginBottom: 16, fontSize: 16, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}>New Map</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <label style={{ color: '#a6adc8', fontSize: 13 }}>
+          <label style={labelStyle}>
             Name:
-            <input value={name} onChange={(e) => setName(e.target.value)} style={{ display: 'block', marginTop: 4, width: '100%', background: '#313244', color: '#cdd6f4', border: '1px solid #45475a', borderRadius: 4, padding: '6px 8px' }} />
+            <input value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
           </label>
           <div style={{ display: 'flex', gap: 12 }}>
-            <label style={{ color: '#a6adc8', fontSize: 13, flex: 1 }}>
+            <label style={{ ...labelStyle, flex: 1 }}>
               Width (cells):
-              <input type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={5} max={100} style={{ display: 'block', marginTop: 4, width: '100%', background: '#313244', color: '#cdd6f4', border: '1px solid #45475a', borderRadius: 4, padding: '6px 8px' }} />
+              <input type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={5} max={100} style={inputStyle} />
             </label>
-            <label style={{ color: '#a6adc8', fontSize: 13, flex: 1 }}>
+            <label style={{ ...labelStyle, flex: 1 }}>
               Height (cells):
-              <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={5} max={100} style={{ display: 'block', marginTop: 4, width: '100%', background: '#313244', color: '#cdd6f4', border: '1px solid #45475a', borderRadius: 4, padding: '6px 8px' }} />
+              <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={5} max={100} style={inputStyle} />
             </label>
           </div>
-          <label style={{ color: '#a6adc8', fontSize: 13 }}>
+          <label style={labelStyle}>
             Grid scale:
-            <select value={scale} onChange={(e) => setScale(e.target.value)} style={{ marginLeft: 8, background: '#313244', color: '#cdd6f4', border: '1px solid #45475a', borderRadius: 4, padding: '4px 8px' }}>
+            <select value={scale} onChange={(e) => setScale(e.target.value)} style={{ ...inputStyle, display: 'inline', marginLeft: 8, width: 'auto', padding: '4px 8px' }}>
               <option value="2m">2m (Cyberpunk Red)</option>
               <option value="5ft">5ft (D&amp;D / Pathfinder)</option>
               <option value="1m">1m</option>
@@ -41,8 +46,8 @@ export default function NewProjectDialog({ onConfirm, onClose }: Props) {
           </label>
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20 }}>
-          <button onClick={onClose} style={{ background: '#313244', color: '#cdd6f4', border: 'none', borderRadius: 4, padding: '6px 16px', cursor: 'pointer', fontSize: 12 }}>Cancel</button>
-          <button onClick={() => onConfirm({ name, width, height, scale })} style={{ background: '#a6e3a1', color: '#1e1e2e', border: 'none', borderRadius: 4, padding: '6px 16px', cursor: 'pointer', fontSize: 12, fontWeight: 'bold' }}>Create</button>
+          <button className="brutal-btn" onClick={onClose} style={{ ...btnBase, background: theme.surface, color: theme.text }}>Cancel</button>
+          <button className="brutal-btn" onClick={() => onConfirm({ name, width, height, scale })} style={{ ...btnBase, background: theme.primary, color: theme.bg, fontWeight: 'bold' }}>Create</button>
         </div>
       </div>
     </div>

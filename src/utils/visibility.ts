@@ -255,3 +255,45 @@ export function getWallSegments(
 
   return segments;
 }
+
+/**
+ * Transform a normalized convex hull [0,1] to world coordinates.
+ * Applies scale, flip, rotation (around element center), and translation.
+ */
+export function transformHull(
+  hull: number[],
+  el: { x: number; y: number; width: number; height: number; rotation: number; flipX: boolean; flipY: boolean },
+  cellSize: number
+): number[] {
+  const pixelW = el.width * cellSize;
+  const pixelH = el.height * cellSize;
+  const centerX = el.x + pixelW / 2;
+  const centerY = el.y + pixelH / 2;
+
+  const angle = (el.rotation * Math.PI) / 180;
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+
+  const result: number[] = [];
+  for (let i = 0; i < hull.length; i += 2) {
+    const nx = hull[i];
+    const ny = hull[i + 1];
+
+    // Scale and center at origin
+    let sx = (nx - 0.5) * pixelW;
+    let sy = (ny - 0.5) * pixelH;
+
+    // Apply flip
+    if (el.flipX) sx = -sx;
+    if (el.flipY) sy = -sy;
+
+    // Rotate around origin
+    const rx = sx * cos - sy * sin;
+    const ry = sx * sin + sy * cos;
+
+    // Translate to world position
+    result.push(centerX + rx, centerY + ry);
+  }
+
+  return result;
+}

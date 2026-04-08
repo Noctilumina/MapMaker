@@ -1,7 +1,7 @@
 import { Layer, Rect, Line, Group } from 'react-konva';
 import React, { useMemo, useCallback } from 'react';
 import { useMapStore } from '../../stores/mapStore';
-import { computeVisibilityPolygon, getWallSegments } from '../../utils/visibility';
+import { computeVisibilityPolygon, getWallSegments, transformHull } from '../../utils/visibility';
 import type { PolygonElement, LightSource } from '../../types';
 
 function getAmbientLight(time: number): { color: string; darkness: number } {
@@ -193,6 +193,20 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
 export default function LightingLayer() {
   const grid = useMapStore((s) => s.grid);
   const elements = useMapStore((s) => s.elements);
+  const assets = useMapStore((s) => s.assets);
+  const cellSize = useMapStore((s) => s.grid.cellSize);
+  const [showHullDebug, setShowHullDebug] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if ((e.key === 'd' || e.key === 'D') && e.ctrlKey && e.shiftKey) {
+        e.preventDefault();
+        setShowHullDebug(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   if (!grid.lightingEnabled) return null;
 
@@ -205,8 +219,8 @@ export default function LightingLayer() {
   const polygons = elements.filter((el): el is PolygonElement => el.type === 'polygon' && (el.borderWidth || 0) > 0);
   const lights = elements.filter((el): el is LightSource => el.type === 'light');
 
-  // Collect all wall segments for light occlusion
-  const allWallSegments = useMemo(() => {
+  // Polygon wall segments
+  const polySegments = useMemo(() => {
     const segs: ReturnType<typeof getWallSegments> = [];
     for (const poly of polygons) {
       const polySegs = getWallSegments(poly.points, poly.openings || [], poly.innerWalls || [], poly.wallsBlockLight ?? true);
@@ -214,6 +228,29 @@ export default function LightingLayer() {
     }
     return segs;
   }, [polygons]);
+
+  // Tile hull segments (from blocksLight asset occlusion hulls)
+  const tileSegments = useMemo(() => {
+    const segs: ReturnType<typeof getWallSegments> = [];
+    for (const el of elements) {
+      if (el.type !== 'tile' || !el.blocksLight) continue;
+      const asset = assets[el.assetId];
+      if (!asset?.occlusionHull || asset.occlusionHull.length < 6) continue;
+      const hull = transformHull(asset.occlusionHull, el, cellSize);
+      for (let i = 0; i < hull.length; i += 2) {
+        const ni = (i + 2) % hull.length;
+        segs.push({ x1: hull[i], y1: hull[i + 1], x2: hull[ni], y2: hull[ni + 1] });
+      }
+    }
+    return segs;
+  }, [elements, assets, cellSize]);
+
+
+  // All wall segments merged
+  const allWallSegments = useMemo(
+    () => [...polySegments, ...tileSegments],
+    [polySegments, tileSegments]
+  );
 
   // Window glows at night
   const windowGlows = useMemo(() => {
@@ -263,6 +300,40 @@ export default function LightingLayer() {
 
   return (
     <Layer listening={false}>
+      {/* DEBUG: Tile hull visualization (Ctrl+Shift+D to toggle) */}
+      {showHullDebug && (
+        <>
+          {tileSegments.map((seg, idx) => (
+            <React.Fragment key={`hull-debug-${idx}`}>
+              <Line
+                points={[seg.x1, seg.y1, seg.x2, seg.y2]}
+                stroke="rgba(255, 0, 255, 0.8)"
+                strokeWidth={3}
+                listening={false}
+              />
+              <Rect
+                x={seg.x1 - 4}
+                y={seg.y1 - 4}
+                width={8}
+                height={8}
+                fill="rgba(255, 0, 255, 1)"
+                listening={false}
+              />
+            </React.Fragment>
+          ))}
+          {tileSegments.length === 0 && (
+            <Rect
+              x={0}
+              y={0}
+              width={100}
+              height={30}
+              fill="rgba(255, 0, 0, 0.3)"
+              listening={false}
+            />
+          )}
+        </>
+      )}
+
       {/* Building shadows — daytime only */}
       {sun.visible && shadows.map((pts, idx) => (
         <Line key={`shadow-${idx}`}

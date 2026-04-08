@@ -6,15 +6,23 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e2e;
-  color: #cdd6f4;
-  font-family: system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .toolbar {
   height: 40px;
-  background: #1e1e2e;
-  border-bottom: 1px solid #45475a;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 24px,
+      var(--color-primary-alpha-stripe) 24px,
+      var(--color-primary-alpha-stripe) 36px
+    ),
+    var(--color-bg);
+  border-bottom: var(--border-heavy);
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -28,23 +36,25 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
 
 .tool-sidebar {
   width: 48px;
-  background: #1e1e2e;
-  border-right: 1px solid #45475a;
+  background: var(--color-bg);
+  border-right: var(--border-light);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .asset-panel {
   min-width: 160px;
   max-width: 500px;
-  background: #181825;
-  border-right: 1px solid #45475a;
+  background: var(--color-surface);
+  border-right: var(--border-light);
   position: relative;
   flex-shrink: 0;
 }
 
 .canvas-area {
   flex: 1;
-  background: #11111b;
+  background: var(--color-canvas);
   overflow: hidden;
   position: relative;
 }
@@ -52,21 +62,22 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
 .right-panel {
   min-width: 160px;
   max-width: 500px;
-  background: #181825;
-  border-left: 1px solid #45475a;
+  background: var(--color-surface);
+  border-left: var(--border-light);
   position: relative;
   flex-shrink: 0;
 }
 
 .status-bar {
   height: 24px;
-  background: #1e1e2e;
-  border-top: 1px solid #45475a;
+  background: var(--color-bg);
+  border-top: var(--border-heavy);
   display: flex;
   align-items: center;
   padding: 0 16px;
   font-size: 11px;
-  color: #6c7086;
+  color: var(--color-muted);
+  font-family: 'Space Mono', monospace;
 }
 
 /* Resize handles */
@@ -79,10 +90,66 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
   z-index: 10;
 }
 .resize-handle:hover, .resize-handle.active {
-  background: rgba(203, 166, 247, 0.3);
+  background: var(--color-primary-alpha-mid);
 }
 .resize-handle-right { right: -2px; }
 .resize-handle-left { left: -2px; }
+
+/* Brutalist button — primary action (filled, shadow, hover lift) */
+.brutal-btn {
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md) !important;
+}
+.brutal-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0.06em 0.06em 0 var(--color-shadow) !important;
+}
+
+/* Ghost button — tertiary action (text only, underline on hover) */
+.ghost-btn {
+  transition: color 0.1s;
+}
+.ghost-btn:hover {
+  color: var(--color-text) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Panel section header with accent bar */
+.panel-header {
+  font-family: 'Space Mono', monospace;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 8px 12px 8px 14px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      rgba(255,255,255,0.03) 8px,
+      rgba(255,255,255,0.03) 9px
+    ),
+    var(--color-surface-hover);
+  border-bottom: var(--border-light);
+  position: relative;
+}
+.panel-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+}
+.panel-header--success::before { background: var(--color-success); }
+.panel-header--warning::before { background: var(--color-warning); }
+.panel-header--primary::before { background: var(--color-primary); }
+.panel-header--info::before { background: var(--color-info); }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
@@ -93,11 +160,11 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #45475a;
-  border-radius: 3px;
+  background: var(--color-border-subtle);
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6c7086;
+  background: var(--color-muted);
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
@@ -106,5 +173,5 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #45475a transparent;
+  scrollbar-color: var(--color-border-subtle) transparent;
 }

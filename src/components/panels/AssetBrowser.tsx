@@ -1,8 +1,10 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
 import { getManifestEntries } from '../../utils/assetLoader';
 import ImportDialog from '../dialogs/ImportDialog';
+import { theme } from '../../theme';
+import ChipButton from '../ChipButton';
 
 import type { ToolName } from '../../stores/editorStore';
 
@@ -200,16 +202,40 @@ export default function AssetBrowser() {
     setTab('imported');
   };
 
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+
+  const updateIndicator = useCallback(() => {
+    if (!tabsRef.current) return;
+    const activeBtn = tabsRef.current.querySelector(`[data-tab="${tab}"]`) as HTMLElement | null;
+    if (activeBtn) {
+      const containerRect = tabsRef.current.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      setIndicator({ left: btnRect.left - containerRect.left, width: btnRect.width });
+    }
+  }, [tab]);
+
+  useEffect(() => {
+    updateIndicator();
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator]);
+
   const tabStyle = (t: Tab) => ({
     flex: 1,
-    background: tab === t ? '#313244' : 'transparent',
-    color: tab === t ? '#cdd6f4' : '#6c7086',
+    background: 'transparent',
+    color: tab === t ? theme.text : theme.textMuted,
     border: 'none',
-    borderBottom: tab === t ? '2px solid #cba6f7' : '2px solid transparent',
-    padding: '6px 4px',
-    fontSize: 11,
+    padding: '6px 2px',
+    fontSize: 9,
     cursor: 'pointer',
     transition: 'color 0.15s',
+    fontFamily: theme.fontHeading,
+    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   } as React.CSSProperties);
 
   return (
@@ -223,36 +249,49 @@ export default function AssetBrowser() {
       }}
     >
       {/* Header: search + import button */}
-      <div style={{ padding: '8px 12px', borderBottom: '1px solid #313244', display: 'flex', gap: 6 }}>
+      <div style={{ padding: '8px 12px', borderBottom: theme.borderLight, display: 'flex', gap: 6 }}>
         <input
           type="text"
           placeholder="Search assets..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ flex: 1, background: '#313244', border: '1px solid #45475a', borderRadius: 4, padding: '5px 8px', color: '#cdd6f4', fontSize: 12, outline: 'none' }}
+          style={{ flex: 1, background: theme.surface, border: theme.borderLight, borderRadius: theme.radius, padding: '5px 8px', color: theme.text, fontSize: 12, outline: 'none' }}
         />
         <button
           onClick={handleImportClick}
           title="Import image asset"
-          style={{ background: '#313244', color: '#a6e3a1', border: '1px solid #45475a', borderRadius: 4, padding: '4px 10px', fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap' }}
+          style={{ background: theme.surface, color: theme.success, border: theme.borderLight, borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap' }}
         >
           + Import
         </button>
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', borderBottom: '1px solid #313244' }}>
-        <button style={tabStyle('presets')} onClick={() => setTab('presets')}>Presets</button>
-        <button style={tabStyle('objects')} onClick={() => setTab('objects')}>
+      <div ref={tabsRef} style={{ display: 'flex', borderBottom: theme.borderLight, position: 'relative' }}>
+        {/* Sliding underline indicator */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: indicator.left,
+          width: indicator.width,
+          height: 2,
+          background: theme.primary,
+          boxShadow: `0 0 6px ${theme.primaryAlphaMid}`,
+          transition: 'left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }} />
+        <button data-tab="presets" style={tabStyle('presets')} onClick={() => setTab('presets')}>Presets</button>
+        <button data-tab="objects" style={tabStyle('objects')} onClick={() => setTab('objects')}>
           Objects{objects.length > 0 ? ` (${objects.length})` : ''}
         </button>
-        <button style={tabStyle('textures')} onClick={() => setTab('textures')}>
+        <button data-tab="textures" style={tabStyle('textures')} onClick={() => setTab('textures')}>
           Textures
         </button>
-        <button style={tabStyle('imported')} onClick={() => setTab('imported')}>
+        <button data-tab="imported" style={tabStyle('imported')} onClick={() => setTab('imported')}>
           Imported{importedEntries.length > 0 ? ` (${importedEntries.length})` : ''}
         </button>
-        <button style={tabStyle('map')} onClick={() => setTab('map')}>
+        <button data-tab="map" style={tabStyle('map')} onClick={() => setTab('map')}>
           Map{mapAssetEntries.length > 0 ? ` (${mapAssetEntries.length})` : ''}
         </button>
       </div>
@@ -262,13 +301,9 @@ export default function AssetBrowser() {
         <>
           <div style={{ padding: '8px 12px', display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                style={{ background: category === cat ? '#cba6f7' : '#313244', color: category === cat ? '#1e1e2e' : '#a6adc8', border: 'none', borderRadius: 10, padding: '2px 8px', fontSize: 11, cursor: 'pointer', textTransform: 'capitalize' }}
-              >
+              <ChipButton key={cat} variant="primary" selected={category === cat} onClick={() => setCategory(cat)} style={{ textTransform: 'capitalize' }}>
                 {cat}
-              </button>
+              </ChipButton>
             ))}
           </div>
           <div style={{ flex: 1, overflow: 'auto', padding: '0 12px 12px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
@@ -277,13 +312,13 @@ export default function AssetBrowser() {
                 key={entry.id}
                 onClick={() => handleSelect(entry.id)}
                 title={entry.name}
-                style={{ aspectRatio: '1', background: entry.color, border: stampAssetId === entry.id ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 2 }}
+                style={{ aspectRatio: '1', background: entry.color, border: stampAssetId === entry.id ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 2 }}
               >
                 <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>{entry.name}</span>
               </button>
             ))}
             {presetEntries.length === 0 && (
-              <div style={{ gridColumn: '1/-1', color: '#6c7086', fontSize: 11, padding: '8px 0', textAlign: 'center' }}>No results</div>
+              <div style={{ gridColumn: '1/-1', color: theme.textMuted, fontSize: 11, padding: '8px 0', textAlign: 'center' }}>No results</div>
             )}
           </div>
         </>
@@ -292,32 +327,30 @@ export default function AssetBrowser() {
       {/* Objects tab */}
       {tab === 'objects' && (
         <>
-          <div style={{ padding: '4px 12px', display: 'flex', gap: 3, borderBottom: '1px solid #313244' }}>
+          <div style={{ padding: '4px 12px', display: 'flex', gap: 3, borderBottom: theme.borderLight }}>
             {['all', 'fantasy', 'modern', 'sci-fi', 'generic'].map((v) => (
-              <button key={v} onClick={() => setObjVibe(v)}
-                style={{ background: objVibe === v ? '#f9e2af' : '#313244', color: objVibe === v ? '#1e1e2e' : '#a6adc8', border: 'none', borderRadius: 6, padding: '2px 8px', fontSize: 10, cursor: 'pointer', fontWeight: objVibe === v ? 'bold' : 'normal', textTransform: 'capitalize' }}>
+              <ChipButton key={v} variant="warning" selected={objVibe === v} onClick={() => setObjVibe(v)} style={{ textTransform: 'capitalize' }}>
                 {v}
-              </button>
+              </ChipButton>
             ))}
           </div>
           <div style={{ padding: '4px 12px', display: 'flex', flexWrap: 'wrap', gap: 2 }}>
             {OBJECT_CATEGORIES.map((cat) => (
-              <button key={cat} onClick={() => setObjCategory(cat)}
-                style={{ background: objCategory === cat ? '#cba6f7' : '#313244', color: objCategory === cat ? '#1e1e2e' : '#a6adc8', border: 'none', borderRadius: 8, padding: '1px 6px', fontSize: 10, cursor: 'pointer', textTransform: 'capitalize' }}>
+              <ChipButton key={cat} variant="primary" selected={objCategory === cat} onClick={() => setObjCategory(cat)} style={{ padding: '1px 6px', textTransform: 'capitalize' }}>
                 {cat}
-              </button>
+              </ChipButton>
             ))}
           </div>
           <div style={{ flex: 1, overflow: 'auto', padding: '0 12px 12px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
             {filteredObjects.map((obj) => (
               <button key={obj.id} onClick={() => handleObjectSelect(obj)} title={`${obj.name} (${obj.gridSize[0]}x${obj.gridSize[1]})`}
-                style={{ height: 80, border: stampAssetId === `object:${obj.id}` ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', padding: 4, background: '#313244', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                style={{ height: 80, border: stampAssetId === `object:${obj.id}` ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                 <img src={withBase(obj.path)} alt={obj.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} loading="lazy" />
-                <span style={{ position: 'absolute', bottom: 2, right: 3, fontSize: 8, color: '#cdd6f4', background: 'rgba(0,0,0,0.6)', borderRadius: 2, padding: '0 3px', lineHeight: '14px' }}>{obj.gridSize[0]}x{obj.gridSize[1]}</span>
+                <span style={{ position: 'absolute', bottom: 2, right: 3, fontSize: 8, color: theme.text, background: 'rgba(0,0,0,0.6)', borderRadius: theme.radius, padding: '0 3px', lineHeight: '14px' }}>{obj.gridSize[0]}x{obj.gridSize[1]}</span>
               </button>
             ))}
             {filteredObjects.length === 0 && (
-              <div style={{ gridColumn: '1/-1', color: '#6c7086', fontSize: 11, padding: '8px 0', textAlign: 'center' }}>No objects found</div>
+              <div style={{ gridColumn: '1/-1', color: theme.textMuted, fontSize: 11, padding: '8px 0', textAlign: 'center' }}>No objects found</div>
             )}
           </div>
         </>
@@ -328,13 +361,9 @@ export default function AssetBrowser() {
         <>
           <div style={{ padding: '6px 12px', display: 'flex', flexWrap: 'wrap', gap: 2 }}>
             {TEXTURE_CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setTexCategory(cat)}
-                style={{ background: texCategory === cat ? '#cba6f7' : '#313244', color: texCategory === cat ? '#1e1e2e' : '#a6adc8', border: 'none', borderRadius: 8, padding: '1px 6px', fontSize: 10, cursor: 'pointer', textTransform: 'capitalize' }}
-              >
+              <ChipButton key={cat} variant="primary" selected={texCategory === cat} onClick={() => setTexCategory(cat)} style={{ padding: '1px 6px', textTransform: 'capitalize' }}>
                 {cat}
-              </button>
+              </ChipButton>
             ))}
           </div>
           <div style={{ flex: 1, overflow: 'auto', padding: '0 12px 12px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
@@ -343,13 +372,13 @@ export default function AssetBrowser() {
                 key={tex.id}
                 onClick={() => handleTextureSelect(tex)}
                 title={tex.name}
-                style={{ aspectRatio: '1', border: stampAssetId === `texture:${tex.id}` ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', padding: 0, overflow: 'hidden', background: '#313244' }}
+                style={{ aspectRatio: '1', border: stampAssetId === `texture:${tex.id}` ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 0, overflow: 'hidden', background: theme.surface }}
               >
                 <img src={withBase(tex.path)} alt={tex.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
               </button>
             ))}
             {filteredTextures.length === 0 && (
-              <div style={{ gridColumn: '1/-1', color: '#6c7086', fontSize: 11, padding: '8px 0', textAlign: 'center' }}>No textures found</div>
+              <div style={{ gridColumn: '1/-1', color: theme.textMuted, fontSize: 11, padding: '8px 0', textAlign: 'center' }}>No textures found</div>
             )}
           </div>
         </>
@@ -359,9 +388,9 @@ export default function AssetBrowser() {
       {tab === 'imported' && (
         <div style={{ flex: 1, overflow: 'auto', padding: '8px 12px' }}>
           {importedEntries.length === 0 ? (
-            <div style={{ color: '#6c7086', fontSize: 11, textAlign: 'center', marginTop: 16 }}>
+            <div style={{ color: theme.textMuted, fontSize: 11, textAlign: 'center', marginTop: 16 }}>
               No imported assets yet.<br />
-              <span style={{ color: '#a6adc8' }}>Use + Import or drag an image here.</span>
+              <span style={{ color: theme.textMuted }}>Use + Import or drag an image here.</span>
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
@@ -370,16 +399,16 @@ export default function AssetBrowser() {
                   <button
                     onClick={() => handleSelect(id)}
                     title={asset.name}
-                    style={{ height: 80, border: stampAssetId === id ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', padding: 4, background: '#313244', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ height: 80, border: stampAssetId === id ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
                     <img src={asset.src} alt={asset.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
                   </button>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <span style={{ flex: 1, fontSize: 9, color: '#a6adc8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{asset.name}</span>
+                    <span style={{ flex: 1, fontSize: 9, color: theme.textMuted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{asset.name}</span>
                     <button
                       onClick={() => removeAsset(id)}
                       title="Delete asset"
-                      style={{ background: 'transparent', color: '#f38ba8', border: 'none', fontSize: 12, cursor: 'pointer', padding: '0 2px', lineHeight: 1 }}
+                      style={{ background: 'transparent', color: theme.danger, border: 'none', fontSize: 12, cursor: 'pointer', padding: '0 2px', lineHeight: 1 }}
                     >
                       ×
                     </button>
@@ -395,7 +424,7 @@ export default function AssetBrowser() {
       {tab === 'map' && (
         <div style={{ flex: 1, overflow: 'auto', padding: '8px 12px' }}>
           {mapAssetEntries.length === 0 ? (
-            <div style={{ color: '#6c7086', fontSize: 11, textAlign: 'center', marginTop: 16 }}>No assets placed on map yet.</div>
+            <div style={{ color: theme.textMuted, fontSize: 11, textAlign: 'center', marginTop: 16 }}>No assets placed on map yet.</div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
               {mapAssetEntries.map(({ id, count, asset }) => (
@@ -403,12 +432,12 @@ export default function AssetBrowser() {
                   <button
                     onClick={() => handleSelect(id)}
                     title={asset.name}
-                    style={{ height: 80, border: stampAssetId === id ? '2px solid #cba6f7' : '2px solid transparent', borderRadius: 4, cursor: 'pointer', padding: 4, background: '#313244', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ height: 80, border: stampAssetId === id ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
                     <img src={asset.src} alt={asset.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
-                    <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 9, color: '#cdd6f4', background: 'rgba(0,0,0,0.5)', borderRadius: 3, padding: '1px 3px' }}>×{count}</span>
+                    <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 9, color: theme.text, background: 'rgba(0,0,0,0.5)', borderRadius: theme.radius, padding: '1px 3px' }}>{'\u00d7'}{count}</span>
                   </button>
-                  <span style={{ fontSize: 9, color: '#a6adc8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{asset.name}</span>
+                  <span style={{ fontSize: 9, color: theme.textMuted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{asset.name}</span>
                 </div>
               ))}
             </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useMapStore } from '../../stores/mapStore';
 import { useEditorStore } from '../../stores/editorStore';
 import { useHistoryStore } from '../../stores/historyStore';
+import { theme } from '../../theme';
 import type { Group, MapElement } from '../../types';
 
 function GroupNode({ group, depth }: { group: Group; depth: number }) {
@@ -16,7 +17,6 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
   const [renameName, setRenameName] = useState(group.name);
   const [showContext, setShowContext] = useState(false);
 
-  // Auto-start rename when this group was just created
   useEffect(() => {
     if (renamingGroupId === group.id) {
       setRenameName(group.name);
@@ -76,7 +76,7 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
           padding: '3px 6px', paddingLeft: depth * 16 + 6,
           cursor: 'pointer', fontSize: 11, background: 'transparent', position: 'relative',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = '#313244')}
+        onMouseEnter={(e) => (e.currentTarget.style.background = theme.surface)}
         onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
       >
         <span onClick={(e) => { e.stopPropagation(); updateGroup(group.id, { collapsed: !group.collapsed }); }}
@@ -92,10 +92,10 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
             onBlur={handleRenameSubmit}
             onKeyDown={(e) => { if (e.key === 'Enter') handleRenameSubmit(); if (e.key === 'Escape') setRenaming(false); }}
             autoFocus onClick={(e) => e.stopPropagation()}
-            style={{ flex: 1, background: '#313244', color: '#cdd6f4', border: '1px solid #89b4fa', borderRadius: 2, padding: '0 4px', fontSize: 11, outline: 'none' }} />
+            style={{ flex: 1, background: theme.surface, color: theme.text, border: `1px solid ${theme.primary}`, borderRadius: theme.radius, padding: '0 4px', fontSize: 11, outline: 'none' }} />
         ) : (
           <span onDoubleClick={(e) => { e.stopPropagation(); setRenameName(group.name); setRenaming(true); }}
-            style={{ flex: 1, color: '#cdd6f4', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            style={{ flex: 1, color: theme.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {group.name}
           </span>
         )}
@@ -106,8 +106,8 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
       </div>
       {showContext && (
         <div style={{
-          position: 'absolute', zIndex: 200, background: '#1e1e2e', border: '1px solid #45475a',
-          borderRadius: 4, padding: 4, minWidth: 120, marginLeft: depth * 16 + 6,
+          position: 'absolute', zIndex: 200, background: theme.bg, border: theme.borderHeavy,
+          borderRadius: theme.radius, padding: 4, minWidth: 120, marginLeft: depth * 16 + 6, boxShadow: theme.shadowMd,
         }}>
           {[
             { label: 'Rename', action: () => { setRenameName(group.name); setRenaming(true); setShowContext(false); } },
@@ -120,8 +120,8 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
             }},
           ].map(item => (
             <div key={item.label} onClick={(e) => { e.stopPropagation(); item.action(); }}
-              style={{ padding: '4px 8px', cursor: 'pointer', fontSize: 11, color: '#a6adc8', borderRadius: 2 }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = '#313244')}
+              style={{ padding: '4px 8px', cursor: 'pointer', fontSize: 11, color: theme.textMuted, borderRadius: theme.radius, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = theme.surface)}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
               {item.label}
             </div>
@@ -157,10 +157,10 @@ function ElementNode({ element, depth }: { element: MapElement; depth: number })
         display: 'flex', alignItems: 'center', gap: 4,
         padding: '2px 6px', paddingLeft: depth * 16 + 18,
         cursor: 'pointer', fontSize: 11,
-        background: isSelected ? '#45475a' : 'transparent',
-        color: isSelected ? '#cdd6f4' : '#a6adc8',
+        background: isSelected ? theme.borderSubtle : 'transparent',
+        color: isSelected ? theme.text : theme.textMuted,
       }}
-      onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = '#313244'; }}
+      onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = theme.surface; }}
       onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = 'transparent'; }}>
       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {asset?.name || assetId || element.type}
@@ -177,14 +177,14 @@ export default function HierarchyPanel() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ color: '#f9e2af', fontWeight: 'bold', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, padding: '8px 12px' }}>
+      <div className="panel-header panel-header--warning" style={{ color: theme.warning }}>
         Hierarchy
       </div>
       <div style={{ flex: 1, overflow: 'auto' }}>
         {topGroups.map(g => <GroupNode key={g.id} group={g} depth={0} />)}
         {ungroupedElements.map(el => <ElementNode key={el.id} element={el} depth={0} />)}
         {topGroups.length === 0 && ungroupedElements.length === 0 && (
-          <div style={{ padding: '8px 12px', color: '#6c7086', fontSize: 11 }}>No elements yet</div>
+          <div style={{ padding: '8px 12px', color: theme.textMuted, fontSize: 11 }}>No elements yet</div>
         )}
       </div>
     </div>

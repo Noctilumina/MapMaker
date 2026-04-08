@@ -33,6 +33,7 @@ interface MapState {
   registerAsset: (id: string, asset: AssetDef) => void;
   importAsset: (name: string, src: string, category: string, gridSize: [number, number]) => string;
   removeAsset: (id: string) => void;
+  setAssetHull: (id: string, hull: number[]) => void;
   addGroup: (name: string, parentId?: string | null) => string;
   removeGroup: (id: string) => void;
   updateGroup: (id: string, updates: Partial<Group>) => void;
@@ -188,6 +189,14 @@ export const useMapStore = create<MapState>((set, get) => ({
         elements: state.elements.filter((el) => !('assetId' in el) || el.assetId !== id),
       };
     }),
+
+  setAssetHull: (id, hull) =>
+    set((state) => ({
+      assets: {
+        ...state.assets,
+        [id]: { ...state.assets[id], occlusionHull: hull },
+      },
+    })),
 
   addGroup: (name, parentId = null) => {
     const id = uuidv4();

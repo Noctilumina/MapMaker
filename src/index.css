@@ -1,111 +1,79 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* Core color palette — dark mode defaults */
+  --color-bg: #1a1a1a;
+  --color-surface: #2a2a2a;
+  --color-surface-hover: #333333;
+  --color-canvas: #111111;
+  --color-text: #f5f0eb;
+  --color-muted: #aaaaaa;
+  --color-primary: #FF4081;
+  --color-secondary: #CE93D8;
+  --color-success: #00E5A0;
+  --color-warning: #FFD700;
+  --color-info: #89b4fa;
+  --color-danger: #FF4081;
+  --color-border: #f5f0eb;
+  --color-border-subtle: #444444;
+  --color-shadow: #000000;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Pre-computed alpha tokens — template literals can't use var() references */
+  --color-primary-alpha-low: rgba(255, 64, 129, 0.10);
+  --color-primary-alpha-mid: rgba(255, 64, 129, 0.27);
+  --color-primary-alpha-stripe: rgba(255, 64, 129, 0.08);
+  --color-success-alpha-low: rgba(0, 229, 160, 0.12);
+  --color-success-alpha-mid: rgba(0, 229, 160, 0.27);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  /* Compound tokens that auto-resolve via var() — not repeated in light override */
+  --border-heavy: 2px solid var(--color-border);
+  --border-medium: 2px solid var(--color-border-subtle);
+  --border-light: 1px solid var(--color-border-subtle);
+
+  /* Shadows — em-based for proportional scaling */
+  --shadow-sm: 0.15em 0.15em 0 var(--color-shadow);
+  --shadow-md: 0.2em 0.2em 0 var(--color-shadow);
+  --shadow-lg: 0.3em 0.3em 0 var(--color-shadow);
+
+  /* Radius */
+  --radius: 2px;
+
+  /* Typography */
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* Light mode overrides — only raw colors and alpha tokens need to be redefined */
+[data-theme="light"] {
+  --color-bg: #f5f0eb;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0ebe4;
+  --color-canvas: #e8e2db;
+  --color-text: #1a1a1a;
+  --color-muted: #666666;
+  --color-primary: #E91E63;
+  --color-secondary: #9C27B0;
+  --color-success: #00E5A0;
+  --color-warning: #FFD700;
+  --color-info: #5c9adf;
+  --color-danger: #E91E63;
+  --color-border: #000000;
+  --color-border-subtle: #cccccc;
+  --color-shadow: #000000;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  /* Alpha tokens for light mode */
+  --color-primary-alpha-low: rgba(233, 30, 99, 0.08);
+  --color-primary-alpha-mid: rgba(233, 30, 99, 0.22);
+  --color-primary-alpha-stripe: rgba(233, 30, 99, 0.07);
+  --color-success-alpha-low: rgba(0, 229, 160, 0.10);
+  --color-success-alpha-mid: rgba(0, 229, 160, 0.22);
 }
 
 body {
   margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
 }
