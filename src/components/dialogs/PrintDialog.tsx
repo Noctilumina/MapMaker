@@ -39,7 +39,7 @@ export default function PrintDialog({ getStage, onClose }: Props) {
   const [printing, setPrinting] = useState(false);
   const [thumbUrl, setThumbUrl] = useState<string | null>(null);
   const [dpi, setDpi] = useState(150);
-  const [cellsPerPage, setCellsPerPage] = useState(10);
+  const [targetCols, setTargetCols] = useState(3);
 
   const paper = PAPER_SIZES[paperKey];
   const pw = orientation === 'portrait' ? paper.w : paper.h;
@@ -47,10 +47,11 @@ export default function PrintDialog({ getStage, onClose }: Props) {
   const printableW = pw - marginIn * 2; // inches
   const printableH = ph - marginIn * 2;
 
-  // cellsPerPage = cells across one page width; height derived from aspect ratio
+  // Derive cells per page from desired column count
+  const cols = targetCols;
+  const cellsPerPage = grid.width / cols; // cells across one page width
   const cellsPerPageW = cellsPerPage;
   const cellsPerPageH = cellsPerPage * printableH / printableW;
-  const cols = Math.ceil(grid.width / cellsPerPageW);
   const rows = Math.ceil(grid.height / cellsPerPageH);
 
   // Thumbnail for preview
@@ -189,10 +190,20 @@ body{background:white}
           </label>
 
           <label style={{ color: theme.textMuted, fontSize: 12 }}>
-            Cells per page (width)
-            <input type="number" min={1} max={200} step={1} value={cellsPerPage}
-              onChange={(e) => setCellsPerPage(Math.max(1, Math.round(Number(e.target.value))))}
-              style={{ ...inputStyle, display: 'block', width: '100%', marginTop: 4 }} />
+            Layout (pages wide)
+            <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
+              {[2, 3, 4, 5, 6].map(n => (
+                <button key={n} onClick={() => setTargetCols(n)}
+                  style={{ ...btnBase, flex: 1, padding: '3px 0', fontSize: 11,
+                    background: targetCols === n ? theme.primary : theme.surface,
+                    color: targetCols === n ? theme.bg : theme.textMuted }}>
+                  {n}
+                </button>
+              ))}
+              <input type="number" min={1} max={50} step={1} value={targetCols}
+                onChange={(e) => setTargetCols(Math.max(1, Math.round(Number(e.target.value))))}
+                style={{ ...inputStyle, width: 44 }} />
+            </div>
           </label>
 
           <label style={{ color: theme.textMuted, fontSize: 12 }}>
@@ -211,7 +222,7 @@ body{background:white}
 
           <div style={{ marginTop: 4, padding: '8px 10px', background: theme.surface, borderRadius: theme.radius, fontSize: 11, color: theme.textMuted }}>
             <span style={{ color: theme.text, fontWeight: 'bold' }}>{rows * cols}</span> page{rows * cols !== 1 ? 's' : ''} ({cols} × {rows})<br />
-            {cellsPerPage} cells/page · {(printableW / cellsPerPage).toFixed(2)} in/cell · {dpi} DPI
+            {cellsPerPage.toFixed(1)} cells/page · {(printableW / cellsPerPage).toFixed(2)} in/cell · {dpi} DPI
           </div>
 
           <div style={{ display: 'flex', gap: 8, marginTop: 'auto', paddingTop: 8 }}>

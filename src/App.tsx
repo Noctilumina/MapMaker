@@ -65,11 +65,11 @@ export default function App() {
     (async () => {
       const store = useMapStore.getState();
 
-      // Try to restore last saved project from IDB
+      // Try to restore last saved project from IDB (skip if empty/blank)
       const ids = await listProjectIds();
       if (ids.length > 0) {
         const saved = await loadProjectFromDb(ids[ids.length - 1]);
-        if (saved) {
+        if (saved && saved.elements.length > 0) {
           store.loadProject(saved);
           const presets = loadPresetAssets(saved.grid.cellSize);
           Object.entries(presets).forEach(([id, asset]) => store.registerAsset(id, asset));
@@ -77,7 +77,7 @@ export default function App() {
         }
       }
 
-      // No saved project — load default map
+      // No saved project (or blank) — load default map
       const base = import.meta.env.BASE_URL;
       const res = await fetch(`${base}default-map.json`);
       const json = await res.json();
