@@ -14,6 +14,27 @@ export default function ExportDialog({ onExport, onClose }: Props) {
   const [dpi, setDpi] = useState(300);
   const [includeGrid, setIncludeGrid] = useState(true);
   const [includeGmNotes, setIncludeGmNotes] = useState(false);
+  const [exporting, setExporting] = useState(false);
+
+  const handleExport = () => {
+    setExporting(true);
+    // Let React paint the loading state before the blocking canvas operation
+    setTimeout(() => {
+      onExport({ dpi, includeGrid, includeGmNotes });
+    }, 50);
+  };
+
+  if (exporting) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+        <div style={{ background: theme.bg, borderRadius: theme.radius, padding: '32px 48px', border: theme.borderHeavy, boxShadow: theme.shadowLg, textAlign: 'center' }}>
+          <div style={{ fontSize: 32, marginBottom: 12 }}>⏳</div>
+          <div style={{ color: theme.text, fontSize: 14, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Rendering map…</div>
+          <div style={{ color: theme.textMuted, fontSize: 11, marginTop: 6 }}>This may take a moment for large maps</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={onClose}>
@@ -38,7 +59,7 @@ export default function ExportDialog({ onExport, onClose }: Props) {
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20 }}>
           <button className="brutal-btn" onClick={onClose} style={{ ...btnBase, background: theme.surface, color: theme.text }}>Cancel</button>
-          <button className="brutal-btn" onClick={() => onExport({ dpi, includeGrid, includeGmNotes })} style={{ ...btnBase, background: theme.primary, color: theme.bg, fontWeight: 'bold' }}>Export</button>
+          <button className="brutal-btn" onClick={handleExport} style={{ ...btnBase, background: theme.primary, color: theme.bg, fontWeight: 'bold' }}>Export</button>
         </div>
       </div>
     </div>
