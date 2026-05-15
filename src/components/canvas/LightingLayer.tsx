@@ -146,10 +146,11 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
         sceneFunc={(ctx) => {
           const nctx = (ctx as any)._context as CanvasRenderingContext2D;
 
+          // Cap stops mirror tube's perpendicular half-profile so junction is seamless:
+          // tube at d=0 → ei, d=r/2 (stop 0.75) → ei*0.15, d=r → 0
           const addCapStops = (grad: CanvasGradient) => {
             grad.addColorStop(0,   `rgba(${rgb}, ${ei})`);
-            grad.addColorStop(0.3, `rgba(${rgb}, ${ei * 0.5})`);
-            grad.addColorStop(0.7, `rgba(${rgb}, ${ei * 0.15})`);
+            grad.addColorStop(0.5, `rgba(${rgb}, ${ei * 0.15})`);
             grad.addColorStop(1,   `rgba(${rgb}, 0)`);
           };
 
