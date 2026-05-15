@@ -105,11 +105,13 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
 
   const rgb = hexToRgb(light.color);
   const shape = light.lightShape || 'point';
-  const hide = light.hideSource ?? false;
 
-  const colorStops = (intensity: number): (number | string)[] => hide
-    ? [0, `rgba(${rgb}, 0)`, 0.2, `rgba(${rgb}, 0)`, 0.45, `rgba(${rgb}, ${intensity})`, 0.7, `rgba(${rgb}, ${intensity * 0.2})`, 1, `rgba(${rgb}, 0)`]
-    : [0, `rgba(${rgb}, ${intensity})`, 0.3, `rgba(${rgb}, ${intensity * 0.5})`, 0.7, `rgba(${rgb}, ${intensity * 0.15})`, 1, `rgba(${rgb}, 0)`];
+  const colorStops = (intensity: number): (number | string)[] => [
+    0, `rgba(${rgb}, ${intensity})`,
+    0.3, `rgba(${rgb}, ${intensity * 0.5})`,
+    0.7, `rgba(${rgb}, ${intensity * 0.15})`,
+    1, `rgba(${rgb}, 0)`,
+  ];
 
   // Generate light gradient element(s) based on shape
   let lightElements: React.JSX.Element;

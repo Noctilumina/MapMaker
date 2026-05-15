@@ -24,42 +24,42 @@ export default function LightElement({ element }: Props) {
       )}
 
       {/* POINT light marker */}
-      {shape === 'point' && !element.hideSource && (
-        <>
+      {shape === 'point' && (
+        element.hideSource ? (
+          /* Hidden source — faint dashed ring for editor selection only */
           <Circle
             id={element.id}
             x={element.x} y={element.y} radius={10}
-            fill={element.color}
-            stroke={isSelected ? '#89b4fa' : '#1e1e2e'}
-            strokeWidth={isSelected ? 2 : 1}
-            opacity={0.8} listening={true}
+            fill="transparent"
+            stroke={isSelected ? '#89b4fa' : '#ffffff'}
+            strokeWidth={1} dash={[3, 4]}
+            opacity={0.25} listening={true}
           />
-          {[0, 60, 120, 180, 240, 300].map(angle => {
-            const rad = angle * Math.PI / 180;
-            return (
-              <Line key={`ray-${element.id}-${angle}`}
-                points={[
-                  element.x + Math.cos(rad) * 12, element.y + Math.sin(rad) * 12,
-                  element.x + Math.cos(rad) * 16, element.y + Math.sin(rad) * 16,
-                ]}
-                stroke={element.color} strokeWidth={2} lineCap="round"
-                opacity={0.6} listening={false}
-              />
-            );
-          })}
-        </>
-      )}
-      {/* Hidden-source point light — dashed ring, no glow */}
-      {shape === 'point' && element.hideSource && (
-        <Circle
-          id={element.id}
-          x={element.x} y={element.y} radius={10}
-          fill="transparent"
-          stroke={isSelected ? '#89b4fa' : element.color}
-          strokeWidth={isSelected ? 2 : 1.5}
-          dash={[4, 3]}
-          opacity={0.7} listening={true}
-        />
+        ) : (
+          <>
+            <Circle
+              id={element.id}
+              x={element.x} y={element.y} radius={10}
+              fill={element.color}
+              stroke={isSelected ? '#89b4fa' : '#1e1e2e'}
+              strokeWidth={isSelected ? 2 : 1}
+              opacity={0.8} listening={true}
+            />
+            {[0, 60, 120, 180, 240, 300].map(angle => {
+              const rad = angle * Math.PI / 180;
+              return (
+                <Line key={`ray-${element.id}-${angle}`}
+                  points={[
+                    element.x + Math.cos(rad) * 12, element.y + Math.sin(rad) * 12,
+                    element.x + Math.cos(rad) * 16, element.y + Math.sin(rad) * 16,
+                  ]}
+                  stroke={element.color} strokeWidth={2} lineCap="round"
+                  opacity={0.6} listening={false}
+                />
+              );
+            })}
+          </>
+        )
       )}
 
       {/* BAR light marker */}
@@ -68,11 +68,11 @@ export default function LightElement({ element }: Props) {
           <Line
             id={element.id}
             points={[element.x, element.y, element.x2 ?? element.x + 64, element.y2 ?? element.y]}
-            stroke={element.color}
-            strokeWidth={isSelected ? 8 : 6}
+            stroke={element.hideSource ? '#ffffff' : element.color}
+            strokeWidth={element.hideSource ? 2 : (isSelected ? 8 : 6)}
             lineCap="round"
-            dash={element.hideSource ? [6, 4] : undefined}
-            opacity={element.hideSource ? 0.5 : 0.8}
+            dash={element.hideSource ? [4, 6] : undefined}
+            opacity={element.hideSource ? 0.2 : 0.8}
             listening={true}
           />
           {isSelected && (
