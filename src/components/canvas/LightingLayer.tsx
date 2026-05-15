@@ -130,33 +130,60 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
       />
     );
   } else if (shape === 'bar') {
-    // Bar light — render as multiple overlapping point lights along the line
+    // Bar light — capsule: rotated rect (perpendicular linear gradient) + radial end caps
     const x2 = light.x2 ?? light.x + 64;
     const y2 = light.y2 ?? light.y;
     const dx = x2 - light.x;
     const dy = y2 - light.y;
-    const len = Math.sqrt(dx * dx + dy * dy);
-    const steps = Math.max(3, Math.ceil(len / (light.radius * 0.4)));
-    const perLight = effectiveIntensity / Math.sqrt(steps) * 1.5;
+    const len = Math.max(1, Math.sqrt(dx * dx + dy * dy));
+    const angleDeg = Math.atan2(dy, dx) * 180 / Math.PI;
+    const mcx = (light.x + x2) / 2;
+    const mcy = (light.y + y2) / 2;
+    const r = light.radius;
+    const ei = effectiveIntensity;
+
+    const tubeStops: (number | string)[] = [
+      0,    `rgba(${rgb}, 0)`,
+      0.25, `rgba(${rgb}, ${ei * 0.15})`,
+      0.5,  `rgba(${rgb}, ${ei})`,
+      0.75, `rgba(${rgb}, ${ei * 0.15})`,
+      1,    `rgba(${rgb}, 0)`,
+    ];
+    const cs = colorStops(ei);
 
     lightElements = (
-      <>{Array.from({ length: steps }, (_, i) => {
-        const t = steps === 1 ? 0.5 : i / (steps - 1);
-        const px = light.x + dx * t;
-        const py = light.y + dy * t;
-        return (
-          <Rect key={`bar-${i}`}
-            x={px - light.radius} y={py - light.radius}
-            width={light.radius * 2} height={light.radius * 2}
-            fillRadialGradientStartPoint={{ x: light.radius, y: light.radius }}
-            fillRadialGradientEndPoint={{ x: light.radius, y: light.radius }}
-            fillRadialGradientStartRadius={0}
-            fillRadialGradientEndRadius={light.radius}
-            fillRadialGradientColorStops={colorStops(perLight)}
-            listening={false} globalCompositeOperation="lighter"
-          />
-        );
-      })}</>
+      <>
+        {/* Tube body — linear gradient perpendicular to bar */}
+        <Rect
+          x={mcx} y={mcy} offsetX={len / 2} offsetY={r}
+          width={len} height={r * 2}
+          rotation={angleDeg}
+          fillLinearGradientStartPoint={{ x: len / 2, y: 0 }}
+          fillLinearGradientEndPoint={{ x: len / 2, y: r * 2 }}
+          fillLinearGradientColorStops={tubeStops}
+          listening={false} globalCompositeOperation="lighter"
+        />
+        {/* Start cap */}
+        <Rect
+          x={light.x - r} y={light.y - r} width={r * 2} height={r * 2}
+          fillRadialGradientStartPoint={{ x: r, y: r }}
+          fillRadialGradientEndPoint={{ x: r, y: r }}
+          fillRadialGradientStartRadius={0}
+          fillRadialGradientEndRadius={r}
+          fillRadialGradientColorStops={cs}
+          listening={false} globalCompositeOperation="lighter"
+        />
+        {/* End cap */}
+        <Rect
+          x={x2 - r} y={y2 - r} width={r * 2} height={r * 2}
+          fillRadialGradientStartPoint={{ x: r, y: r }}
+          fillRadialGradientEndPoint={{ x: r, y: r }}
+          fillRadialGradientStartRadius={0}
+          fillRadialGradientEndRadius={r}
+          fillRadialGradientColorStops={cs}
+          listening={false} globalCompositeOperation="lighter"
+        />
+      </>
     );
   } else {
     // Polygon light — render point lights at centroid + vertices
