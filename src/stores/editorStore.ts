@@ -17,6 +17,7 @@ interface EditorState {
   pendingShape: PendingShape;
   pendingOpening: 'door' | 'window' | null;
   pendingInnerWall: boolean;
+  clipboardElementIds: string[] | null;
 
   setTool: (tool: ToolName) => void;
   setActiveLayer: (id: string) => void;
@@ -31,6 +32,7 @@ interface EditorState {
   setPendingShape: (shape: PendingShape) => void;
   setPendingOpening: (type: 'door' | 'window' | null) => void;
   setPendingInnerWall: (active: boolean) => void;
+  setClipboard: (ids: string[]) => void;
   reset: () => void;
 }
 
@@ -47,6 +49,7 @@ const initialState = {
   pendingShape: null as PendingShape,
   pendingOpening: null as 'door' | 'window' | null,
   pendingInnerWall: false,
+  clipboardElementIds: null as string[] | null,
 };
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -68,5 +71,6 @@ export const useEditorStore = create<EditorState>((set) => ({
   setPendingShape: (shape) => set({ pendingShape: shape }),
   setPendingOpening: (type) => set({ pendingOpening: type }),
   setPendingInnerWall: (active) => set({ pendingInnerWall: active }),
+  setClipboard: (ids) => set({ clipboardElementIds: ids }),
   reset: () => set({ ...initialState, selectionBox: null, snapToGrid: true, renamingGroupId: null, pendingShape: null, pendingOpening: null, pendingInnerWall: false }),
 }));

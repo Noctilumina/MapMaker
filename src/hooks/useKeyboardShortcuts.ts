@@ -53,6 +53,25 @@ export function useKeyboardShortcuts() {
         if (e.key === 'z') { e.preventDefault(); useHistoryStore.getState().undo(); return; }
         if (e.key === 'y') { e.preventDefault(); useHistoryStore.getState().redo(); return; }
         if (e.key === 's') { e.preventDefault(); return; }
+        if (e.key === 'c') {
+          e.preventDefault();
+          const selected = useEditorStore.getState().selectedElementIds;
+          if (selected.length > 0) {
+            useEditorStore.getState().setClipboard([...selected]);
+          }
+          return;
+        }
+        if (e.key === 'v') {
+          e.preventDefault();
+          const clipboard = useEditorStore.getState().clipboardElementIds;
+          if (clipboard && clipboard.length > 0) {
+            useHistoryStore.getState().captureSnapshot();
+            const cellSize = useMapStore.getState().grid.cellSize;
+            const newIds = useMapStore.getState().duplicateElements(clipboard, { x: cellSize, y: cellSize });
+            if (newIds.length > 0) useEditorStore.getState().select(newIds);
+          }
+          return;
+        }
         if (e.key === 'd') {
           e.preventDefault();
           const selected = useEditorStore.getState().selectedElementIds;

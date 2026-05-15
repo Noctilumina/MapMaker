@@ -157,8 +157,7 @@ export default function PropertiesPanel() {
                       <button
                         key={t.id}
                         onClick={() => {
-                          const base = import.meta.env.BASE_URL;
-                          setGrid({ backgroundImage: base + t.path.replace(/^\//, ''), backgroundTile: true });
+                          setGrid({ backgroundImage: t.path.replace(/^\//, ''), backgroundTile: true });
                           setShowBgPicker(false);
                         }}
                         title={t.name}
