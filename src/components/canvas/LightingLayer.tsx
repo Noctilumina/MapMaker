@@ -1,4 +1,4 @@
-import { Layer, Rect, Line, Group } from 'react-konva';
+import { Layer, Rect, Line, Group, Shape } from 'react-konva';
 import React, { useMemo, useCallback } from 'react';
 import { useMapStore } from '../../stores/mapStore';
 import { computeVisibilityPolygon, getWallSegments, transformHull } from '../../utils/visibility';
@@ -130,60 +130,75 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
       />
     );
   } else if (shape === 'bar') {
-    // Bar light — capsule: rotated rect (perpendicular linear gradient) + radial end caps
+    // Bar light — true capsule via sceneFunc with clipped non-overlapping regions
     const x2 = light.x2 ?? light.x + 64;
     const y2 = light.y2 ?? light.y;
     const dx = x2 - light.x;
     const dy = y2 - light.y;
     const len = Math.max(1, Math.sqrt(dx * dx + dy * dy));
-    const angleDeg = Math.atan2(dy, dx) * 180 / Math.PI;
-    const mcx = (light.x + x2) / 2;
-    const mcy = (light.y + y2) / 2;
+    const angle = Math.atan2(dy, dx);
     const r = light.radius;
     const ei = effectiveIntensity;
-
-    const tubeStops: (number | string)[] = [
-      0,    `rgba(${rgb}, 0)`,
-      0.25, `rgba(${rgb}, ${ei * 0.15})`,
-      0.5,  `rgba(${rgb}, ${ei})`,
-      0.75, `rgba(${rgb}, ${ei * 0.15})`,
-      1,    `rgba(${rgb}, 0)`,
-    ];
-    const cs = colorStops(ei);
+    const x1 = light.x, y1 = light.y;
 
     lightElements = (
-      <>
-        {/* Tube body — linear gradient perpendicular to bar */}
-        <Rect
-          x={mcx} y={mcy} offsetX={len / 2} offsetY={r}
-          width={len} height={r * 2}
-          rotation={angleDeg}
-          fillLinearGradientStartPoint={{ x: len / 2, y: 0 }}
-          fillLinearGradientEndPoint={{ x: len / 2, y: r * 2 }}
-          fillLinearGradientColorStops={tubeStops}
-          listening={false} globalCompositeOperation="lighter"
-        />
-        {/* Start cap */}
-        <Rect
-          x={light.x - r} y={light.y - r} width={r * 2} height={r * 2}
-          fillRadialGradientStartPoint={{ x: r, y: r }}
-          fillRadialGradientEndPoint={{ x: r, y: r }}
-          fillRadialGradientStartRadius={0}
-          fillRadialGradientEndRadius={r}
-          fillRadialGradientColorStops={cs}
-          listening={false} globalCompositeOperation="lighter"
-        />
-        {/* End cap */}
-        <Rect
-          x={x2 - r} y={y2 - r} width={r * 2} height={r * 2}
-          fillRadialGradientStartPoint={{ x: r, y: r }}
-          fillRadialGradientEndPoint={{ x: r, y: r }}
-          fillRadialGradientStartRadius={0}
-          fillRadialGradientEndRadius={r}
-          fillRadialGradientColorStops={cs}
-          listening={false} globalCompositeOperation="lighter"
-        />
-      </>
+      <Shape
+        sceneFunc={(ctx) => {
+          const nctx = (ctx as any)._context as CanvasRenderingContext2D;
+
+          const addCapStops = (grad: CanvasGradient) => {
+            grad.addColorStop(0,   `rgba(${rgb}, ${ei})`);
+            grad.addColorStop(0.3, `rgba(${rgb}, ${ei * 0.5})`);
+            grad.addColorStop(0.7, `rgba(${rgb}, ${ei * 0.15})`);
+            grad.addColorStop(1,   `rgba(${rgb}, 0)`);
+          };
+
+          // Tube body — perpendicular linear gradient, x ∈ [0, len], y ∈ [-r, r]
+          nctx.save();
+          nctx.translate(x1, y1);
+          nctx.rotate(angle);
+          nctx.beginPath();
+          nctx.rect(0, -r, len, r * 2);
+          nctx.clip();
+          const tubeGrad = nctx.createLinearGradient(0, -r, 0, r);
+          tubeGrad.addColorStop(0,    `rgba(${rgb}, 0)`);
+          tubeGrad.addColorStop(0.25, `rgba(${rgb}, ${ei * 0.15})`);
+          tubeGrad.addColorStop(0.5,  `rgba(${rgb}, ${ei})`);
+          tubeGrad.addColorStop(0.75, `rgba(${rgb}, ${ei * 0.15})`);
+          tubeGrad.addColorStop(1,    `rgba(${rgb}, 0)`);
+          nctx.fillStyle = tubeGrad;
+          nctx.fillRect(0, -r, len, r * 2);
+          nctx.restore();
+
+          // Start cap — half-disc at x1,y1 — x ∈ [-r, 0] in bar-local space
+          nctx.save();
+          nctx.translate(x1, y1);
+          nctx.rotate(angle);
+          nctx.beginPath();
+          nctx.rect(-r, -r, r, r * 2);
+          nctx.clip();
+          const startGrad = nctx.createRadialGradient(0, 0, 0, 0, 0, r);
+          addCapStops(startGrad);
+          nctx.fillStyle = startGrad;
+          nctx.fillRect(-r, -r, r, r * 2);
+          nctx.restore();
+
+          // End cap — half-disc at x2,y2 — x ∈ [0, r] in bar-local space
+          nctx.save();
+          nctx.translate(x2, y2);
+          nctx.rotate(angle);
+          nctx.beginPath();
+          nctx.rect(0, -r, r, r * 2);
+          nctx.clip();
+          const endGrad = nctx.createRadialGradient(0, 0, 0, 0, 0, r);
+          addCapStops(endGrad);
+          nctx.fillStyle = endGrad;
+          nctx.fillRect(0, -r, r, r * 2);
+          nctx.restore();
+        }}
+        listening={false}
+        globalCompositeOperation="lighter"
+      />
     );
   } else {
     // Polygon light — render point lights at centroid + vertices
