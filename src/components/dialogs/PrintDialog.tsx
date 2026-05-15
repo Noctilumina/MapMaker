@@ -80,15 +80,20 @@ export default function PrintDialog({ getStage, onClose }: Props) {
       const pixelRatio = dpi * printableW / (grid.cellSize * cellsPerPage);
       const mapDataUrl = captureStage(stage, mapW, mapH, pixelRatio);
 
+      const totalMapW = (grid.width * printableW / cellsPerPage).toFixed(4);
+      const totalMapH = (grid.height * printableW / cellsPerPage).toFixed(4);
+
       const pages: string[] = [];
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const label = `${String.fromCharCode(65 + r)}${c + 1}`;
-          const bgLeft = -(c * printableW);
-          const bgTop  = -(r * printableH);
+          const imgLeft = -(c * printableW);
+          const imgTop  = -(r * printableH);
           pages.push(`
 <div class="page">
-  <div class="crop" style="background-position:${bgLeft}in ${bgTop}in"></div>
+  <div class="crop">
+    <img src="${mapDataUrl}" style="position:absolute;left:${imgLeft}in;top:${imgTop}in;width:${totalMapW}in;height:${totalMapH}in;display:block;" />
+  </div>
   ${showLabels ? `<div class="label">${label}</div>` : ''}
 </div>`);
         }
@@ -113,9 +118,6 @@ body{background:white}
   left:${marginIn}in;top:${marginIn}in;
   width:${printableW}in;height:${printableH}in;
   overflow:hidden;
-  background-image:url('${mapDataUrl}');
-  background-size:${(grid.width * printableW / cellsPerPage).toFixed(4)}in ${(grid.height * printableW / cellsPerPage).toFixed(4)}in;
-  background-repeat:no-repeat;
 }
 .label{
   position:absolute;
@@ -132,8 +134,8 @@ body{background:white}
         win.document.write(html);
         win.document.close();
         win.focus();
-        // Give images a moment to load before print dialog
-        setTimeout(() => win.print(), 600);
+        // Let DOM paint before triggering print dialog
+        setTimeout(() => win.print(), 300);
       }
       setPrinting(false);
       onClose();
