@@ -21,6 +21,7 @@ import DiagonalStripes from './components/DiagonalStripes';
 
 export default function App() {
   const { mode } = useTheme();
+  const mapName = useMapStore((s) => s.name);
   const [showExport, setShowExport] = useState(false);
   const [showNewProject, setShowNewProject] = useState(false);
   const [assetPanelWidth, setAssetPanelWidth] = useState(260);
@@ -45,6 +46,10 @@ export default function App() {
     document.body.style.cursor = '';
     document.body.style.userSelect = '';
   }, []);
+
+  useEffect(() => {
+    document.title = mapName ? `${mapName} — MapMaker` : 'MapMaker';
+  }, [mapName]);
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);

@@ -123,7 +123,7 @@ export default function PropertiesPanel() {
             </div>
             {grid.backgroundImage && (
               <img
-                src={grid.backgroundImage}
+                src={grid.backgroundImage.startsWith('data:') ? grid.backgroundImage : import.meta.env.BASE_URL + grid.backgroundImage}
                 alt="Background preview"
                 style={{ marginTop: 6, maxWidth: '100%', maxHeight: 64, borderRadius: theme.radius, border: theme.borderLight }}
               />

@@ -216,7 +216,7 @@ export default function LightingLayer() {
   const ambient = getAmbientLight(time);
   const sun = getSunAngle(time);
 
-  const polygons = elements.filter((el): el is PolygonElement => el.type === 'polygon' && (el.borderWidth || 0) > 0);
+  const polygons = elements.filter((el): el is PolygonElement => el.type === 'polygon' && (el.wallsBlockLight ?? true));
   const lights = elements.filter((el): el is LightSource => el.type === 'light');
 
   // Polygon wall segments

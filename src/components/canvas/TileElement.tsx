@@ -1,4 +1,4 @@
-import { Image as KonvaImage } from 'react-konva';
+import { Image as KonvaImage, Group } from 'react-konva';
 import { useEffect, useState } from 'react';
 import type { TileElement as TileElementType } from '../../types';
 import { useMapStore } from '../../stores/mapStore';
@@ -31,21 +31,27 @@ export default function TileElement({ element }: Props) {
   const pixelY = element.y;
 
   return (
-    <KonvaImage
-      id={element.id}
-      image={image}
+    <Group
       x={pixelX + pixelWidth / 2}
       y={pixelY + pixelHeight / 2}
-      offsetX={pixelWidth / 2}
-      offsetY={pixelHeight / 2}
-      width={pixelWidth}
-      height={pixelHeight}
       rotation={element.rotation}
-      scaleX={element.flipX ? -1 : 1}
-      scaleY={element.flipY ? -1 : 1}
-      opacity={element.opacity}
-      stroke={isSelected ? '#89b4fa' : undefined}
-      strokeWidth={isSelected ? 2 : 0}
-    />
+      clipFunc={(ctx) => {
+        ctx.rect(-pixelWidth / 2, -pixelHeight / 2, pixelWidth, pixelHeight);
+      }}
+    >
+      <KonvaImage
+        id={element.id}
+        image={image}
+        offsetX={pixelWidth / 2}
+        offsetY={pixelHeight / 2}
+        width={pixelWidth}
+        height={pixelHeight}
+        scaleX={element.flipX ? -1 : 1}
+        scaleY={element.flipY ? -1 : 1}
+        opacity={element.opacity}
+        stroke={isSelected ? '#89b4fa' : undefined}
+        strokeWidth={isSelected ? 2 : 0}
+      />
+    </Group>
   );
 }
