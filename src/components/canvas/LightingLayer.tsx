@@ -90,6 +90,11 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
 
   const rgb = hexToRgb(light.color);
   const shape = light.lightShape || 'point';
+  const hide = light.hideSource ?? false;
+
+  const colorStops = (intensity: number): (number | string)[] => hide
+    ? [0, `rgba(${rgb}, 0)`, 0.2, `rgba(${rgb}, 0)`, 0.45, `rgba(${rgb}, ${intensity})`, 0.7, `rgba(${rgb}, ${intensity * 0.2})`, 1, `rgba(${rgb}, 0)`]
+    : [0, `rgba(${rgb}, ${intensity})`, 0.3, `rgba(${rgb}, ${intensity * 0.5})`, 0.7, `rgba(${rgb}, ${intensity * 0.15})`, 1, `rgba(${rgb}, 0)`];
 
   // Generate light gradient element(s) based on shape
   let lightElements: React.JSX.Element;
@@ -103,12 +108,7 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
         fillRadialGradientEndPoint={{ x: light.radius, y: light.radius }}
         fillRadialGradientStartRadius={0}
         fillRadialGradientEndRadius={light.radius}
-        fillRadialGradientColorStops={[
-          0, `rgba(${rgb}, ${effectiveIntensity})`,
-          0.3, `rgba(${rgb}, ${effectiveIntensity * 0.5})`,
-          0.7, `rgba(${rgb}, ${effectiveIntensity * 0.15})`,
-          1, `rgba(${rgb}, 0)`,
-        ]}
+        fillRadialGradientColorStops={colorStops(effectiveIntensity)}
         listening={false} globalCompositeOperation="lighter"
       />
     );
@@ -135,12 +135,7 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
             fillRadialGradientEndPoint={{ x: light.radius, y: light.radius }}
             fillRadialGradientStartRadius={0}
             fillRadialGradientEndRadius={light.radius}
-            fillRadialGradientColorStops={[
-              0, `rgba(${rgb}, ${perLight})`,
-              0.3, `rgba(${rgb}, ${perLight * 0.5})`,
-              0.7, `rgba(${rgb}, ${perLight * 0.15})`,
-              1, `rgba(${rgb}, 0)`,
-            ]}
+            fillRadialGradientColorStops={colorStops(perLight)}
             listening={false} globalCompositeOperation="lighter"
           />
         );
@@ -171,12 +166,7 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
           fillRadialGradientEndPoint={{ x: light.radius, y: light.radius }}
           fillRadialGradientStartRadius={0}
           fillRadialGradientEndRadius={light.radius}
-          fillRadialGradientColorStops={[
-            0, `rgba(${rgb}, ${perLight})`,
-            0.3, `rgba(${rgb}, ${perLight * 0.5})`,
-            0.7, `rgba(${rgb}, ${perLight * 0.15})`,
-            1, `rgba(${rgb}, 0)`,
-          ]}
+          fillRadialGradientColorStops={colorStops(perLight)}
           listening={false} globalCompositeOperation="lighter"
         />
       ))}</>

@@ -34,8 +34,10 @@ export class SelectTool implements Tool {
       } else if (!selected.includes(hit.id)) {
         useEditorStore.getState().select([hit.id]);
       }
-      this.dragging = true;
-      this.dragElementId = hit.id;
+      if (!hit.locked) {
+        this.dragging = true;
+        this.dragElementId = hit.id;
+      }
       this.dragStartX = gridPos.col * useMapStore.getState().grid.cellSize;
       this.dragStartY = gridPos.row * useMapStore.getState().grid.cellSize;
       useHistoryStore.getState().captureSnapshot();
@@ -96,7 +98,7 @@ export class SelectTool implements Tool {
 
     selected.forEach((id) => {
       const el = elements.find((e) => e.id === id);
-      if (el) {
+      if (el && !el.locked) {
         if (el.type === 'polygon') {
           useMapStore.getState().movePolygon(id, deltaX, deltaY);
         } else if (el.type === 'path') {

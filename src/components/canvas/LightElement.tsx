@@ -24,7 +24,7 @@ export default function LightElement({ element }: Props) {
       )}
 
       {/* POINT light marker */}
-      {shape === 'point' && (
+      {shape === 'point' && !element.hideSource && (
         <>
           <Circle
             id={element.id}
@@ -49,6 +49,18 @@ export default function LightElement({ element }: Props) {
           })}
         </>
       )}
+      {/* Hidden-source point light — dashed ring, no glow */}
+      {shape === 'point' && element.hideSource && (
+        <Circle
+          id={element.id}
+          x={element.x} y={element.y} radius={10}
+          fill="transparent"
+          stroke={isSelected ? '#89b4fa' : element.color}
+          strokeWidth={isSelected ? 2 : 1.5}
+          dash={[4, 3]}
+          opacity={0.7} listening={true}
+        />
+      )}
 
       {/* BAR light marker */}
       {shape === 'bar' && (
@@ -59,7 +71,8 @@ export default function LightElement({ element }: Props) {
             stroke={element.color}
             strokeWidth={isSelected ? 8 : 6}
             lineCap="round"
-            opacity={0.8}
+            dash={element.hideSource ? [6, 4] : undefined}
+            opacity={element.hideSource ? 0.5 : 0.8}
             listening={true}
           />
           {isSelected && (

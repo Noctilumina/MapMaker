@@ -52,6 +52,7 @@ export interface TileElement {
   tint: string | null;
   opacity: number;
   blocksLight?: boolean;
+  locked?: boolean;
 }
 
 export interface PolygonElement {
@@ -75,6 +76,7 @@ export interface PolygonElement {
   innerWalls: InnerWall[];     // internal wall segments
   tint: string | null;
   opacity: number;
+  locked?: boolean;
 }
 
 export interface Opening {
@@ -123,6 +125,7 @@ export interface PathElement {
   closed: boolean;       // closed path (loop) or open
   tint: string | null;
   opacity: number;
+  locked?: boolean;
 }
 
 export interface LightSource {
@@ -140,6 +143,8 @@ export interface LightSource {
   x2?: number;                // bar end X (pixels)
   y2?: number;                // bar end Y (pixels)
   shapePoints?: number[];     // polygon light shape [x1,y1, x2,y2, ...]
+  hideSource?: boolean;       // light illuminates but source glow is hidden (interior/under-roof lights)
+  locked?: boolean;
 }
 
 export type MapElement = TileElement | PolygonElement | PathElement | LightSource;

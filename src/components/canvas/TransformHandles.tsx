@@ -1,4 +1,4 @@
-import { Circle, Line, Rect } from 'react-konva';
+import { Circle, Line, Rect, Text } from 'react-konva';
 import { useCallback, useState } from 'react';
 import { useMapStore } from '../../stores/mapStore';
 import { useEditorStore } from '../../stores/editorStore';
@@ -107,6 +107,8 @@ export default function TransformHandles({ element }: Props) {
   }, [element.id, cx, cy, captureOnce, updateElement]);
 
   const handleStyle = { fill: '#89b4fa', stroke: '#1e1e2e', strokeWidth: 1.5 };
+  const locked = element.locked ?? false;
+  const lockHandle = { x: rotHandle.x + 18, y: rotHandle.y };
 
   return (
     <>
@@ -114,15 +116,15 @@ export default function TransformHandles({ element }: Props) {
       <Line
         points={[...corners.flatMap(c => [c.x, c.y])]}
         closed
-        stroke="#89b4fa"
+        stroke={locked ? '#f38ba8' : '#89b4fa'}
         strokeWidth={1}
         dash={[4, 4]}
         listening={false}
         opacity={0.5}
       />
 
-      {/* Scale handles at corners */}
-      {corners.map((c, i) => (
+      {/* Scale handles at corners — hidden when locked */}
+      {!locked && corners.map((c, i) => (
         <Rect
           key={`scale-${i}`}
           x={c.x}
@@ -144,30 +146,53 @@ export default function TransformHandles({ element }: Props) {
       ))}
 
       {/* Rotation handle line */}
-      <Line
-        points={[rotLineStart.x, rotLineStart.y, rotHandle.x, rotHandle.y]}
-        stroke="#89b4fa"
-        strokeWidth={1}
-        listening={false}
-        opacity={0.5}
-      />
+      {!locked && (
+        <Line
+          points={[rotLineStart.x, rotLineStart.y, rotHandle.x, rotHandle.y]}
+          stroke="#89b4fa"
+          strokeWidth={1}
+          listening={false}
+          opacity={0.5}
+        />
+      )}
 
-      {/* Rotation handle */}
-      <Circle
-        x={rotHandle.x}
-        y={rotHandle.y}
-        radius={6}
-        fill="#cba6f7"
-        stroke="#1e1e2e"
-        strokeWidth={1.5}
-        draggable
-        onMouseDown={(e) => { e.cancelBubble = true; }}
-        onDragStart={(e) => { e.cancelBubble = true; captureOnce(); }}
-        onDragMove={handleRotationDrag}
-        onDragEnd={(e) => { e.cancelBubble = true; setSnapshotTaken(false); }}
-        onMouseEnter={(e) => { const s = (e.target as any).getStage(); if (s) s.container().style.cursor = 'crosshair'; }}
+      {/* Rotation handle — hidden when locked */}
+      {!locked && (
+        <Circle
+          x={rotHandle.x}
+          y={rotHandle.y}
+          radius={6}
+          fill="#cba6f7"
+          stroke="#1e1e2e"
+          strokeWidth={1.5}
+          draggable
+          onMouseDown={(e) => { e.cancelBubble = true; }}
+          onDragStart={(e) => { e.cancelBubble = true; captureOnce(); }}
+          onDragMove={handleRotationDrag}
+          onDragEnd={(e) => { e.cancelBubble = true; setSnapshotTaken(false); }}
+          onMouseEnter={(e) => { const s = (e.target as any).getStage(); if (s) s.container().style.cursor = 'crosshair'; }}
+          onMouseLeave={(e) => { const s = (e.target as any).getStage(); if (s) s.container().style.cursor = ''; }}
+          hitStrokeWidth={8}
+        />
+      )}
+
+      {/* Lock toggle button */}
+      <Text
+        x={lockHandle.x}
+        y={lockHandle.y}
+        text={locked ? '🔒' : '🔓'}
+        fontSize={14}
+        offsetX={7}
+        offsetY={7}
+        listening={true}
+        onClick={(e) => {
+          e.cancelBubble = true;
+          useHistoryStore.getState().captureSnapshot();
+          updateElement(element.id, { locked: !locked });
+        }}
+        onMouseEnter={(e) => { const s = (e.target as any).getStage(); if (s) s.container().style.cursor = 'pointer'; }}
         onMouseLeave={(e) => { const s = (e.target as any).getStage(); if (s) s.container().style.cursor = ''; }}
-        hitStrokeWidth={8}
+        hitStrokeWidth={10}
       />
     </>
   );

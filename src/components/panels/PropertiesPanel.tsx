@@ -518,7 +518,16 @@ export default function PropertiesPanel() {
 
   return (
     <div style={{ fontSize: 12, color: theme.textMuted }}>
-      <div className="panel-header panel-header--success" style={{ color: theme.success }}>Properties</div>
+      <div className="panel-header panel-header--success" style={{ color: theme.success, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span>Properties</span>
+        <button
+          onClick={() => handleUpdate({ locked: !('locked' in el && el.locked) })}
+          title={('locked' in el && el.locked) ? 'Unlock element' : 'Lock element'}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: '0 4px', lineHeight: 1 }}
+        >
+          {('locked' in el && el.locked) ? '🔒' : '🔓'}
+        </button>
+      </div>
       <div style={{ padding: 12 }}>
       {'assetId' in el && assets[el.assetId] && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, padding: '4px 6px', background: theme.surface, borderRadius: theme.radius }}>
@@ -642,6 +651,15 @@ export default function PropertiesPanel() {
                 style={{ flex: 1 }} />
               <span style={{ color: theme.text, width: 28, textAlign: 'right', fontSize: 10 }}>{Math.round(el.flickerAmount * 100)}%</span>
             </div>
+            <span>Hidden</span>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={el.hideSource ?? false}
+                onChange={(e) => handleUpdate({ hideSource: e.target.checked })}
+              />
+              <span style={{ fontSize: 10, color: theme.textMuted }}>Hide source glow</span>
+            </label>
           </>
         )}
         {el.type === 'polygon' && (

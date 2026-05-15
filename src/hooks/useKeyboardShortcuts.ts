@@ -139,9 +139,11 @@ export function useKeyboardShortcuts() {
         case 'delete':
         case 'backspace': {
           const selected = useEditorStore.getState().selectedElementIds;
-          if (selected.length > 0) {
+          const elements = useMapStore.getState().elements;
+          const deletable = selected.filter(id => !elements.find(el => el.id === id)?.locked);
+          if (deletable.length > 0) {
             useHistoryStore.getState().captureSnapshot();
-            selected.forEach((id) => useMapStore.getState().removeElement(id));
+            deletable.forEach((id) => useMapStore.getState().removeElement(id));
             useEditorStore.getState().deselect();
           }
           break;

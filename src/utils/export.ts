@@ -13,8 +13,9 @@ interface ExportOptions {
 export function exportToPng(stage: Konva.Stage, options: ExportOptions): void {
   const { dpi, gridWidthCells, gridHeightCells, cellSizePx, includeGrid, includeGmNotes } = options;
 
-  const pixelsPerCell = dpi;
-  const scale = pixelsPerCell / cellSizePx;
+  const scale = dpi / cellSizePx;
+  const mapWidth = gridWidthCells * cellSizePx;
+  const mapHeight = gridHeightCells * cellSizePx;
 
   const gmLayer = stage.findOne('.gm-notes') as Konva.Layer | undefined;
   const gmWasVisible = gmLayer?.visible();
@@ -24,38 +25,36 @@ export function exportToPng(stage: Konva.Stage, options: ExportOptions): void {
   const gridWasVisible = gridLayer?.visible();
   if (gridLayer && !includeGrid) gridLayer.visible(false);
 
-  const width = gridWidthCells * cellSizePx;
-  const height = gridHeightCells * cellSizePx;
+  // Save stage transform — the map occupies (0,0)..(mapWidth,mapHeight) in scene space.
+  // Reset to identity so scene coords == stage screen coords for the capture.
+  const savedX = stage.x();
+  const savedY = stage.y();
+  const savedScaleX = stage.scaleX();
+  const savedScaleY = stage.scaleY();
 
   try {
-    // Get the canvas from the stage and render to a new canvas at the desired scale
-    const canvas = document.createElement('canvas');
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Failed to get canvas context');
+    stage.position({ x: 0, y: 0 });
+    stage.scale({ x: 1, y: 1 });
 
-    // Scale the context
-    ctx.scale(scale, scale);
+    const dataUrl = stage.toDataURL({
+      x: 0,
+      y: 0,
+      width: mapWidth,
+      height: mapHeight,
+      pixelRatio: scale,
+      mimeType: 'image/png',
+    });
 
-    // Draw the stage content
-    const stageCanvas = stage.toCanvas({ pixelRatio: 1 }) as HTMLCanvasElement;
-    ctx.drawImage(stageCanvas, 0, 0, width, height, 0, 0, width, height);
-
-    // Convert to blob and download
-    canvas.toBlob((blob) => {
-      if (!blob) throw new Error('Failed to create blob');
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `map-${Date.now()}.png`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, 'image/png');
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = `map-${Date.now()}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   } finally {
-    // Restore visibility
+    stage.position({ x: savedX, y: savedY });
+    stage.scale({ x: savedScaleX, y: savedScaleY });
+
     if (gmLayer && gmWasVisible !== undefined) gmLayer.visible(gmWasVisible);
     if (gridLayer && gridWasVisible !== undefined) gridLayer.visible(gridWasVisible);
   }
