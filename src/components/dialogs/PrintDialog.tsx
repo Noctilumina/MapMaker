@@ -11,8 +11,6 @@ const PAPER_SIZES: Record<string, { w: number; h: number; label: string }> = {
   tabloid: { w: 11,    h: 17,    label: 'Tabloid (11×17")' },
 };
 
-const PRINT_DPI = 150;
-
 interface Props {
   getStage: () => Konva.Stage | null;
   onClose: () => void;
@@ -40,6 +38,8 @@ export default function PrintDialog({ getStage, onClose }: Props) {
   const [showLabels, setShowLabels] = useState(true);
   const [printing, setPrinting] = useState(false);
   const [thumbUrl, setThumbUrl] = useState<string | null>(null);
+  const [dpi, setDpi] = useState(150);
+  const [cellsPerInch, setCellsPerInch] = useState(1);
 
   const paper = PAPER_SIZES[paperKey];
   const pw = orientation === 'portrait' ? paper.w : paper.h;
@@ -47,9 +47,8 @@ export default function PrintDialog({ getStage, onClose }: Props) {
   const printableW = pw - marginIn * 2; // inches
   const printableH = ph - marginIn * 2;
 
-  // 1 cell = 1 inch at 1:1 scale (battlemap standard)
-  const cellsPerPageW = printableW;
-  const cellsPerPageH = printableH;
+  const cellsPerPageW = printableW * cellsPerInch;
+  const cellsPerPageH = printableH * cellsPerInch;
   const cols = Math.ceil(grid.width / cellsPerPageW);
   const rows = Math.ceil(grid.height / cellsPerPageH);
 
@@ -76,7 +75,7 @@ export default function PrintDialog({ getStage, onClose }: Props) {
       const stage = getStage();
       if (!stage) { setPrinting(false); return; }
 
-      const pixelRatio = PRINT_DPI / grid.cellSize;
+      const pixelRatio = dpi / (grid.cellSize * cellsPerInch);
       const mapDataUrl = captureStage(stage, mapW, mapH, pixelRatio);
 
       const pages: string[] = [];
@@ -113,7 +112,7 @@ body{background:white}
   width:${printableW}in;height:${printableH}in;
   overflow:hidden;
   background-image:url('${mapDataUrl}');
-  background-size:${grid.width}in ${grid.height}in;
+  background-size:${(grid.width / cellsPerInch).toFixed(4)}in ${(grid.height / cellsPerInch).toFixed(4)}in;
   background-repeat:no-repeat;
 }
 .label{
@@ -188,6 +187,22 @@ body{background:white}
               style={{ ...inputStyle, display: 'block', width: '100%', marginTop: 4 }} />
           </label>
 
+          <label style={{ color: theme.textMuted, fontSize: 12 }}>
+            Cells per inch
+            <input type="number" min={0.1} max={20} step={0.25} value={cellsPerInch}
+              onChange={(e) => setCellsPerInch(Math.max(0.1, Number(e.target.value)))}
+              style={{ ...inputStyle, display: 'block', width: '100%', marginTop: 4 }} />
+          </label>
+
+          <label style={{ color: theme.textMuted, fontSize: 12 }}>
+            Print DPI
+            <select value={dpi} onChange={(e) => setDpi(Number(e.target.value))} style={{ ...inputStyle, display: 'block', width: '100%', marginTop: 4 }}>
+              <option value={72}>72 (screen)</option>
+              <option value={150}>150 (standard)</option>
+              <option value={300}>300 (high)</option>
+            </select>
+          </label>
+
           <label style={{ color: theme.textMuted, fontSize: 12, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
             <input type="checkbox" checked={showLabels} onChange={(e) => setShowLabels(e.target.checked)} />
             Page labels (A1, B2…)
@@ -195,7 +210,7 @@ body{background:white}
 
           <div style={{ marginTop: 4, padding: '8px 10px', background: theme.surface, borderRadius: theme.radius, fontSize: 11, color: theme.textMuted }}>
             <span style={{ color: theme.text, fontWeight: 'bold' }}>{rows * cols}</span> page{rows * cols !== 1 ? 's' : ''} ({cols} × {rows})<br />
-            Scale: 1 cell = 1 inch
+            {cellsPerInch === 1 ? '1 cell = 1 in' : cellsPerInch < 1 ? `1 cell = ${(1/cellsPerInch).toFixed(2)} in` : `${cellsPerInch} cells = 1 in`} · {dpi} DPI
           </div>
 
           <div style={{ display: 'flex', gap: 8, marginTop: 'auto', paddingTop: 8 }}>
