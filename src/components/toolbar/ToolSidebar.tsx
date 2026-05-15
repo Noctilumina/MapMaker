@@ -12,6 +12,7 @@ const tools: { name: ToolName; icon: string; shortcut: string }[] = [
   { name: 'polygon', icon: '\u2B21', shortcut: 'P' },
   { name: 'path', icon: '\u2935', shortcut: 'R' },
   { name: 'eraser', icon: '\uD83E\uDDF9', shortcut: 'E' },
+  { name: 'light', icon: '\u2600', shortcut: 'L' },
 ];
 
 const shapes: { name: PendingShape; icon: string; label: string }[] = [

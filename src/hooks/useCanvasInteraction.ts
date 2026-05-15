@@ -10,6 +10,7 @@ import { EraserTool } from '../tools/EraserTool';
 import { PanTool } from '../tools/PanTool';
 import { PolygonTool } from '../tools/PolygonTool';
 import { PathTool } from '../tools/PathTool';
+import { LightTool } from '../tools/LightTool';
 
 const polygonTool = new PolygonTool();
 const pathTool = new PathTool();
@@ -21,6 +22,7 @@ const toolInstances: Record<ToolName, Tool> = {
   pan: new PanTool(),
   polygon: polygonTool,
   path: pathTool,
+  light: new LightTool(),
 };
 
 export function getPolygonTool() { return polygonTool; }

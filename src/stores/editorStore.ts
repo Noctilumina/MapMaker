@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Viewport } from '../types';
 
-export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path';
+export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light';
 export type PendingShape = 'circle' | 'rect' | 'hexagon' | null;
 
 interface EditorState {
