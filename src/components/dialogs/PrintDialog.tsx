@@ -4,10 +4,10 @@ import { useMapStore } from '../../stores/mapStore';
 import type Konva from 'konva';
 
 const PAPER_SIZES: Record<string, { w: number; h: number; label: string }> = {
-  letter:  { w: 8.5,   h: 11,    label: 'Letter (8.5×11")' },
   a4:      { w: 8.27,  h: 11.69, label: 'A4 (210×297mm)' },
-  legal:   { w: 8.5,   h: 14,    label: 'Legal (8.5×14")' },
   a3:      { w: 11.69, h: 16.54, label: 'A3 (297×420mm)' },
+  letter:  { w: 8.5,   h: 11,    label: 'Letter (8.5×11")' },
+  legal:   { w: 8.5,   h: 14,    label: 'Legal (8.5×14")' },
   tabloid: { w: 11,    h: 17,    label: 'Tabloid (11×17")' },
 };
 
@@ -32,14 +32,14 @@ export default function PrintDialog({ getStage, onClose }: Props) {
   const mapW = grid.width * grid.cellSize;
   const mapH = grid.height * grid.cellSize;
 
-  const [paperKey, setPaperKey] = useState('letter');
+  const [paperKey, setPaperKey] = useState('a4');
   const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('landscape');
   const [marginIn, setMarginIn] = useState(0.25);
   const [showLabels, setShowLabels] = useState(true);
   const [printing, setPrinting] = useState(false);
   const [thumbUrl, setThumbUrl] = useState<string | null>(null);
   const [dpi, setDpi] = useState(150);
-  const [cellsPerInch, setCellsPerInch] = useState(1);
+  const [cellsPerPage, setCellsPerPage] = useState(10);
 
   const paper = PAPER_SIZES[paperKey];
   const pw = orientation === 'portrait' ? paper.w : paper.h;
@@ -47,8 +47,9 @@ export default function PrintDialog({ getStage, onClose }: Props) {
   const printableW = pw - marginIn * 2; // inches
   const printableH = ph - marginIn * 2;
 
-  const cellsPerPageW = printableW * cellsPerInch;
-  const cellsPerPageH = printableH * cellsPerInch;
+  // cellsPerPage = cells across one page width; height derived from aspect ratio
+  const cellsPerPageW = cellsPerPage;
+  const cellsPerPageH = cellsPerPage * printableH / printableW;
   const cols = Math.ceil(grid.width / cellsPerPageW);
   const rows = Math.ceil(grid.height / cellsPerPageH);
 
@@ -75,7 +76,7 @@ export default function PrintDialog({ getStage, onClose }: Props) {
       const stage = getStage();
       if (!stage) { setPrinting(false); return; }
 
-      const pixelRatio = dpi / (grid.cellSize * cellsPerInch);
+      const pixelRatio = dpi * printableW / (grid.cellSize * cellsPerPage);
       const mapDataUrl = captureStage(stage, mapW, mapH, pixelRatio);
 
       const pages: string[] = [];
@@ -112,7 +113,7 @@ body{background:white}
   width:${printableW}in;height:${printableH}in;
   overflow:hidden;
   background-image:url('${mapDataUrl}');
-  background-size:${(grid.width / cellsPerInch).toFixed(4)}in ${(grid.height / cellsPerInch).toFixed(4)}in;
+  background-size:${(grid.width * printableW / cellsPerPage).toFixed(4)}in ${(grid.height * printableW / cellsPerPage).toFixed(4)}in;
   background-repeat:no-repeat;
 }
 .label{
@@ -188,9 +189,9 @@ body{background:white}
           </label>
 
           <label style={{ color: theme.textMuted, fontSize: 12 }}>
-            Cells per inch
-            <input type="number" min={0.1} max={20} step={0.25} value={cellsPerInch}
-              onChange={(e) => setCellsPerInch(Math.max(0.1, Number(e.target.value)))}
+            Cells per page (width)
+            <input type="number" min={1} max={200} step={1} value={cellsPerPage}
+              onChange={(e) => setCellsPerPage(Math.max(1, Math.round(Number(e.target.value))))}
               style={{ ...inputStyle, display: 'block', width: '100%', marginTop: 4 }} />
           </label>
 
@@ -210,7 +211,7 @@ body{background:white}
 
           <div style={{ marginTop: 4, padding: '8px 10px', background: theme.surface, borderRadius: theme.radius, fontSize: 11, color: theme.textMuted }}>
             <span style={{ color: theme.text, fontWeight: 'bold' }}>{rows * cols}</span> page{rows * cols !== 1 ? 's' : ''} ({cols} × {rows})<br />
-            {cellsPerInch === 1 ? '1 cell = 1 in' : cellsPerInch < 1 ? `1 cell = ${(1/cellsPerInch).toFixed(2)} in` : `${cellsPerInch} cells = 1 in`} · {dpi} DPI
+            {cellsPerPage} cells/page · {(printableW / cellsPerPage).toFixed(2)} in/cell · {dpi} DPI
           </div>
 
           <div style={{ display: 'flex', gap: 8, marginTop: 'auto', paddingTop: 8 }}>
@@ -256,6 +257,42 @@ body{background:white}
           <div style={{ color: theme.textMuted, fontSize: 10 }}>
             Map: {grid.width}×{grid.height} cells · Paper: {pw.toFixed(2)}×{ph.toFixed(2)}"
           </div>
+          {/* Page layout grid */}
+          {(() => {
+            const maxGridW = 220;
+            const cellW = Math.min(40, Math.floor(maxGridW / cols));
+            const cellH = Math.round(cellW * ph / pw);
+            const gridW = cols * cellW;
+            const gridH = rows * cellH;
+            const fontSize = Math.max(6, Math.min(10, cellW * 0.28));
+            return (
+              <div style={{ alignSelf: 'flex-start' }}>
+                <div style={{ color: theme.textMuted, fontSize: 10, marginBottom: 4 }}>
+                  Page layout — {cols}×{rows} ({rows * cols} page{rows * cols !== 1 ? 's' : ''})
+                </div>
+                <svg width={gridW} height={gridH} style={{ display: 'block' }}>
+                  {Array.from({ length: cols }, (_, c) =>
+                    Array.from({ length: rows }, (_, r) => {
+                      const x = c * cellW;
+                      const y = r * cellH;
+                      const label = `${String.fromCharCode(65 + r)}${c + 1}`;
+                      return (
+                        <g key={`${c}-${r}`}>
+                          <rect x={x + 1} y={y + 1} width={cellW - 2} height={cellH - 2}
+                            fill={theme.surface} stroke={theme.primary} strokeWidth={1} rx={1} />
+                          <text x={x + cellW / 2} y={y + cellH / 2 + fontSize * 0.35}
+                            textAnchor="middle" fontSize={fontSize}
+                            fill={theme.textMuted} fontFamily="monospace">
+                            {label}
+                          </text>
+                        </g>
+                      );
+                    })
+                  )}
+                </svg>
+              </div>
+            );
+          })()}
         </div>
       </div>
     </div>
