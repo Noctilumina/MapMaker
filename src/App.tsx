@@ -10,6 +10,7 @@ import Toolbar from './components/toolbar/Toolbar';
 import ToolSidebar from './components/toolbar/ToolSidebar';
 import StatusBar from './components/toolbar/StatusBar';
 import ExportDialog from './components/dialogs/ExportDialog';
+import PrintDialog from './components/dialogs/PrintDialog';
 import NewProjectDialog from './components/dialogs/NewProjectDialog';
 import { useMapStore } from './stores/mapStore';
 import { loadPresetAssets } from './utils/assetLoader';
@@ -23,6 +24,7 @@ export default function App() {
   const { mode } = useTheme();
   const mapName = useMapStore((s) => s.name);
   const [showExport, setShowExport] = useState(false);
+  const [showPrint, setShowPrint] = useState(false);
   const [showNewProject, setShowNewProject] = useState(false);
   const [assetPanelWidth, setAssetPanelWidth] = useState(260);
   const [rightPanelWidth, setRightPanelWidth] = useState(240);
@@ -468,7 +470,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="toolbar">
-        <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} />
+        <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} />
       </header>
       <div className="workspace">
         <aside className="tool-sidebar">
@@ -518,6 +520,9 @@ export default function App() {
           }}
           onClose={() => setShowExport(false)}
         />
+      )}
+      {showPrint && (
+        <PrintDialog getStage={getStageInstance} onClose={() => setShowPrint(false)} />
       )}
       {showNewProject && (
         <NewProjectDialog

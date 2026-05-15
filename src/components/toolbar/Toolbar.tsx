@@ -8,9 +8,10 @@ import ChipButton from '../ChipButton';
 interface Props {
   onExportPng: () => void;
   onNewProject: () => void;
+  onPrint: () => void;
 }
 
-export default function Toolbar({ onExportPng, onNewProject }: Props) {
+export default function Toolbar({ onExportPng, onNewProject, onPrint }: Props) {
   const { mode, toggle } = useTheme();
   const canUndo = useHistoryStore((s) => s.canUndo);
   const canRedo = useHistoryStore((s) => s.canRedo);
@@ -43,6 +44,7 @@ export default function Toolbar({ onExportPng, onNewProject }: Props) {
         <ChipButton variant="secondary" onClick={undo} disabled={!canUndo} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Undo</ChipButton>
         <ChipButton variant="secondary" onClick={redo} disabled={!canRedo} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Redo</ChipButton>
       </div>
+      <ChipButton variant="secondary" onClick={onPrint} style={{ padding: '4px 12px', fontSize: 11 }}>Print</ChipButton>
       <ChipButton variant="success" selected onClick={onExportPng} style={{ padding: '4px 12px', fontSize: 11, fontWeight: 'bold', boxShadow: theme.shadowSm }}>Export PNG</ChipButton>
       <button
         onClick={toggle}
