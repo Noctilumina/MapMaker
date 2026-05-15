@@ -943,15 +943,18 @@ export default function PropertiesPanel() {
       </div>
 
       {/* Z-order controls */}
-      <div style={{ display: 'flex', gap: 3, marginTop: 12 }}>
-        <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().bringToFront(el.id); }}
-          style={{ flex: 1, background: theme.surface, color: theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '3px 0', cursor: 'pointer', fontSize: 9 }} title="Bring to front">⬆⬆</button>
-        <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().bringForward(el.id); }}
-          style={{ flex: 1, background: theme.surface, color: theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '3px 0', cursor: 'pointer', fontSize: 9 }} title="Bring forward">⬆</button>
-        <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().sendBackward(el.id); }}
-          style={{ flex: 1, background: theme.surface, color: theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '3px 0', cursor: 'pointer', fontSize: 9 }} title="Send backward">⬇</button>
-        <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().sendToBack(el.id); }}
-          style={{ flex: 1, background: theme.surface, color: theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '3px 0', cursor: 'pointer', fontSize: 9 }} title="Send to back">⬇⬇</button>
+      <div style={{ marginTop: 12 }}>
+        <div style={{ color: theme.textMuted, fontSize: 10, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>Z-Order</div>
+        <div style={{ display: 'flex', gap: 3 }}>
+          <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().bringToFront(el.id); }}
+            style={{ flex: 1, background: theme.successAlphaLow, color: theme.success, border: `1px solid ${theme.success}`, borderRadius: theme.radius, padding: '5px 0', cursor: 'pointer', fontSize: 14, lineHeight: 1 }} title="Bring to front (Shift+])">⬆⬆</button>
+          <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().bringForward(el.id); }}
+            style={{ flex: 1, background: theme.successAlphaLow, color: theme.success, border: `1px solid ${theme.success}`, borderRadius: theme.radius, padding: '5px 0', cursor: 'pointer', fontSize: 14, lineHeight: 1 }} title="Bring forward (])">⬆</button>
+          <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().sendBackward(el.id); }}
+            style={{ flex: 1, background: 'rgba(255,64,129,0.12)', color: theme.danger, border: `1px solid ${theme.danger}`, borderRadius: theme.radius, padding: '5px 0', cursor: 'pointer', fontSize: 14, lineHeight: 1 }} title="Send backward ([)">⬇</button>
+          <button onClick={() => { useHistoryStore.getState().captureSnapshot(); useMapStore.getState().sendToBack(el.id); }}
+            style={{ flex: 1, background: 'rgba(255,64,129,0.12)', color: theme.danger, border: `1px solid ${theme.danger}`, borderRadius: theme.radius, padding: '5px 0', cursor: 'pointer', fontSize: 14, lineHeight: 1 }} title="Send to back (Shift+[)">⬇⬇</button>
+        </div>
       </div>
 
       <div style={{ display: 'flex', gap: 6, marginTop: 6 }}>

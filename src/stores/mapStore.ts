@@ -70,9 +70,11 @@ export const useMapStore = create<MapState>((set, get) => ({
   ...initialState,
 
   addElement: (input) =>
-    set((state) => ({
-      elements: [...state.elements, { ...input, id: uuidv4() } as MapElement],
-    })),
+    set((state) => {
+      const maxZ = state.elements.reduce((m, e) => Math.max(m, e.zIndex ?? 0), -1);
+      const zIndex = (input as any).zIndex !== undefined ? (input as any).zIndex : maxZ + 1;
+      return { elements: [...state.elements, { ...input, id: uuidv4(), zIndex } as MapElement] };
+    }),
 
   moveElement: (id, x, y) =>
     set((state) => ({
@@ -118,32 +120,54 @@ export const useMapStore = create<MapState>((set, get) => ({
     set((state) => {
       const el = state.elements.find(e => e.id === id);
       if (!el) return state;
-      return { elements: [...state.elements.filter(e => e.id !== id), el] };
+      const maxZ = state.elements.reduce((m, e) => Math.max(m, e.zIndex ?? 0), -1);
+      return { elements: state.elements.map(e => e.id === id ? { ...e, zIndex: maxZ + 1 } : e) };
     }),
 
   sendToBack: (id) =>
     set((state) => {
       const el = state.elements.find(e => e.id === id);
       if (!el) return state;
-      return { elements: [el, ...state.elements.filter(e => e.id !== id)] };
+      const minZ = state.elements.reduce((m, e) => Math.min(m, e.zIndex ?? 0), Infinity);
+      return { elements: state.elements.map(e => e.id === id ? { ...e, zIndex: minZ - 1 } : e) };
     }),
 
   bringForward: (id) =>
     set((state) => {
-      const idx = state.elements.findIndex(e => e.id === id);
-      if (idx < 0 || idx >= state.elements.length - 1) return state;
-      const els = [...state.elements];
-      [els[idx], els[idx + 1]] = [els[idx + 1], els[idx]];
-      return { elements: els };
+      const el = state.elements.find(e => e.id === id);
+      if (!el) return state;
+      const myZ = el.zIndex ?? 0;
+      // Find element with next higher zIndex
+      const above = state.elements
+        .filter(e => e.id !== id && (e.zIndex ?? 0) > myZ)
+        .sort((a, b) => (a.zIndex ?? 0) - (b.zIndex ?? 0))[0];
+      if (!above) return state;
+      const aboveZ = above.zIndex ?? 0;
+      return {
+        elements: state.elements.map(e =>
+          e.id === id ? { ...e, zIndex: aboveZ } :
+          e.id === above.id ? { ...e, zIndex: myZ } : e
+        ),
+      };
     }),
 
   sendBackward: (id) =>
     set((state) => {
-      const idx = state.elements.findIndex(e => e.id === id);
-      if (idx <= 0) return state;
-      const els = [...state.elements];
-      [els[idx], els[idx - 1]] = [els[idx - 1], els[idx]];
-      return { elements: els };
+      const el = state.elements.find(e => e.id === id);
+      if (!el) return state;
+      const myZ = el.zIndex ?? 0;
+      // Find element with next lower zIndex
+      const below = state.elements
+        .filter(e => e.id !== id && (e.zIndex ?? 0) < myZ)
+        .sort((a, b) => (b.zIndex ?? 0) - (a.zIndex ?? 0))[0];
+      if (!below) return state;
+      const belowZ = below.zIndex ?? 0;
+      return {
+        elements: state.elements.map(e =>
+          e.id === id ? { ...e, zIndex: belowZ } :
+          e.id === below.id ? { ...e, zIndex: myZ } : e
+        ),
+      };
     }),
 
   removeElement: (id) =>
@@ -333,7 +357,10 @@ export const useMapStore = create<MapState>((set, get) => ({
       version: project.version,
       grid: project.grid,
       layers: project.layers,
-      elements: project.elements,
+      // Migrate legacy elements without zIndex: assign array position so render order is preserved
+      elements: project.elements.map((el, idx) =>
+        el.zIndex !== undefined ? el : { ...el, zIndex: idx }
+      ),
       assets: project.assets,
       groups: project.groups,
     }),

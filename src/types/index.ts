@@ -51,6 +51,7 @@ export interface TileElement {
   flipY: boolean;
   tint: string | null;
   opacity: number;
+  zIndex?: number;
   blocksLight?: boolean;
   locked?: boolean;
 }
@@ -76,6 +77,7 @@ export interface PolygonElement {
   innerWalls: InnerWall[];     // internal wall segments
   tint: string | null;
   opacity: number;
+  zIndex?: number;
   locked?: boolean;
 }
 
@@ -125,6 +127,7 @@ export interface PathElement {
   closed: boolean;       // closed path (loop) or open
   tint: string | null;
   opacity: number;
+  zIndex?: number;
   locked?: boolean;
 }
 
@@ -144,6 +147,7 @@ export interface LightSource {
   y2?: number;                // bar end Y (pixels)
   shapePoints?: number[];     // polygon light shape [x1,y1, x2,y2, ...]
   hideSource?: boolean;       // light illuminates but source glow is hidden (interior/under-roof lights)
+  zIndex?: number;
   locked?: boolean;
 }
 

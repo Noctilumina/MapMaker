@@ -154,12 +154,12 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
             grad.addColorStop(1,   `rgba(${rgb}, 0)`);
           };
 
-          // Tube body — perpendicular linear gradient, x ∈ [-1, len+1] (1px overlap at each end to avoid boundary gaps)
+          // Tube body — perpendicular linear gradient, x ∈ [-0.5, len+0.5] (sub-pixel overlap to avoid boundary gaps without additive brightness spike)
           nctx.save();
           nctx.translate(x1, y1);
           nctx.rotate(angle);
           nctx.beginPath();
-          nctx.rect(-1, -r, len + 2, r * 2);
+          nctx.rect(-0.5, -r, len + 1, r * 2);
           nctx.clip();
           const tubeGrad = nctx.createLinearGradient(0, -r, 0, r);
           tubeGrad.addColorStop(0,    `rgba(${rgb}, 0)`);
@@ -168,7 +168,7 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
           tubeGrad.addColorStop(0.75, `rgba(${rgb}, ${ei * 0.15})`);
           tubeGrad.addColorStop(1,    `rgba(${rgb}, 0)`);
           nctx.fillStyle = tubeGrad;
-          nctx.fillRect(-1, -r, len + 2, r * 2);
+          nctx.fillRect(-0.5, -r, len + 1, r * 2);
           nctx.restore();
 
           // Start cap — half-disc at x1,y1 — x ∈ [-r, 0] in bar-local space

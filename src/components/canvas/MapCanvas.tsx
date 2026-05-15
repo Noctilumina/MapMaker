@@ -34,6 +34,8 @@ function MapLayers() {
           >
             {elements
               .filter((el) => el.layerId === layer.id)
+              .slice()
+              .sort((a, b) => (a.zIndex ?? 0) - (b.zIndex ?? 0))
               .map((el) => {
                 if (el.type === 'polygon') {
                   return <PolygonElement key={el.id} element={el} />;

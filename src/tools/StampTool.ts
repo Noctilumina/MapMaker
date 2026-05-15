@@ -84,6 +84,17 @@ export class StampTool implements Tool {
     });
     if (isDuplicate) return;
 
+    // Auto-zIndex: place one above the highest-zIndex element overlapping the placement area
+    const overlapping = existing.filter(el => {
+      if (el.type !== 'tile') return false;
+      const ew = el.width * cellSize;
+      const eh = el.height * cellSize;
+      return x < el.x + ew && x + w > el.x && y < el.y + eh && y + h > el.y;
+    });
+    const maxOverlapZ = overlapping.length > 0
+      ? overlapping.reduce((m, e) => Math.max(m, e.zIndex ?? 0), -Infinity)
+      : undefined;
+
     useMapStore.getState().addElement({
       type: 'tile',
       layerId: activeLayerId,
@@ -98,6 +109,7 @@ export class StampTool implements Tool {
       flipY: false,
       tint: null,
       opacity: 1.0,
+      ...(maxOverlapZ !== undefined ? { zIndex: maxOverlapZ + 1 } : {}),
     });
   }
 }
