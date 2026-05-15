@@ -73,20 +73,35 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
   // Use all wall segments — visibility algorithm handles inside/outside correctly
   const useOcclusion = wallSegments.length > 0;
 
-  const visPolygon = useMemo(() => {
+  const visPolygons = useMemo(() => {
     if (!useOcclusion) return [];
-    return computeVisibilityPolygon(light.x, light.y, wallSegments, light.radius);
-  }, [light.x, light.y, wallSegments, light.radius, useOcclusion]);
+    const shape = light.lightShape || 'point';
+    if (shape === 'bar') {
+      const x2 = light.x2 ?? light.x + 64;
+      const y2 = light.y2 ?? light.y;
+      const dx = x2 - light.x;
+      const dy = y2 - light.y;
+      const len = Math.sqrt(dx * dx + dy * dy);
+      const steps = Math.max(3, Math.ceil(len / (light.radius * 0.4)));
+      return Array.from({ length: steps }, (_, i) => {
+        const t = steps === 1 ? 0.5 : i / (steps - 1);
+        return computeVisibilityPolygon(light.x + dx * t, light.y + dy * t, wallSegments, light.radius);
+      });
+    }
+    return [computeVisibilityPolygon(light.x, light.y, wallSegments, light.radius)];
+  }, [light.x, light.y, light.x2, light.y2, light.lightShape, wallSegments, light.radius, useOcclusion]);
 
   const clipFunc = useCallback((ctx: any) => {
-    if (visPolygon.length < 6) return;
     ctx.beginPath();
-    ctx.moveTo(visPolygon[0], visPolygon[1]);
-    for (let i = 2; i < visPolygon.length; i += 2) {
-      ctx.lineTo(visPolygon[i], visPolygon[i + 1]);
+    for (const poly of visPolygons) {
+      if (poly.length < 6) continue;
+      ctx.moveTo(poly[0], poly[1]);
+      for (let i = 2; i < poly.length; i += 2) {
+        ctx.lineTo(poly[i], poly[i + 1]);
+      }
+      ctx.closePath();
     }
-    ctx.closePath();
-  }, [visPolygon]);
+  }, [visPolygons]);
 
   const rgb = hexToRgb(light.color);
   const shape = light.lightShape || 'point';
@@ -173,7 +188,7 @@ function LightWithOcclusion({ light, wallSegments, darkness }: {
     );
   }
 
-  if (useOcclusion) {
+  if (useOcclusion && visPolygons.some(p => p.length >= 6)) {
     return <Group clipFunc={clipFunc}>{lightElements}</Group>;
   }
 
