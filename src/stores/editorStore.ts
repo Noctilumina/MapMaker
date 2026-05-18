@@ -35,6 +35,7 @@ interface EditorState {
   replaceSourceAssetId: string | null;
   replaceTargetAssetId: string | null;
   stampTemplate: StampTemplateEntry[] | null;
+  lineStampAxisLock: 'free' | 'h' | 'v';
   mirrorSymmetry: boolean;
   mirrorAxis: 'x' | 'y' | 'both';
   mirrorLineX: number | null;
@@ -61,6 +62,7 @@ interface EditorState {
   setReplaceSource: (assetId: string | null) => void;
   setReplaceTarget: (assetId: string | null) => void;
   setStampTemplate: (template: StampTemplateEntry[] | null) => void;
+  setLineStampAxisLock: (lock: 'free' | 'h' | 'v') => void;
   setMirrorSymmetry: (enabled: boolean) => void;
   setMirrorAxis: (axis: 'x' | 'y' | 'both') => void;
   setMirrorLineX: (x: number | null) => void;
@@ -89,6 +91,7 @@ const initialState = {
   replaceSourceAssetId: null as string | null,
   replaceTargetAssetId: null as string | null,
   stampTemplate: null as StampTemplateEntry[] | null,
+  lineStampAxisLock: 'free' as 'free' | 'h' | 'v',
   mirrorSymmetry: false,
   mirrorAxis: 'x' as 'x' | 'y' | 'both',
   mirrorLineX: null as number | null,
@@ -126,6 +129,7 @@ export const useEditorStore = create<EditorState>((set) => ({
   setReplaceSource: (assetId) => set({ replaceSourceAssetId: assetId }),
   setReplaceTarget: (assetId) => set({ replaceTargetAssetId: assetId }),
   setStampTemplate: (template) => set({ stampTemplate: template }),
+  setLineStampAxisLock: (lock) => set({ lineStampAxisLock: lock }),
   setMirrorSymmetry: (enabled) => set({ mirrorSymmetry: enabled }),
   setMirrorAxis: (axis) => set({ mirrorAxis: axis }),
   setMirrorLineX: (x) => set({ mirrorLineX: x }),

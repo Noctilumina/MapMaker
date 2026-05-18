@@ -40,16 +40,27 @@ export class LineStampTool implements Tool {
     useHistoryStore.getState().captureSnapshot();
   }
 
-  onMouseMove(gridPos: GridPos, _e: Konva.KonvaEventObject<MouseEvent>) {
-    if (!this.dragging) return;
-    this._preview = { start: this.startPos, end: gridPos };
+  private constrain(end: GridPos, e: Konva.KonvaEventObject<MouseEvent>): GridPos {
+    const lock = useEditorStore.getState().lineStampAxisLock;
+    const dc = Math.abs(end.col - this.startPos.col);
+    const dr = Math.abs(end.row - this.startPos.row);
+    const shiftLock = e.evt.shiftKey ? (dc >= dr ? 'h' : 'v') : null;
+    const effective = shiftLock ?? lock;
+    if (effective === 'h') return { col: end.col, row: this.startPos.row };
+    if (effective === 'v') return { col: this.startPos.col, row: end.row };
+    return end;
   }
 
-  onMouseUp(gridPos: GridPos, _e: Konva.KonvaEventObject<MouseEvent>) {
+  onMouseMove(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
+    if (!this.dragging) return;
+    this._preview = { start: this.startPos, end: this.constrain(gridPos, e) };
+  }
+
+  onMouseUp(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
     if (!this.dragging) return;
     this.dragging = false;
     this._preview = null;
-    this.fillLine(this.startPos, gridPos);
+    this.fillLine(this.startPos, this.constrain(gridPos, e));
   }
 
   private fillLine(start: GridPos, end: GridPos) {

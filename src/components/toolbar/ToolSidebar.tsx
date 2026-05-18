@@ -61,6 +61,8 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
   const setMirrorAxis = useEditorStore((s) => s.setMirrorAxis);
   const setMirrorLineX = useEditorStore((s) => s.setMirrorLineX);
   const setMirrorLineY = useEditorStore((s) => s.setMirrorLineY);
+  const lineStampAxisLock = useEditorStore((s) => s.lineStampAxisLock);
+  const setLineStampAxisLock = useEditorStore((s) => s.setLineStampAxisLock);
   const scatterAssetIds = useEditorStore((s) => s.scatterAssetIds);
   const toggleScatterAsset = useEditorStore((s) => s.toggleScatterAsset);
   const replaceSourceAssetId = useEditorStore((s) => s.replaceSourceAssetId);
@@ -159,6 +161,39 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
           </button>
         );
       })}
+
+      {activeTool === 'line-stamp' && (
+        <>
+          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: expanded ? '100%' : 24, margin: '4px 0' }} />
+          <div style={{ fontSize: 9, color: theme.textMuted, textAlign: 'center', padding: '0 4px' }}>
+            {expanded ? 'Axis lock (Shift = auto)' : 'Axis'}
+          </div>
+          <div style={{ display: 'flex', gap: 2, padding: '0 4px', width: '100%', boxSizing: 'border-box' as const }}>
+            {(['free', 'h', 'v'] as const).map((lock) => {
+              const label = lock === 'free' ? '⤢' : lock === 'h' ? '↔' : '↕';
+              const tip = lock === 'free' ? 'Free (any direction)' : lock === 'h' ? 'Horizontal only' : 'Vertical only';
+              const isActive = lineStampAxisLock === lock;
+              return (
+                <button
+                  key={lock}
+                  onClick={() => setLineStampAxisLock(lock)}
+                  title={tip}
+                  style={{
+                    flex: 1, height: 22, fontSize: 13, border: 'none', cursor: 'pointer',
+                    borderRadius: theme.radius,
+                    background: isActive ? theme.primary : theme.surface,
+                    color: isActive ? theme.bg : theme.textMuted,
+                    fontFamily: theme.fontHeading, fontWeight: isActive ? 'bold' : 'normal',
+                    transition: 'background 0.15s',
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       {activeTool === 'scatter' && (
         <>
