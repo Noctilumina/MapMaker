@@ -9,7 +9,7 @@ export type ElementInput =
   | Omit<PathElement, 'id'>
   | Omit<LightSource, 'id'>;
 
-interface MapState {
+export interface MapState {
   id: string;
   name: string;
   version: number;
@@ -20,6 +20,8 @@ interface MapState {
   groups: Group[];
 
   addElement: (input: ElementInput) => void;
+  addElements: (inputs: ElementInput[]) => void;
+  replaceAsset: (layerId: string, sourceAssetId: string, targetAssetId: string) => void;
   moveElement: (id: string, x: number, y: number) => void;
   movePolygon: (id: string, deltaX: number, deltaY: number) => void;
   movePath: (id: string, deltaX: number, deltaY: number) => void;
@@ -75,6 +77,25 @@ export const useMapStore = create<MapState>((set, get) => ({
       const zIndex = (input as any).zIndex !== undefined ? (input as any).zIndex : maxZ + 1;
       return { elements: [...state.elements, { ...input, id: uuidv4(), zIndex } as MapElement] };
     }),
+
+  addElements: (inputs) =>
+    set((state) => {
+      let maxZ = state.elements.reduce((m, e) => Math.max(m, e.zIndex ?? 0), -1);
+      const newElements = inputs.map(input => {
+        const zIndex = (input as any).zIndex !== undefined ? (input as any).zIndex : ++maxZ;
+        return { ...input, id: uuidv4(), zIndex } as MapElement;
+      });
+      return { elements: [...state.elements, ...newElements] };
+    }),
+
+  replaceAsset: (layerId, sourceAssetId, targetAssetId) =>
+    set((state) => ({
+      elements: state.elements.map(el =>
+        el.layerId === layerId && el.type === 'tile' && el.assetId === sourceAssetId
+          ? { ...el, assetId: targetAssetId }
+          : el
+      ),
+    })),
 
   moveElement: (id, x, y) =>
     set((state) => ({
