@@ -820,6 +820,7 @@ export default function PropertiesPanel() {
                         openings: (el.openings || []).map(op => op.id === o.id ? { ...op, ...updates } : op),
                       });
                     };
+                    const numVerts = el.points.length / 2;
                     return (
                       <div key={o.id} style={{ padding: '4px 0', borderBottom: '1px solid ' + theme.borderSubtle }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -828,6 +829,28 @@ export default function PropertiesPanel() {
                             useHistoryStore.getState().captureSnapshot();
                             handleUpdate({ openings: (el.openings || []).filter(op => op.id !== o.id) });
                           }} style={{ background: 'none', border: 'none', color: theme.danger, cursor: 'pointer', fontSize: 10 }}>×</button>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3 }}>
+                          <span>Edge</span>
+                          <select value={o.edgeIndex}
+                            onChange={(e) => updateOpening({ edgeIndex: Number(e.target.value) })}
+                            style={{ background: theme.surface, color: theme.text, border: theme.borderLight, borderRadius: theme.radius, padding: '0 4px', fontSize: 9 }}>
+                            {Array.from({ length: numVerts }, (_, i) => (
+                              <option key={i} value={i}>{i}</option>
+                            ))}
+                          </select>
+                          <span>Pos</span>
+                          <input type="range" min={0} max={1} step={0.01} value={o.position ?? 0.5}
+                            onChange={(e) => updateOpening({ position: Number(e.target.value) })}
+                            style={{ flex: 1 }} />
+                          <span style={{ width: 28, textAlign: 'right' }}>{((o.position ?? 0.5) * 100).toFixed(0)}%</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3 }}>
+                          <span>Width</span>
+                          <input type="number" min={4} max={500} step={1} value={o.width ?? 40}
+                            onChange={(e) => updateOpening({ width: Number(e.target.value) })}
+                            style={{ width: 52, background: theme.surface, color: theme.text, border: theme.borderLight, borderRadius: theme.radius, padding: '0 4px', fontSize: 9 }} />
+                          <span>px</span>
                         </div>
                         {o.type === 'door' && (
                           <div style={{ marginTop: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
