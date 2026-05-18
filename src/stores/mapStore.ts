@@ -23,6 +23,7 @@ export interface MapState {
   addElements: (inputs: ElementInput[]) => void;
   replaceAsset: (layerId: string, sourceAssetId: string, targetAssetId: string) => void;
   moveElement: (id: string, x: number, y: number) => void;
+  moveElements: (moves: Array<{ id: string; dx: number; dy: number }>) => void;
   movePolygon: (id: string, deltaX: number, deltaY: number) => void;
   movePath: (id: string, deltaX: number, deltaY: number) => void;
   bringToFront: (id: string) => void;
@@ -103,6 +104,33 @@ export const useMapStore = create<MapState>((set, get) => ({
         el.id === id ? { ...el, x, y } : el
       ),
     })),
+
+  moveElements: (moves) =>
+    set((state) => {
+      const moveMap = new Map(moves.map(m => [m.id, m]));
+      return {
+        elements: state.elements.map(el => {
+          const m = moveMap.get(el.id);
+          if (!m) return el;
+          if (el.type === 'polygon') {
+            return {
+              ...el,
+              points: el.points.map((v, i) => i % 2 === 0 ? v + m.dx : v + m.dy),
+              innerWalls: (el.innerWalls || []).map(w => ({
+                ...w, x1: w.x1 + m.dx, y1: w.y1 + m.dy, x2: w.x2 + m.dx, y2: w.y2 + m.dy,
+              })),
+            };
+          }
+          if (el.type === 'path') {
+            return {
+              ...el,
+              pathPoints: el.pathPoints.map(pt => ({ ...pt, x: pt.x + m.dx, y: pt.y + m.dy })),
+            };
+          }
+          return { ...el, x: el.x + m.dx, y: el.y + m.dy };
+        }),
+      };
+    }),
 
   movePolygon: (id, deltaX, deltaY) =>
     set((state) => ({

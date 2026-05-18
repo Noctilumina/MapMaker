@@ -96,18 +96,14 @@ export class SelectTool implements Tool {
     const selected = useEditorStore.getState().selectedElementIds;
     const elements = useMapStore.getState().elements;
 
-    selected.forEach((id) => {
-      const el = elements.find((e) => e.id === id);
-      if (el && !el.locked) {
-        if (el.type === 'polygon') {
-          useMapStore.getState().movePolygon(id, deltaX, deltaY);
-        } else if (el.type === 'path') {
-          useMapStore.getState().movePath(id, deltaX, deltaY);
-        } else {
-          useMapStore.getState().moveElement(id, el.x + deltaX, el.y + deltaY);
-        }
-      }
-    });
+    const moves = selected
+      .map(id => elements.find(e => e.id === id))
+      .filter((el): el is NonNullable<typeof el> => !!el && !el.locked)
+      .map(el => ({ id: el.id, dx: deltaX, dy: deltaY }));
+
+    if (moves.length > 0) {
+      useMapStore.getState().moveElements(moves);
+    }
 
     this.dragStartX = currentX;
     this.dragStartY = currentY;
