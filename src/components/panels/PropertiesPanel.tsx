@@ -4,6 +4,7 @@ import { useMapStore } from '../../stores/mapStore';
 import { useHistoryStore } from '../../stores/historyStore';
 import type { ElementInput } from '../../stores/mapStore';
 import { theme } from '../../theme';
+import { KEYS } from '../../keys';
 
 interface TextureEntry {
   id: string;
@@ -403,8 +404,8 @@ export default function PropertiesPanel() {
         <div style={{ marginBottom: 8, padding: '8px 12px' }}>{selectedIds.length} elements selected</div>
 
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 10 }}>
-          <button onClick={handleGroup} style={{ ...btnStyle, background: theme.info, color: theme.bg }}>
-            Group (Ctrl+G)
+          <button onClick={handleGroup} title={KEYS.GROUP} style={{ ...btnStyle, background: theme.info, color: theme.bg }}>
+            Group
           </button>
           <button
             onClick={() => {
@@ -413,6 +414,7 @@ export default function PropertiesPanel() {
               const newIds = useMapStore.getState().duplicateElements(selectedIds, { x: cellSize, y: cellSize });
               useEditorStore.getState().select(newIds);
             }}
+            title={KEYS.DUPLICATE}
             style={btnStyle}
           >
             Duplicate
@@ -423,6 +425,7 @@ export default function PropertiesPanel() {
               selectedIds.forEach((id) => removeElement(id));
               useEditorStore.getState().deselect();
             }}
+            title={KEYS.DELETE}
             style={{ ...btnStyle, background: theme.danger, color: theme.bg }}
           >
             Delete All
@@ -586,12 +589,14 @@ export default function PropertiesPanel() {
             <div style={{ display: 'flex', gap: 4 }}>
               <button
                 onClick={() => handleUpdate({ flipX: !el.flipX })}
+                title="Flip horizontal"
                 style={{ background: el.flipX ? theme.info : theme.surface, color: el.flipX ? theme.bg : theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '2px 6px', fontSize: 11, cursor: 'pointer' }}
               >
                 H
               </button>
               <button
                 onClick={() => handleUpdate({ flipY: !el.flipY })}
+                title="Flip vertical"
                 style={{ background: el.flipY ? theme.info : theme.surface, color: el.flipY ? theme.bg : theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '2px 6px', fontSize: 11, cursor: 'pointer' }}
               >
                 V
@@ -1047,6 +1052,7 @@ export default function PropertiesPanel() {
             const newIds = useMapStore.getState().duplicateElements([el.id], { x: cellSize, y: cellSize });
             useEditorStore.getState().select(newIds);
           }}
+          title={KEYS.DUPLICATE}
           style={{ flex: 1, background: theme.surface, color: theme.text, border: 'none', borderRadius: theme.radius, padding: '4px 12px', cursor: 'pointer', fontSize: 11, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
         >
           Duplicate
@@ -1057,6 +1063,7 @@ export default function PropertiesPanel() {
             removeElement(el.id);
             useEditorStore.getState().deselect();
           }}
+          title={KEYS.DELETE}
           style={{ flex: 1, background: theme.danger, color: theme.bg, border: 'none', borderRadius: theme.radius, padding: '4px 12px', cursor: 'pointer', fontSize: 11, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
         >
           Delete

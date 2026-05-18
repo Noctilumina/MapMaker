@@ -2,29 +2,37 @@ import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
 import { useHistoryStore } from '../../stores/historyStore';
 import { theme } from '../../theme';
-import { TOOL_KEYS } from '../../hotkeys';
+import { TOOL_KEYS, HOTKEYS } from '../../hotkeys';
+import { KEYS } from '../../keys';
 
 import type { ToolName, PendingShape } from '../../stores/editorStore';
 
+// Derive human-readable labels from the hotkeys registry
+const toolLabels: Record<string, string> = Object.fromEntries(
+  HOTKEYS
+    .filter(h => h.id.startsWith('tool-') && h.id !== 'tool-pan-temp')
+    .map(h => [h.id.slice(5), h.label])
+);
+
 const tools: { name: ToolName; icon: string }[] = [
-  { name: 'select', icon: '\u2196' },
-  { name: 'pan', icon: '\u270B' },
-  { name: 'stamp', icon: '\uD83D\uDD8C' },
+  { name: 'select',     icon: '\u2196' },
+  { name: 'pan',        icon: '\u270B' },
+  { name: 'stamp',      icon: '\uD83D\uDD8C' },
   { name: 'rect-stamp', icon: '\u25A3' },
   { name: 'line-stamp', icon: '\u2500' },
-  { name: 'scatter', icon: '\u2234' },
-  { name: 'replace', icon: '\u21C4' },
-  { name: 'polygon', icon: '\u2B21' },
-  { name: 'path', icon: '\u2935' },
-  { name: 'eraser', icon: '\uD83E\uDDF9' },
-  { name: 'fill', icon: '\uD83E\uDEA3' },
+  { name: 'scatter',    icon: '\u2234' },
+  { name: 'replace',    icon: '\u21C4' },
+  { name: 'polygon',    icon: '\u2B21' },
+  { name: 'path',       icon: '\u2935' },
+  { name: 'eraser',     icon: '\uD83E\uDDF9' },
+  { name: 'fill',       icon: '\uD83E\uDEA3' },
   { name: 'copy-stamp', icon: '\u2750' },
-  { name: 'light', icon: '\u2600' },
+  { name: 'light',      icon: '\u2600' },
 ];
 
 const shapes: { name: PendingShape; icon: string; label: string }[] = [
-  { name: 'circle', icon: '\u25CB', label: 'Circle' },
-  { name: 'rect', icon: '\u25A1', label: 'Rectangle' },
+  { name: 'circle',  icon: '\u25CB', label: 'Circle' },
+  { name: 'rect',    icon: '\u25A1', label: 'Rectangle' },
   { name: 'hexagon', icon: '\u2B22', label: 'Hexagon' },
 ];
 
@@ -32,7 +40,12 @@ const TOOL_SIZE = 32;
 const TOOL_GAP = 2;
 const PAD_TOP = 8;
 
-export default function ToolSidebar() {
+interface Props {
+  expanded: boolean;
+  onToggle: () => void;
+}
+
+export default function ToolSidebar({ expanded, onToggle }: Props) {
   const activeTool = useEditorStore((s) => s.activeTool);
   const setTool = useEditorStore((s) => s.setTool);
   const pendingShape = useEditorStore((s) => s.pendingShape);
@@ -70,8 +83,42 @@ export default function ToolSidebar() {
     ? PAD_TOP + activeIndex * (TOOL_SIZE + TOOL_GAP)
     : -100;
 
+  // Shared button layout — changes based on expanded state
+  const rowStyle = (isActive?: boolean, activeColor?: string): React.CSSProperties => expanded
+    ? {
+        width: '100%', height: TOOL_SIZE, padding: '0 10px', gap: 8,
+        display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
+        borderRadius: theme.radius, border: 'none', cursor: 'pointer',
+        background: isActive ? (activeColor ? `${activeColor}22` : theme.primaryAlphaLow) : 'transparent',
+        transition: 'color 0.15s', position: 'relative', zIndex: 1,
+      }
+    : {
+        width: TOOL_SIZE, height: TOOL_SIZE,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        borderRadius: theme.radius, border: 'none', cursor: 'pointer',
+        background: 'transparent',
+        transition: 'color 0.15s', position: 'relative', zIndex: 1,
+      };
+
+  const iconSpan = (content: React.ReactNode) => (
+    <span style={{ width: 20, flexShrink: 0, textAlign: 'center', fontSize: 14, lineHeight: 1 }}>
+      {content}
+    </span>
+  );
+
+  const labelSpan = (text: string) => expanded ? (
+    <span style={{ fontSize: 11, fontFamily: theme.fontHeading, textTransform: 'uppercase' as const, letterSpacing: '0.05em', lineHeight: 1 }}>
+      {text}
+    </span>
+  ) : null;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: PAD_TOP, gap: TOOL_GAP, position: 'relative' }}>
+    <div style={{
+      display: 'flex', flexDirection: 'column',
+      alignItems: expanded ? 'stretch' : 'center',
+      paddingTop: PAD_TOP, gap: TOOL_GAP,
+      position: 'relative', height: '100%',
+    }}>
       {/* Sliding active indicator */}
       <div style={{
         position: 'absolute',
@@ -90,30 +137,30 @@ export default function ToolSidebar() {
 
       {tools.map((t) => {
         const isActive = activeTool === t.name;
+        const label = toolLabels[t.name] || t.name;
+        const key = TOOL_KEYS[t.name];
+        // collapsed: show full description + hotkey; expanded: label visible so just show hotkey
+        const tooltipText = expanded
+          ? (key || '')
+          : `${label}${key ? ` (${key})` : ''}`;
         return (
-          <button key={t.name} onClick={() => handleToolClick(t.name)} title={`${t.name}${TOOL_KEYS[t.name] ? ` (${TOOL_KEYS[t.name]})` : ''}`}
-            style={{
-              width: TOOL_SIZE, height: TOOL_SIZE,
-              borderRadius: theme.radius,
-              border: 'none',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 14, cursor: 'pointer',
-              background: 'transparent',
-              color: isActive ? theme.primary : theme.textMuted,
-              transition: 'color 0.15s',
-              position: 'relative',
-              zIndex: 1,
-            }}>
-            {t.icon}
+          <button
+            key={t.name}
+            onClick={() => handleToolClick(t.name)}
+            title={tooltipText}
+            style={{ ...rowStyle(), color: isActive ? theme.primary : theme.textMuted }}
+          >
+            {iconSpan(t.icon)}
+            {labelSpan(label)}
           </button>
         );
       })}
 
       {activeTool === 'scatter' && (
         <>
-          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: 24, margin: '4px 0' }} />
+          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: expanded ? '100%' : 24, margin: '4px 0' }} />
           <div style={{ fontSize: 9, color: theme.textMuted, textAlign: 'center', padding: '0 4px' }}>
-            Click assets in browser to add to set
+            {expanded ? 'Click assets in browser to add' : 'Click assets in browser to add to set'}
           </div>
           {scatterAssetIds.length === 0 ? (
             <div style={{ fontSize: 9, color: theme.danger, textAlign: 'center', padding: '0 4px' }}>No assets</div>
@@ -137,7 +184,7 @@ export default function ToolSidebar() {
 
       {activeTool === 'replace' && (
         <>
-          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: 24, margin: '4px 0' }} />
+          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: expanded ? '100%' : 24, margin: '4px 0' }} />
           <div style={{ fontSize: 9, color: theme.textMuted, textAlign: 'center', padding: '0 4px' }}>Click tile on canvas → source</div>
           <div style={{ padding: '2px 4px', width: '100%', boxSizing: 'border-box' as const }}>
             <div style={{ fontSize: 9, color: theme.textMuted, marginBottom: 2 }}>Source:</div>
@@ -162,6 +209,7 @@ export default function ToolSidebar() {
               useMapStore.getState().replaceAsset(activeLayerId, replaceSourceAssetId, replaceTargetAssetId);
             }}
             disabled={!replaceSourceAssetId || !replaceTargetAssetId}
+            title="Apply replacement to all matching tiles on layer"
             style={{
               background: replaceSourceAssetId && replaceTargetAssetId ? theme.success : theme.surface,
               color: replaceSourceAssetId && replaceTargetAssetId ? theme.bg : theme.textMuted,
@@ -184,70 +232,88 @@ export default function ToolSidebar() {
 
       {activeTool === 'polygon' && (
         <>
-          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: 24, margin: '4px 0' }} />
+          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: expanded ? '100%' : 24, margin: '4px 0' }} />
           {shapes.map((s) => {
-            const isActive = pendingShape === s.name;
+            const isShapeActive = pendingShape === s.name;
             return (
-              <button key={s.name} onClick={() => handleShapeClick(s.name)} title={s.label}
+              <button
+                key={s.name}
+                onClick={() => handleShapeClick(s.name)}
+                title={s.label}
                 style={{
-                  width: TOOL_SIZE, height: TOOL_SIZE,
-                  borderRadius: theme.radius,
-                  border: 'none',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 16, cursor: 'pointer',
-                  background: isActive ? theme.successAlphaLow : 'transparent',
-                  color: isActive ? theme.success : theme.textMuted,
-                  borderLeft: isActive ? `3px solid ${theme.success}` : '3px solid transparent',
-                  boxShadow: isActive ? `0 0 8px ${theme.successAlphaMid}` : 'none',
+                  ...rowStyle(),
+                  fontSize: 16,
+                  background: isShapeActive ? theme.successAlphaLow : 'transparent',
+                  color: isShapeActive ? theme.success : theme.textMuted,
+                  borderLeft: isShapeActive ? `3px solid ${theme.success}` : '3px solid transparent',
+                  boxShadow: isShapeActive ? `0 0 8px ${theme.successAlphaMid}` : 'none',
                   transition: 'all 0.15s',
                 }}>
-                {s.icon}
+                {iconSpan(s.icon)}
+                {labelSpan(s.label)}
               </button>
             );
           })}
         </>
       )}
 
-      <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: 24, margin: '4px 0' }} />
-      <button onClick={() => { useHistoryStore.getState().captureSnapshot(); setGrid({ visible: !grid.visible }); }} title="Toggle grid"
-        style={{
-          width: TOOL_SIZE, height: TOOL_SIZE, borderRadius: theme.radius, border: 'none',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 11, cursor: 'pointer',
-          background: 'transparent', color: grid.visible ? theme.text : theme.textMuted,
-          transition: 'color 0.15s',
-        }}>{'\u25A6'}</button>
+      <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: expanded ? '100%' : 24, margin: '4px 0' }} />
+
+      <button
+        onClick={() => { useHistoryStore.getState().captureSnapshot(); setGrid({ visible: !grid.visible }); }}
+        title={expanded ? 'Toggle grid' : 'Grid (toggle)'}
+        style={{ ...rowStyle(), color: grid.visible ? theme.text : theme.textMuted }}
+      >
+        {iconSpan('\u25A6')}
+        {labelSpan('Grid')}
+      </button>
+
       <button
         onClick={() => { useHistoryStore.getState().captureSnapshot(); setSnapToGrid(!snapToGrid); }}
-        title={`Snap to grid (G) — ${snapToGrid ? 'ON' : 'OFF'}`}
+        title={`Snap to grid (${KEYS.SNAP}) — ${snapToGrid ? 'ON' : 'OFF'}`}
         style={{
-          width: TOOL_SIZE, height: TOOL_SIZE, borderRadius: theme.radius, border: 'none',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 11, cursor: 'pointer',
+          ...rowStyle(),
           background: snapToGrid ? theme.successAlphaLow : 'transparent',
           color: snapToGrid ? theme.success : theme.textMuted,
           borderLeft: snapToGrid ? `3px solid ${theme.success}` : '3px solid transparent',
           boxShadow: snapToGrid ? `0 0 8px ${theme.successAlphaMid}` : 'none',
-          transition: 'all 0.15s',
         }}
       >
-        <span>🧲</span>
+        {iconSpan('🧲')}
+        {labelSpan('Snap')}
       </button>
+
       <button
         onClick={() => setMirrorSymmetry(!mirrorSymmetry)}
-        title={`Mirror symmetry (M) — ${mirrorSymmetry ? 'ON' : 'OFF'}`}
+        title={`Mirror symmetry (${KEYS.MIRROR}) — ${mirrorSymmetry ? 'ON' : 'OFF'}`}
         style={{
-          width: TOOL_SIZE, height: TOOL_SIZE, borderRadius: theme.radius, border: 'none',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 14, cursor: 'pointer',
+          ...rowStyle(),
+          fontSize: 14,
           background: mirrorSymmetry ? theme.primaryAlphaLow : 'transparent',
           color: mirrorSymmetry ? theme.primary : theme.textMuted,
           borderLeft: mirrorSymmetry ? `3px solid ${theme.primary}` : '3px solid transparent',
           boxShadow: mirrorSymmetry ? `0 0 8px ${theme.primaryAlphaMid}` : 'none',
-          transition: 'all 0.15s',
         }}
       >
-        ⇔
+        {iconSpan('⇔')}
+        {labelSpan('Mirror')}
+      </button>
+
+      <div style={{ flex: 1 }} />
+
+      {/* Expand / collapse toggle */}
+      <button
+        onClick={onToggle}
+        title={expanded ? 'Collapse sidebar' : 'Expand sidebar'}
+        style={{
+          ...rowStyle(),
+          color: theme.textMuted,
+          marginBottom: PAD_TOP,
+          fontSize: 12,
+        }}
+      >
+        {iconSpan(expanded ? '«' : '»')}
+        {labelSpan('Collapse')}
       </button>
     </div>
   );

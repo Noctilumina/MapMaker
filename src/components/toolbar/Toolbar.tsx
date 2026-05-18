@@ -4,6 +4,7 @@ import { exportProjectToFile, importProjectFromFile } from '../../utils/storage'
 import { theme } from '../../theme';
 import { useTheme } from '../../context/ThemeContext';
 import ChipButton from '../ChipButton';
+import { KEYS } from '../../keys';
 
 interface Props {
   onExportPng: () => void;
@@ -42,8 +43,8 @@ export default function Toolbar({ onExportPng, onNewProject, onPrint, onShowHotk
       </div>
       <div style={{ flex: 1 }} />
       <div style={{ display: 'flex', gap: 6 }}>
-        <ChipButton variant="secondary" onClick={undo} disabled={!canUndo} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Undo</ChipButton>
-        <ChipButton variant="secondary" onClick={redo} disabled={!canRedo} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Redo</ChipButton>
+        <ChipButton variant="secondary" onClick={undo} disabled={!canUndo} title={KEYS.UNDO} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Undo</ChipButton>
+        <ChipButton variant="secondary" onClick={redo} disabled={!canRedo} title={KEYS.REDO} style={{ padding: '4px 10px', fontSize: 11, border: 'none' }}>Redo</ChipButton>
       </div>
       <ChipButton variant="secondary" onClick={onPrint} style={{ padding: '4px 12px', fontSize: 11 }}>Print</ChipButton>
       <ChipButton variant="success" selected onClick={onExportPng} style={{ padding: '4px 12px', fontSize: 11, fontWeight: 'bold', boxShadow: theme.shadowSm }}>Export PNG</ChipButton>

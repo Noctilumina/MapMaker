@@ -31,6 +31,7 @@ export default function App() {
   const [showExport, setShowExport] = useState(false);
   const [showPrint, setShowPrint] = useState(false);
   const [showNewProject, setShowNewProject] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [assetPanelWidth, setAssetPanelWidth] = useState(260);
   const [rightPanelWidth, setRightPanelWidth] = useState(240);
   const dragRef = useRef<{ target: 'asset' | 'right'; startX: number; startWidth: number } | null>(null);
@@ -108,8 +109,8 @@ export default function App() {
         <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} onShowHotkeys={() => setShowHotkeys(true)} />
       </header>
       <div className="workspace">
-        <aside className="tool-sidebar">
-          <ToolSidebar />
+        <aside className="tool-sidebar" style={{ width: sidebarExpanded ? 160 : 48, transition: 'width 0.2s ease' }}>
+          <ToolSidebar expanded={sidebarExpanded} onToggle={() => setSidebarExpanded(v => !v)} />
           <DiagonalStripes count={4} thickness={12} gap={24} color={stripeColor} angle={-45} />
         </aside>
         <aside className="asset-panel" style={{ width: assetPanelWidth }}>
