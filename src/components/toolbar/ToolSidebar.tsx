@@ -4,11 +4,16 @@ import { useHistoryStore } from '../../stores/historyStore';
 import { theme } from '../../theme';
 
 import type { ToolName, PendingShape } from '../../stores/editorStore';
+import ChipButton from '../ChipButton';
 
 const tools: { name: ToolName; icon: string; shortcut: string }[] = [
   { name: 'select', icon: '\u2196', shortcut: 'V' },
   { name: 'pan', icon: '\u270B', shortcut: 'H' },
   { name: 'stamp', icon: '\uD83D\uDD8C', shortcut: 'B' },
+  { name: 'rect-stamp', icon: '\u25A3', shortcut: 'F' },
+  { name: 'line-stamp', icon: '\u2500', shortcut: 'N' },
+  { name: 'scatter', icon: '\u2234', shortcut: 'X' },
+  { name: 'replace', icon: '\u21C4', shortcut: '-' },
   { name: 'polygon', icon: '\u2B21', shortcut: 'P' },
   { name: 'path', icon: '\u2935', shortcut: 'R' },
   { name: 'eraser', icon: '\uD83E\uDDF9', shortcut: 'E' },
@@ -34,6 +39,13 @@ export default function ToolSidebar() {
   const setGrid = useMapStore((s) => s.setGrid);
   const snapToGrid = useEditorStore((s) => s.snapToGrid);
   const setSnapToGrid = useEditorStore((s) => s.setSnapToGrid);
+  const scatterAssetIds = useEditorStore((s) => s.scatterAssetIds);
+  const toggleScatterAsset = useEditorStore((s) => s.toggleScatterAsset);
+  const replaceSourceAssetId = useEditorStore((s) => s.replaceSourceAssetId);
+  const replaceTargetAssetId = useEditorStore((s) => s.replaceTargetAssetId);
+  const assets = useMapStore((s) => s.assets);
+  const elements = useMapStore((s) => s.elements);
+  const activeLayerId = useEditorStore((s) => s.activeLayerId);
 
   const handleShapeClick = (shape: PendingShape) => {
     useHistoryStore.getState().captureSnapshot();
@@ -92,6 +104,79 @@ export default function ToolSidebar() {
           </button>
         );
       })}
+
+      {activeTool === 'scatter' && (
+        <>
+          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: 24, margin: '4px 0' }} />
+          <div style={{ fontSize: 9, color: theme.textMuted, textAlign: 'center', padding: '0 4px' }}>
+            Click assets in browser to add to set
+          </div>
+          {scatterAssetIds.length === 0 ? (
+            <div style={{ fontSize: 9, color: theme.danger, textAlign: 'center', padding: '0 4px' }}>No assets</div>
+          ) : (
+            scatterAssetIds.map(id => {
+              const asset = assets[id];
+              if (!asset) return null;
+              return (
+                <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%', padding: '0 4px', boxSizing: 'border-box' as const }}>
+                  <img src={asset.src} alt={asset.name} style={{ width: 20, height: 20, objectFit: 'contain', borderRadius: 2, background: theme.surface, flexShrink: 0 }} />
+                  <button onClick={() => toggleScatterAsset(id)} title={`Remove ${asset.name}`}
+                    style={{ background: 'none', border: 'none', color: theme.danger, cursor: 'pointer', fontSize: 10, padding: 0, lineHeight: 1, flexShrink: 0 }}>
+                    ×
+                  </button>
+                </div>
+              );
+            })
+          )}
+        </>
+      )}
+
+      {activeTool === 'replace' && (
+        <>
+          <div style={{ borderTop: `1px solid ${theme.borderSubtle}`, width: 24, margin: '4px 0' }} />
+          <div style={{ fontSize: 9, color: theme.textMuted, textAlign: 'center', padding: '0 4px' }}>Click tile on canvas → source</div>
+          <div style={{ padding: '2px 4px', width: '100%', boxSizing: 'border-box' as const }}>
+            <div style={{ fontSize: 9, color: theme.textMuted, marginBottom: 2 }}>Source:</div>
+            {replaceSourceAssetId && assets[replaceSourceAssetId] ? (
+              <img src={assets[replaceSourceAssetId].src} alt="source" style={{ width: 28, height: 28, objectFit: 'contain', background: theme.surface, borderRadius: 2, border: `1px solid ${theme.warning}` }} />
+            ) : (
+              <div style={{ fontSize: 9, color: theme.danger }}>none</div>
+            )}
+          </div>
+          <div style={{ padding: '2px 4px', width: '100%', boxSizing: 'border-box' as const }}>
+            <div style={{ fontSize: 9, color: theme.textMuted, marginBottom: 2 }}>Target (from browser):</div>
+            {replaceTargetAssetId && assets[replaceTargetAssetId] ? (
+              <img src={assets[replaceTargetAssetId].src} alt="target" style={{ width: 28, height: 28, objectFit: 'contain', background: theme.surface, borderRadius: 2, border: `1px solid ${theme.success}` }} />
+            ) : (
+              <div style={{ fontSize: 9, color: theme.danger }}>none</div>
+            )}
+          </div>
+          <button
+            onClick={() => {
+              if (!replaceSourceAssetId || !replaceTargetAssetId) return;
+              useHistoryStore.getState().captureSnapshot();
+              useMapStore.getState().replaceAsset(activeLayerId, replaceSourceAssetId, replaceTargetAssetId);
+            }}
+            disabled={!replaceSourceAssetId || !replaceTargetAssetId}
+            style={{
+              background: replaceSourceAssetId && replaceTargetAssetId ? theme.success : theme.surface,
+              color: replaceSourceAssetId && replaceTargetAssetId ? theme.bg : theme.textMuted,
+              border: 'none', borderRadius: theme.radius, padding: '4px 0', fontSize: 9,
+              cursor: replaceSourceAssetId && replaceTargetAssetId ? 'pointer' : 'default',
+              width: '100%', fontFamily: theme.fontHeading, textTransform: 'uppercase' as const,
+            }}
+          >
+            Apply
+          </button>
+          <div style={{ fontSize: 9, color: theme.textMuted, textAlign: 'center', padding: '0 4px' }}>
+            {(() => {
+              if (!replaceSourceAssetId) return '';
+              const count = elements.filter(el => el.type === 'tile' && 'assetId' in el && el.assetId === replaceSourceAssetId && el.layerId === activeLayerId).length;
+              return `${count} tile(s) on layer`;
+            })()}
+          </div>
+        </>
+      )}
 
       {activeTool === 'polygon' && (
         <>

@@ -11,9 +11,15 @@ import { PanTool } from '../tools/PanTool';
 import { PolygonTool } from '../tools/PolygonTool';
 import { PathTool } from '../tools/PathTool';
 import { LightTool } from '../tools/LightTool';
+import { RectStampTool } from '../tools/RectStampTool';
+import { LineStampTool } from '../tools/LineStampTool';
+import { ScatterTool } from '../tools/ScatterTool';
+import { ReplaceTool } from '../tools/ReplaceTool';
 
 const polygonTool = new PolygonTool();
 const pathTool = new PathTool();
+const rectStampTool = new RectStampTool();
+const lineStampTool = new LineStampTool();
 
 const toolInstances: Record<ToolName, Tool> = {
   select: new SelectTool(),
@@ -23,10 +29,16 @@ const toolInstances: Record<ToolName, Tool> = {
   polygon: polygonTool,
   path: pathTool,
   light: new LightTool(),
+  'rect-stamp': rectStampTool,
+  'line-stamp': lineStampTool,
+  scatter: new ScatterTool(),
+  replace: new ReplaceTool(),
 };
 
 export function getPolygonTool() { return polygonTool; }
 export function getPathTool() { return pathTool; }
+export function getRectStampTool() { return rectStampTool; }
+export function getLineStampTool() { return lineStampTool; }
 
 export function useCanvasInteraction() {
   const activeTool = useEditorStore((s) => s.activeTool);

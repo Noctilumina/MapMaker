@@ -115,6 +115,9 @@ export function useKeyboardShortcuts() {
         case 'e': switchTool('eraser'); break;
         case 'h': switchTool('pan'); break;
         case 'l': switchTool('light'); break;
+        case 'f': switchTool('rect-stamp'); break;
+        case 'n': switchTool('line-stamp'); break;
+        case 'x': switchTool('scatter'); break;
         case 'g':
           useHistoryStore.getState().captureSnapshot();
           useEditorStore.getState().setSnapToGrid(!useEditorStore.getState().snapToGrid);

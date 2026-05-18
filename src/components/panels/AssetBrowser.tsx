@@ -81,6 +81,10 @@ export default function AssetBrowser() {
   const stampAssetId = useEditorStore((s) => s.stampAssetId);
   const setStampAsset = useEditorStore((s) => s.setStampAsset);
   const setTool = useEditorStore((s) => s.setTool);
+  const activeTool = useEditorStore((s) => s.activeTool);
+  const scatterAssetIds = useEditorStore((s) => s.scatterAssetIds);
+  const toggleScatterAsset = useEditorStore((s) => s.toggleScatterAsset);
+  const setReplaceTarget = useEditorStore((s) => s.setReplaceTarget);
   const assets = useMapStore((s) => s.assets);
   const elements = useMapStore((s) => s.elements);
   const removeAsset = useMapStore((s) => s.removeAsset);
@@ -116,8 +120,22 @@ export default function AssetBrowser() {
   }, [assets, elements, search]);
 
   const handleSelect = (assetId: string) => {
+    if (activeTool === 'scatter') {
+      toggleScatterAsset(assetId);
+      return;
+    }
+    if (activeTool === 'replace') {
+      setReplaceTarget(assetId);
+      return;
+    }
     setStampAsset(assetId);
     setTool('stamp' as ToolName);
+  };
+
+  // Highlight state for asset buttons varies by mode
+  const isSelected = (assetId: string) => {
+    if (activeTool === 'scatter') return scatterAssetIds.includes(assetId);
+    return stampAssetId === assetId;
   };
 
   const handleTextureSelect = (tex: TextureEntry) => {
@@ -312,7 +330,7 @@ export default function AssetBrowser() {
                 key={entry.id}
                 onClick={() => handleSelect(entry.id)}
                 title={entry.name}
-                style={{ aspectRatio: '1', background: entry.color, border: stampAssetId === entry.id ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 2 }}
+                style={{ aspectRatio: '1', background: entry.color, border: isSelected(entry.id) ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 2 }}
               >
                 <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>{entry.name}</span>
               </button>
@@ -344,7 +362,7 @@ export default function AssetBrowser() {
           <div style={{ flex: 1, overflow: 'auto', padding: '0 12px 12px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
             {filteredObjects.map((obj) => (
               <button key={obj.id} onClick={() => handleObjectSelect(obj)} title={`${obj.name} (${obj.gridSize[0]}x${obj.gridSize[1]})`}
-                style={{ height: 80, border: stampAssetId === `object:${obj.id}` ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                style={{ height: 80, border: isSelected(`object:${obj.id}`) ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                 <img src={withBase(obj.path)} alt={obj.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} loading="lazy" />
                 <span style={{ position: 'absolute', bottom: 2, right: 3, fontSize: 8, color: theme.text, background: 'rgba(0,0,0,0.6)', borderRadius: theme.radius, padding: '0 3px', lineHeight: '14px' }}>{obj.gridSize[0]}x{obj.gridSize[1]}</span>
               </button>
@@ -372,7 +390,7 @@ export default function AssetBrowser() {
                 key={tex.id}
                 onClick={() => handleTextureSelect(tex)}
                 title={tex.name}
-                style={{ aspectRatio: '1', border: stampAssetId === `texture:${tex.id}` ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 0, overflow: 'hidden', background: theme.surface }}
+                style={{ aspectRatio: '1', border: isSelected(`texture:${tex.id}`) ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 0, overflow: 'hidden', background: theme.surface }}
               >
                 <img src={withBase(tex.path)} alt={tex.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
               </button>
@@ -399,7 +417,7 @@ export default function AssetBrowser() {
                   <button
                     onClick={() => handleSelect(id)}
                     title={asset.name}
-                    style={{ height: 80, border: stampAssetId === id ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ height: 80, border: isSelected(id) ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
                     <img src={asset.src} alt={asset.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
                   </button>
@@ -432,7 +450,7 @@ export default function AssetBrowser() {
                   <button
                     onClick={() => handleSelect(id)}
                     title={asset.name}
-                    style={{ height: 80, border: stampAssetId === id ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ height: 80, border: isSelected(id) ? `2px solid ${theme.primary}` : '2px solid transparent', borderRadius: theme.radius, cursor: 'pointer', padding: 4, background: theme.surface, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
                     <img src={asset.src} alt={asset.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
                     <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 9, color: theme.text, background: 'rgba(0,0,0,0.5)', borderRadius: theme.radius, padding: '1px 3px' }}>{'\u00d7'}{count}</span>

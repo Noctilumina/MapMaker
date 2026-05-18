@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Viewport } from '../types';
 
-export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light';
+export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace';
 export type PendingShape = 'circle' | 'rect' | 'hexagon' | null;
 
 interface EditorState {
@@ -18,6 +18,9 @@ interface EditorState {
   pendingOpening: 'door' | 'window' | null;
   pendingInnerWall: boolean;
   clipboardElementIds: string[] | null;
+  scatterAssetIds: string[];
+  replaceSourceAssetId: string | null;
+  replaceTargetAssetId: string | null;
 
   setTool: (tool: ToolName) => void;
   setActiveLayer: (id: string) => void;
@@ -33,6 +36,9 @@ interface EditorState {
   setPendingOpening: (type: 'door' | 'window' | null) => void;
   setPendingInnerWall: (active: boolean) => void;
   setClipboard: (ids: string[]) => void;
+  toggleScatterAsset: (assetId: string) => void;
+  setReplaceSource: (assetId: string | null) => void;
+  setReplaceTarget: (assetId: string | null) => void;
   reset: () => void;
 }
 
@@ -50,6 +56,9 @@ const initialState = {
   pendingOpening: null as 'door' | 'window' | null,
   pendingInnerWall: false,
   clipboardElementIds: null as string[] | null,
+  scatterAssetIds: [] as string[],
+  replaceSourceAssetId: null as string | null,
+  replaceTargetAssetId: null as string | null,
 };
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -72,5 +81,12 @@ export const useEditorStore = create<EditorState>((set) => ({
   setPendingOpening: (type) => set({ pendingOpening: type }),
   setPendingInnerWall: (active) => set({ pendingInnerWall: active }),
   setClipboard: (ids) => set({ clipboardElementIds: ids }),
+  toggleScatterAsset: (assetId) => set((state) => ({
+    scatterAssetIds: state.scatterAssetIds.includes(assetId)
+      ? state.scatterAssetIds.filter(id => id !== assetId)
+      : [...state.scatterAssetIds, assetId],
+  })),
+  setReplaceSource: (assetId) => set({ replaceSourceAssetId: assetId }),
+  setReplaceTarget: (assetId) => set({ replaceTargetAssetId: assetId }),
   reset: () => set({ ...initialState, selectionBox: null, snapToGrid: true, renamingGroupId: null, pendingShape: null, pendingOpening: null, pendingInnerWall: false }),
 }));

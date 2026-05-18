@@ -12,7 +12,7 @@ import TransformHandles from './TransformHandles';
 import SelectionBox from './SelectionBox';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
-import { useCanvasInteraction, getPolygonTool, getPathTool } from '../../hooks/useCanvasInteraction';
+import { useCanvasInteraction, getPolygonTool, getPathTool, getRectStampTool, getLineStampTool } from '../../hooks/useCanvasInteraction';
 
 const MIN_ZOOM = 0.1;
 const MAX_ZOOM = 5;
@@ -194,6 +194,96 @@ function PolygonPreview() {
   );
 }
 
+function RectStampPreview() {
+  const activeTool = useEditorStore((s) => s.activeTool);
+  const stampAssetId = useEditorStore((s) => s.stampAssetId);
+  const grid = useMapStore((s) => s.grid);
+  const assets = useMapStore((s) => s.assets);
+  const [, forceUpdate] = useState(0);
+
+  useEffect(() => {
+    if (activeTool !== 'rect-stamp') return;
+    const interval = setInterval(() => forceUpdate(n => n + 1), 50);
+    return () => clearInterval(interval);
+  }, [activeTool]);
+
+  if (activeTool !== 'rect-stamp' || !stampAssetId) return null;
+
+  const preview = getRectStampTool().getPreviewState();
+  if (!preview) return null;
+
+  const asset = assets[stampAssetId];
+  if (!asset) return null;
+
+  const cs = grid.cellSize;
+  const tileW = asset.gridSize[0];
+  const tileH = asset.gridSize[1];
+  const minCol = Math.min(preview.start.col, preview.end.col);
+  const maxCol = Math.max(preview.start.col, preview.end.col);
+  const minRow = Math.min(preview.start.row, preview.end.row);
+  const maxRow = Math.max(preview.start.row, preview.end.row);
+
+  const x = minCol * cs;
+  const y = minRow * cs;
+  const w = (Math.floor((maxCol - minCol) / tileW) * tileW + tileW) * cs;
+  const h = (Math.floor((maxRow - minRow) / tileH) * tileH + tileH) * cs;
+
+  return (
+    <KonvaLayer listening={false}>
+      <Line
+        points={[x, y, x + w, y, x + w, y + h, x, y + h]}
+        closed
+        stroke="#66ffaa"
+        strokeWidth={2}
+        dash={[6, 4]}
+        listening={false}
+      />
+    </KonvaLayer>
+  );
+}
+
+function LineStampPreview() {
+  const activeTool = useEditorStore((s) => s.activeTool);
+  const stampAssetId = useEditorStore((s) => s.stampAssetId);
+  const grid = useMapStore((s) => s.grid);
+  const assets = useMapStore((s) => s.assets);
+  const [, forceUpdate] = useState(0);
+
+  useEffect(() => {
+    if (activeTool !== 'line-stamp') return;
+    const interval = setInterval(() => forceUpdate(n => n + 1), 50);
+    return () => clearInterval(interval);
+  }, [activeTool]);
+
+  if (activeTool !== 'line-stamp' || !stampAssetId) return null;
+
+  const preview = getLineStampTool().getPreviewState();
+  if (!preview) return null;
+
+  const asset = assets[stampAssetId];
+  if (!asset) return null;
+
+  const cs = grid.cellSize;
+  const x0 = preview.start.col * cs + cs / 2;
+  const y0 = preview.start.row * cs + cs / 2;
+  const x1 = preview.end.col * cs + cs / 2;
+  const y1 = preview.end.row * cs + cs / 2;
+
+  return (
+    <KonvaLayer listening={false}>
+      <Line
+        points={[x0, y0, x1, y1]}
+        stroke="#ffaa66"
+        strokeWidth={2}
+        dash={[6, 4]}
+        listening={false}
+      />
+      <Circle x={x0} y={y0} radius={4} fill="#ffaa66" listening={false} />
+      <Circle x={x1} y={y1} radius={4} fill="#ffaa66" listening={false} />
+    </KonvaLayer>
+  );
+}
+
 function PathPreview() {
   const activeTool = useEditorStore((s) => s.activeTool);
   const [, forceUpdate] = useState(0);
@@ -336,6 +426,8 @@ export default function MapCanvas() {
         <LightingLayer />
         <PolygonPreview />
         <PathPreview />
+        <RectStampPreview />
+        <LineStampPreview />
         <StampPreviewWrapper />
         <TransformOverlay />
         <SelectionOverlay />
