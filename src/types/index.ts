@@ -54,6 +54,10 @@ export interface TileElement {
   zIndex?: number;
   blocksLight?: boolean;
   locked?: boolean;
+  clipLeft?: number;    // 0-1 fraction clipped from left
+  clipRight?: number;   // 0-1 fraction clipped from right
+  clipTop?: number;     // 0-1 fraction clipped from top
+  clipBottom?: number;  // 0-1 fraction clipped from bottom
 }
 
 export interface PolygonElement {

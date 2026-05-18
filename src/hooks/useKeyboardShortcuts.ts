@@ -186,6 +186,7 @@ export function useKeyboardShortcuts() {
         [KEYS.LIGHT,            () => switchTool('light')],
         [KEYS.FILL,             () => switchTool('fill')],
         [KEYS.COPY_STAMP,       () => switchTool('copy-stamp')],
+        [KEYS.MEASURE,          () => switchTool('measure')],
         [KEYS.PAN,              () => switchTool('pan')],
         [KEYS.SNAP,             () => { useHistoryStore.getState().captureSnapshot(); useEditorStore.getState().setSnapToGrid(!useEditorStore.getState().snapToGrid); }],
         [KEYS.MIRROR,           () => useEditorStore.getState().setMirrorSymmetry(!useEditorStore.getState().mirrorSymmetry)],

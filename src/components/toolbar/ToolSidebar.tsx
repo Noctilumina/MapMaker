@@ -28,6 +28,7 @@ const tools: { name: ToolName; icon: string }[] = [
   { name: 'fill',       icon: '\uD83E\uDEA3' },
   { name: 'copy-stamp', icon: '\u2750' },
   { name: 'light',      icon: '\u2600' },
+  { name: 'measure',    icon: '\u21FF' },
 ];
 
 const shapes: { name: PendingShape; icon: string; label: string }[] = [

@@ -18,6 +18,7 @@ export const KEYS = {
   LIGHT:        'L',
   FILL:         'K',
   COPY_STAMP:   'T',
+  MEASURE:      'U',
   PAN_TEMP:     'Space',
   EYEDROPPER:   'Alt+Click',
 

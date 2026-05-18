@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Viewport } from '../types';
 
-export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace' | 'fill' | 'copy-stamp';
+export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace' | 'fill' | 'copy-stamp' | 'measure';
 export type PendingShape = 'circle' | 'rect' | 'hexagon' | null;
 
 export interface StampTemplateEntry {
@@ -40,6 +40,8 @@ interface EditorState {
   mirrorLineX: number | null;
   mirrorLineY: number | null;
   showHotkeys: boolean;
+  measureStart: { x: number; y: number } | null;
+  measureEnd: { x: number; y: number } | null;
 
   setTool: (tool: ToolName) => void;
   setActiveLayer: (id: string) => void;
@@ -64,6 +66,8 @@ interface EditorState {
   setMirrorLineX: (x: number | null) => void;
   setMirrorLineY: (y: number | null) => void;
   setShowHotkeys: (show: boolean) => void;
+  setMeasureStart: (pos: { x: number; y: number } | null) => void;
+  setMeasureEnd: (pos: { x: number; y: number } | null) => void;
   reset: () => void;
 }
 
@@ -90,6 +94,8 @@ const initialState = {
   mirrorLineX: null as number | null,
   mirrorLineY: null as number | null,
   showHotkeys: false,
+  measureStart: null as { x: number; y: number } | null,
+  measureEnd: null as { x: number; y: number } | null,
 };
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -125,5 +131,7 @@ export const useEditorStore = create<EditorState>((set) => ({
   setMirrorLineX: (x) => set({ mirrorLineX: x }),
   setMirrorLineY: (y) => set({ mirrorLineY: y }),
   setShowHotkeys: (show) => set({ showHotkeys: show }),
+  setMeasureStart: (pos) => set({ measureStart: pos }),
+  setMeasureEnd: (pos) => set({ measureEnd: pos }),
   reset: () => set({ ...initialState, selectionBox: null, snapToGrid: true, renamingGroupId: null, pendingShape: null, pendingOpening: null, pendingInnerWall: false }),
 }));

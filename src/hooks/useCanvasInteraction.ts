@@ -17,6 +17,7 @@ import { ScatterTool } from '../tools/ScatterTool';
 import { ReplaceTool } from '../tools/ReplaceTool';
 import { FillTool } from '../tools/FillTool';
 import { CopyStampTool } from '../tools/CopyStampTool';
+import { MeasureTool } from '../tools/MeasureTool';
 
 const polygonTool = new PolygonTool();
 const pathTool = new PathTool();
@@ -37,6 +38,7 @@ const toolInstances: Record<ToolName, Tool> = {
   replace: new ReplaceTool(),
   fill: new FillTool(),
   'copy-stamp': new CopyStampTool(),
+  measure: new MeasureTool(),
 };
 
 export function getPolygonTool() { return polygonTool; }

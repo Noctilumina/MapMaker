@@ -622,6 +622,35 @@ export default function PropertiesPanel() {
                 V
               </button>
             </div>
+            <span>Clip</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                {(['clipLeft', 'clipRight', 'clipTop', 'clipBottom'] as const).map((key) => (
+                  <input
+                    key={key}
+                    type="number"
+                    min={0} max={99} step={1}
+                    title={key.replace('clip', '')}
+                    value={Math.round((el[key] ?? 0) * 100)}
+                    onChange={(e) => {
+                      const v = Math.min(99, Math.max(0, Number(e.target.value))) / 100;
+                      handleUpdate({ [key]: v });
+                    }}
+                    style={{ flex: 1, ...inputStyle }}
+                  />
+                ))}
+                <button
+                  onClick={() => handleUpdate({ clipLeft: 0, clipRight: 0, clipTop: 0, clipBottom: 0 })}
+                  title="Reset clip"
+                  style={{ background: theme.surface, color: theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '2px 5px', fontSize: 10, cursor: 'pointer' }}
+                >
+                  ↺
+                </button>
+              </div>
+              <div style={{ display: 'flex', gap: 3, fontSize: 9, color: theme.textMuted, justifyContent: 'space-between', paddingRight: 24 }}>
+                <span>L</span><span>R</span><span>T</span><span>B</span>
+              </div>
+            </div>
             <span>Light</span>
             <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
               <input

@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useState } from 'react';
-import { Stage, Layer as KonvaLayer, Group, Line, Circle, Image as KonvaImage } from 'react-konva';
+import { Stage, Layer as KonvaLayer, Group, Line, Circle, Image as KonvaImage, Rect, Text } from 'react-konva';
 import Konva from 'konva';
 import BackgroundLayer from './BackgroundLayer';
 import GridLayer from './GridLayer';
@@ -455,6 +455,60 @@ function MirrorLineOverlay() {
   );
 }
 
+function MeasureOverlay() {
+  const activeTool = useEditorStore((s) => s.activeTool);
+  const measureStart = useEditorStore((s) => s.measureStart);
+  const measureEnd = useEditorStore((s) => s.measureEnd);
+  const grid = useMapStore((s) => s.grid);
+
+  if (activeTool !== 'measure' || !measureStart || !measureEnd) return null;
+
+  const dx = measureEnd.x - measureStart.x;
+  const dy = measureEnd.y - measureStart.y;
+  const pxDist = Math.sqrt(dx * dx + dy * dy);
+  const cells = pxDist / grid.cellSize;
+
+  const scaleMatch = grid.scale.match(/^([\d.]+)\s*(.*)$/);
+  const scaleValue = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
+  const scaleUnit = scaleMatch ? scaleMatch[2] : '';
+  const realDist = cells * scaleValue;
+
+  const midX = (measureStart.x + measureEnd.x) / 2;
+  const midY = (measureStart.y + measureEnd.y) / 2;
+  const label = `${cells.toFixed(1)} cells  /  ${realDist.toFixed(1)}${scaleUnit}`;
+  const labelW = 148;
+  const labelH = 22;
+
+  return (
+    <KonvaLayer listening={false}>
+      <Line
+        points={[measureStart.x, measureStart.y, measureEnd.x, measureEnd.y]}
+        stroke="#f5c842"
+        strokeWidth={2}
+        dash={[6, 4]}
+        listening={false}
+      />
+      <Circle x={measureStart.x} y={measureStart.y} radius={4} fill="#f5c842" listening={false} />
+      <Circle x={measureEnd.x} y={measureEnd.y} radius={4} fill="#f5c842" listening={false} />
+      <Rect
+        x={midX - labelW / 2} y={midY - labelH / 2}
+        width={labelW} height={labelH}
+        fill="#1e1e2e" opacity={0.85} cornerRadius={4}
+        listening={false}
+      />
+      <Text
+        x={midX} y={midY}
+        text={label}
+        fontSize={11}
+        fill="#f5c842"
+        align="center"
+        offsetX={labelW / 2} offsetY={6}
+        listening={false}
+      />
+    </KonvaLayer>
+  );
+}
+
 let stageInstance: Konva.Stage | null = null;
 export function getStageInstance() { return stageInstance; }
 
@@ -553,6 +607,7 @@ export default function MapCanvas() {
         <LineStampPreview />
         <StampPreviewWrapper />
         <MirrorLineOverlay />
+        <MeasureOverlay />
         <TransformOverlay />
         <SelectionOverlay />
       </Stage>
