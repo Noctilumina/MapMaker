@@ -448,7 +448,7 @@ export const useMapStore = create<MapState>((set, get) => ({
         el.zIndex !== undefined ? el : { ...el, zIndex: idx }
       ),
       assets: project.assets,
-      groups: project.groups,
+      groups: project.groups ?? [],
     }),
 
   reset: () =>

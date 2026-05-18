@@ -4,7 +4,6 @@ import { useHistoryStore } from '../../stores/historyStore';
 import { theme } from '../../theme';
 
 import type { ToolName, PendingShape } from '../../stores/editorStore';
-import ChipButton from '../ChipButton';
 
 const tools: { name: ToolName; icon: string; shortcut: string }[] = [
   { name: 'select', icon: '\u2196', shortcut: 'V' },

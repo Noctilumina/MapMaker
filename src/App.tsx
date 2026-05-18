@@ -66,25 +66,34 @@ export default function App() {
       const store = useMapStore.getState();
 
       // Try to restore last saved project from IDB (skip if empty/blank)
-      const ids = await listProjectIds();
-      if (ids.length > 0) {
-        const saved = await loadProjectFromDb(ids[ids.length - 1]);
-        if (saved && saved.elements.length > 0) {
-          store.loadProject(saved);
-          const presets = loadPresetAssets(saved.grid.cellSize);
-          Object.entries(presets).forEach(([id, asset]) => store.registerAsset(id, asset));
-          return;
+      try {
+        const ids = await listProjectIds();
+        if (ids.length > 0) {
+          const saved = await loadProjectFromDb(ids[ids.length - 1]);
+          if (saved && (saved.elements?.length ?? 0) > 0) {
+            store.loadProject(saved);
+            const presets = loadPresetAssets(saved.grid.cellSize);
+            Object.entries(presets).forEach(([id, asset]) => store.registerAsset(id, asset));
+            return;
+          }
         }
+      } catch {
+        // IDB unavailable or corrupt — fall through to default map
       }
 
       // No saved project (or blank) — load default map
-      const base = import.meta.env.BASE_URL;
-      const res = await fetch(`${base}default-map.json`);
-      const json = await res.json();
-      const project = migrateProject(json);
-      store.loadProject(project);
-      const presets = loadPresetAssets(project.grid.cellSize);
-      Object.entries(presets).forEach(([id, asset]) => store.registerAsset(id, asset));
+      try {
+        const base = import.meta.env.BASE_URL;
+        const res = await fetch(`${base}default-map.json`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        const project = migrateProject(json);
+        store.loadProject(project);
+        const presets = loadPresetAssets(project.grid.cellSize);
+        Object.entries(presets).forEach(([id, asset]) => store.registerAsset(id, asset));
+      } catch (err) {
+        console.error('Failed to load default map:', err);
+      }
     })();
   }, []);
 
