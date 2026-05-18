@@ -7,6 +7,7 @@ import PropertiesPanel from './components/panels/PropertiesPanel';
 import HierarchyPanel from './components/panels/HierarchyPanel';
 import LayerBar from './components/panels/LayerBar';
 import Toolbar from './components/toolbar/Toolbar';
+import MapTabs from './components/toolbar/MapTabs';
 import ToolSidebar from './components/toolbar/ToolSidebar';
 import StatusBar from './components/toolbar/StatusBar';
 import ExportDialog from './components/dialogs/ExportDialog';
@@ -15,6 +16,8 @@ import NewProjectDialog from './components/dialogs/NewProjectDialog';
 import HotkeysDialog from './components/dialogs/HotkeysDialog';
 import { useMapStore } from './stores/mapStore';
 import { useEditorStore } from './stores/editorStore';
+import { useProjectManagerStore } from './stores/projectManagerStore';
+import { useHistoryStore } from './stores/historyStore';
 import { loadPresetAssets } from './utils/assetLoader';
 import { exportToPng } from './utils/export';
 import { computeOcclusionHull } from './utils/convexHull';
@@ -22,6 +25,7 @@ import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useAutoSave } from './hooks/useAutoSave';
 import DiagonalStripes from './components/DiagonalStripes';
 import { migrateProject } from './utils/migration';
+import { importProjectFromFile } from './utils/storage';
 
 export default function App() {
   const { mode } = useTheme();
@@ -100,14 +104,34 @@ export default function App() {
     });
   }, []);
 
+  const handleOpenInNewTab = useCallback(async () => {
+    try {
+      const project = await importProjectFromFile();
+      const pm = useProjectManagerStore.getState();
+      const map = useMapStore.getState();
+      // snapshot current tab
+      const { id, name, version, grid, layers, elements, assets, groups } = map;
+      pm.updateTab(pm.activeIndex, JSON.parse(JSON.stringify({ id, name, version, grid, layers, elements, assets, groups })));
+      // load new project
+      map.loadProject(project);
+      useHistoryStore.getState().reset();
+      const newIndex = pm.tabs.length;
+      pm.addTab(project);
+      pm.setActiveIndex(newIndex);
+    } catch {
+      // user cancelled file picker — ignore
+    }
+  }, []);
+
   useKeyboardShortcuts();
   useAutoSave();
 
   return (
     <div className="app">
       <header className="toolbar">
-        <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} onShowHotkeys={() => setShowHotkeys(true)} />
+        <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} onShowHotkeys={() => setShowHotkeys(true)} onOpen={handleOpenInNewTab} />
       </header>
+      <MapTabs />
       <div className="workspace">
         <aside className="tool-sidebar" style={{ width: sidebarExpanded ? 160 : 48, transition: 'width 0.2s ease' }}>
           <ToolSidebar expanded={sidebarExpanded} onToggle={() => setSidebarExpanded(v => !v)} />

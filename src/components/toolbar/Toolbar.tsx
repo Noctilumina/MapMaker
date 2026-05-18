@@ -11,9 +11,10 @@ interface Props {
   onNewProject: () => void;
   onPrint: () => void;
   onShowHotkeys: () => void;
+  onOpen?: () => void;
 }
 
-export default function Toolbar({ onExportPng, onNewProject, onPrint, onShowHotkeys }: Props) {
+export default function Toolbar({ onExportPng, onNewProject, onPrint, onShowHotkeys, onOpen }: Props) {
   const { mode, toggle } = useTheme();
   const canUndo = useHistoryStore((s) => s.canUndo);
   const canRedo = useHistoryStore((s) => s.canRedo);
@@ -25,10 +26,10 @@ export default function Toolbar({ onExportPng, onNewProject, onPrint, onShowHotk
     exportProjectToFile({ id, name, version, grid, layers, elements, assets, groups });
   };
 
-  const handleImportJson = async () => {
+  const handleImportJson = onOpen ?? (async () => {
     const project = await importProjectFromFile();
     useMapStore.getState().loadProject(project);
-  };
+  });
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: 16 }}>

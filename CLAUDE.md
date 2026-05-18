@@ -22,3 +22,9 @@ Always update both `package.json` and the `v{version}` label in `src/components/
 - `1.2.3` — multi-select batch move + copy-paste preserving group structure
 - `1.2.4` — click-through stacked element cycling
 - `1.2.5` — default map loading fix, version display, build fix
+- `1.3.2` — mirror line overlay: draggable axis line on canvas, snaps to center, V/H/Both modes
+- `1.3.3` — prefabs: save/load stamp templates; Prefabs tab in AssetBrowser, persist to localStorage
+- `1.3.4` — prefabs: "Save as Prefab" button in PropertiesPanel multi-select action row
+- `1.3.5` — measure tool (U): click-drag distance overlay in cells + real-world units
+- `1.3.6` — line-stamp axis lock: Free/H/V buttons + Shift auto-lock to dominant axis
+- `1.4.0` — multi-map tabs: open multiple maps simultaneously, quick switching, open file in new tab
