@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
 import { useHistoryStore } from '../../stores/historyStore';
+import type { ElementInput } from '../../stores/mapStore';
 import { theme } from '../../theme';
 
 interface TextureEntry {
@@ -740,6 +741,53 @@ export default function PropertiesPanel() {
                 onChange={(e) => handleUpdate({ wallsBlockLight: e.target.checked })} />
               <span style={{ fontSize: 10, color: theme.textMuted }}>{(el.wallsBlockLight ?? true) ? 'Walls block light' : 'Glass walls (light passes through)'}</span>
             </label>
+            {/* Auto-wall */}
+            <span style={{ gridColumn: '1 / -1' }}>
+              <button
+                onClick={() => {
+                  if (el.type !== 'polygon') return;
+                  const { stampAssetId, activeLayerId } = useEditorStore.getState();
+                  if (!stampAssetId) { alert('Select a wall tile asset first'); return; }
+                  const asset = useMapStore.getState().assets[stampAssetId];
+                  if (!asset) return;
+                  const { cellSize } = useMapStore.getState().grid;
+                  const tileW = asset.gridSize[0];
+                  const tileH = asset.gridSize[1];
+                  const pts = el.points;
+                  const numVerts = pts.length / 2;
+                  const inputs: ElementInput[] = [];
+                  const seen = new Set<string>();
+                  for (let i = 0; i < numVerts; i++) {
+                    const x0 = pts[i * 2], y0 = pts[i * 2 + 1];
+                    const x1 = pts[((i + 1) % numVerts) * 2];
+                    const y1 = pts[((i + 1) % numVerts) * 2 + 1];
+                    const angle = Math.atan2(y1 - y0, x1 - x0) * (180 / Math.PI);
+                    const rotation = ((Math.round(angle / 90) * 90) % 360 + 360) % 360;
+                    const edgeLen = Math.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2);
+                    const steps = Math.max(1, Math.ceil(edgeLen / (tileW * cellSize)));
+                    for (let s = 0; s < steps; s++) {
+                      const t = s / steps;
+                      const col = Math.floor((x0 + (x1 - x0) * t) / cellSize);
+                      const row = Math.floor((y0 + (y1 - y0) * t) / cellSize);
+                      const key = `${col},${row}`;
+                      if (seen.has(key)) continue;
+                      seen.add(key);
+                      inputs.push({
+                        type: 'tile', layerId: activeLayerId, assetId: stampAssetId,
+                        groupId: null, x: col * cellSize, y: row * cellSize,
+                        width: tileW, height: tileH, rotation, flipX: false, flipY: false, tint: null, opacity: 1.0,
+                      });
+                    }
+                  }
+                  useHistoryStore.getState().captureSnapshot();
+                  useMapStore.getState().addElements(inputs);
+                }}
+                style={{ width: '100%', background: theme.surface, color: theme.warning, border: `1px solid ${theme.warning}`, borderRadius: theme.radius, padding: '4px 0', fontSize: 10, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}
+              >
+                Place Border Tiles
+              </button>
+            </span>
+
             {/* Openings */}
             <span>Openings</span>
             <div>
