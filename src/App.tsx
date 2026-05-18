@@ -21,7 +21,6 @@ import { computeOcclusionHull } from './utils/convexHull';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useAutoSave } from './hooks/useAutoSave';
 import DiagonalStripes from './components/DiagonalStripes';
-import { listProjectIds, loadProject as loadProjectFromDb } from './utils/storage';
 import { migrateProject } from './utils/migration';
 
 export default function App() {
@@ -68,24 +67,6 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const store = useMapStore.getState();
-
-      // Try to restore last saved project from IDB (skip if empty/blank)
-      try {
-        const ids = await listProjectIds();
-        if (ids.length > 0) {
-          const saved = await loadProjectFromDb(ids[ids.length - 1]);
-          if (saved && (saved.elements?.length ?? 0) > 0) {
-            store.loadProject(saved);
-            const presets = loadPresetAssets(saved.grid.cellSize);
-            Object.entries(presets).forEach(([id, asset]) => store.registerAsset(id, asset));
-            return;
-          }
-        }
-      } catch {
-        // IDB unavailable or corrupt — fall through to default map
-      }
-
-      // No saved project (or blank) — load default map
       try {
         const base = import.meta.env.BASE_URL;
         const res = await fetch(`${base}default-map.json`);
