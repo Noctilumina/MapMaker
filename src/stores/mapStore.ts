@@ -314,16 +314,52 @@ export const useMapStore = create<MapState>((set, get) => ({
   duplicateElements: (ids, offset) => {
     const state = get();
     const newIds: string[] = [];
+
+    // Remap group IDs so pasted elements preserve their grouping relative to each other.
+    // Collect all groupIds referenced by the selected elements, then walk up parent chains
+    // so nested group hierarchy within the selection is also preserved.
+    const directGroupIds = new Set(
+      ids.map(id => state.elements.find(e => e.id === id)?.groupId).filter((g): g is string => !!g)
+    );
+    const allGroupIds = new Set(directGroupIds);
+    const walkParents = (gid: string) => {
+      const g = state.groups.find(g => g.id === gid);
+      if (g?.parentId && !allGroupIds.has(g.parentId)) {
+        allGroupIds.add(g.parentId);
+        walkParents(g.parentId);
+      }
+    };
+    directGroupIds.forEach(walkParents);
+
+    const groupIdMap = new Map<string, string>();
+    allGroupIds.forEach(gid => groupIdMap.set(gid, uuidv4()));
+
+    const newGroups: Group[] = [];
+    allGroupIds.forEach(gid => {
+      const original = state.groups.find(g => g.id === gid);
+      if (!original) return;
+      newGroups.push({
+        ...original,
+        id: groupIdMap.get(gid)!,
+        parentId: original.parentId && groupIdMap.has(original.parentId)
+          ? groupIdMap.get(original.parentId)!
+          : null,
+      });
+    });
+
     const newElements = ids.map(id => {
       const el = state.elements.find(e => e.id === id);
       if (!el) return null;
       const newId = uuidv4();
       newIds.push(newId);
+      const newGroupId = el.groupId && groupIdMap.has(el.groupId)
+        ? groupIdMap.get(el.groupId)!
+        : null;
       if (el.type === 'polygon') {
         return {
           ...el,
           id: newId,
-          groupId: null,
+          groupId: newGroupId,
           points: el.points.map((v, i) => i % 2 === 0 ? v + offset.x : v + offset.y),
         };
       }
@@ -331,7 +367,7 @@ export const useMapStore = create<MapState>((set, get) => ({
         return {
           ...el,
           id: newId,
-          groupId: null,
+          groupId: newGroupId,
           pathPoints: el.pathPoints.map(pt => ({
             ...pt,
             x: pt.x + offset.x,
@@ -342,7 +378,7 @@ export const useMapStore = create<MapState>((set, get) => ({
       return {
         ...el,
         id: newId,
-        groupId: null,
+        groupId: newGroupId,
         x: el.x + offset.x,
         y: el.y + offset.y,
       };
@@ -350,6 +386,7 @@ export const useMapStore = create<MapState>((set, get) => ({
 
     set((s) => ({
       elements: [...s.elements, ...newElements] as typeof s.elements,
+      groups: [...s.groups, ...newGroups],
     }));
     return newIds;
   },
