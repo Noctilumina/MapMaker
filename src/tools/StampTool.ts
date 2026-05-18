@@ -112,22 +112,30 @@ export class StampTool implements Tool {
 
     useMapStore.getState().addElement({ ...tileData, x, y });
 
-    // Mirror symmetry: place a second tile mirrored about the map center axis
+    // Mirror symmetry: place mirrored tile(s) about the mirror line(s)
     if (mirrorSymmetry) {
       const { width: gridW, height: gridH } = useMapStore.getState().grid;
-      let mx = x, my = y, mFlipX = false, mFlipY = false;
-      if (mirrorAxis === 'x') {
-        // Mirror left-right about vertical center
-        mx = gridW * cellSize - x - w;
-        mFlipX = true;
+      const { mirrorLineX, mirrorLineY } = useEditorStore.getState();
+      const lx = mirrorLineX ?? (gridW * cellSize) / 2;
+      const ly = mirrorLineY ?? (gridH * cellSize) / 2;
+
+      const placeIfDifferent = (px: number, py: number, flipX: boolean, flipY: boolean) => {
+        if (px !== x || py !== y) {
+          useMapStore.getState().addElement({ ...tileData, x: px, y: py, flipX, flipY });
+        }
+      };
+
+      if (mirrorAxis === 'x' || mirrorAxis === 'both') {
+        const mx = 2 * lx - x - w;
+        placeIfDifferent(mx, y, true, false);
+        if (mirrorAxis === 'both') {
+          const my = 2 * ly - y - h;
+          placeIfDifferent(x, my, false, true);
+          placeIfDifferent(mx, my, true, true);
+        }
       } else {
-        // Mirror top-bottom about horizontal center
-        my = gridH * cellSize - y - h;
-        mFlipY = true;
-      }
-      // Don't place on same spot
-      if (mx !== x || my !== y) {
-        useMapStore.getState().addElement({ ...tileData, x: mx, y: my, flipX: mFlipX, flipY: mFlipY });
+        const my = 2 * ly - y - h;
+        placeIfDifferent(x, my, false, true);
       }
     }
   }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
 import { useHistoryStore } from '../../stores/historyStore';
+import { usePrefabStore } from '../../stores/prefabStore';
 import type { ElementInput } from '../../stores/mapStore';
 import { theme } from '../../theme';
 import { KEYS } from '../../keys';
@@ -429,6 +430,25 @@ export default function PropertiesPanel() {
             style={{ ...btnStyle, background: theme.danger, color: theme.bg }}
           >
             Delete All
+          </button>
+          <button
+            onClick={() => {
+              const tiles = selectedElements.filter(el => el.type === 'tile');
+              if (tiles.length === 0) return;
+              const name = prompt('Prefab name:');
+              if (!name?.trim()) return;
+              const minX = Math.min(...tiles.map((t: any) => t.x));
+              const minY = Math.min(...tiles.map((t: any) => t.y));
+              usePrefabStore.getState().savePrefab(name.trim(), tiles.map((t: any) => ({
+                dx: t.x - minX, dy: t.y - minY, assetId: t.assetId,
+                width: t.width, height: t.height, rotation: t.rotation ?? 0,
+                flipX: t.flipX ?? false, flipY: t.flipY ?? false,
+                tint: t.tint, opacity: t.opacity ?? 1,
+              })));
+            }}
+            style={{ ...btnStyle, background: theme.primary, color: theme.bg }}
+          >
+            Save as Prefab
           </button>
         </div>
 

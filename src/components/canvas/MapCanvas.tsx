@@ -332,6 +332,129 @@ function PathPreview() {
   );
 }
 
+const SNAP_DIST = 20; // pixels in canvas-space
+
+function MirrorLineOverlay() {
+  const mirrorSymmetry = useEditorStore((s) => s.mirrorSymmetry);
+  const mirrorAxis = useEditorStore((s) => s.mirrorAxis);
+  const mirrorLineX = useEditorStore((s) => s.mirrorLineX);
+  const mirrorLineY = useEditorStore((s) => s.mirrorLineY);
+  const setMirrorLineX = useEditorStore((s) => s.setMirrorLineX);
+  const setMirrorLineY = useEditorStore((s) => s.setMirrorLineY);
+  const grid = useMapStore((s) => s.grid);
+
+  if (!mirrorSymmetry) return null;
+
+  const totalWidth = grid.width * grid.cellSize;
+  const totalHeight = grid.height * grid.cellSize;
+  const centerX = totalWidth / 2;
+  const centerY = totalHeight / 2;
+
+  const lx = mirrorLineX ?? centerX;
+  const ly = mirrorLineY ?? centerY;
+
+  const lineStyle = {
+    stroke: '#e040fb',
+    strokeWidth: 2,
+    dash: [10, 6],
+    opacity: 0.8,
+    hitStrokeWidth: 16,
+    listening: true,
+  };
+  const handleStyle = {
+    radius: 7,
+    fill: '#e040fb',
+    stroke: '#fff',
+    strokeWidth: 1.5,
+    opacity: 0.9,
+    listening: true,
+  };
+
+  const showX = mirrorAxis === 'x' || mirrorAxis === 'both';
+  const showY = mirrorAxis === 'y' || mirrorAxis === 'both';
+
+  return (
+    <KonvaLayer>
+      {showX && (
+        <>
+          <Line
+            points={[0, -totalHeight, 0, totalHeight * 2]}
+            x={lx}
+            draggable
+            dragBoundFunc={(pos) => ({ x: pos.x, y: 0 })}
+            onDragEnd={(e) => {
+              const newX = e.target.x();
+              if (Math.abs(newX - centerX) < SNAP_DIST) {
+                e.target.x(centerX);
+                setMirrorLineX(null);
+              } else {
+                setMirrorLineX(newX);
+              }
+            }}
+            {...lineStyle}
+            cursor="ew-resize"
+          />
+          <Circle
+            x={lx}
+            y={totalHeight / 2}
+            {...handleStyle}
+            draggable
+            dragBoundFunc={(pos) => ({ x: pos.x, y: totalHeight / 2 })}
+            onDragEnd={(e) => {
+              const newX = e.target.x();
+              if (Math.abs(newX - centerX) < SNAP_DIST) {
+                e.target.x(centerX);
+                setMirrorLineX(null);
+              } else {
+                setMirrorLineX(newX);
+              }
+            }}
+            cursor="ew-resize"
+          />
+        </>
+      )}
+      {showY && (
+        <>
+          <Line
+            points={[-totalWidth, 0, totalWidth * 2, 0]}
+            y={ly}
+            draggable
+            dragBoundFunc={(pos) => ({ x: 0, y: pos.y })}
+            onDragEnd={(e) => {
+              const newY = e.target.y();
+              if (Math.abs(newY - centerY) < SNAP_DIST) {
+                e.target.y(centerY);
+                setMirrorLineY(null);
+              } else {
+                setMirrorLineY(newY);
+              }
+            }}
+            {...lineStyle}
+            cursor="ns-resize"
+          />
+          <Circle
+            x={totalWidth / 2}
+            y={ly}
+            {...handleStyle}
+            draggable
+            dragBoundFunc={(pos) => ({ x: totalWidth / 2, y: pos.y })}
+            onDragEnd={(e) => {
+              const newY = e.target.y();
+              if (Math.abs(newY - centerY) < SNAP_DIST) {
+                e.target.y(centerY);
+                setMirrorLineY(null);
+              } else {
+                setMirrorLineY(newY);
+              }
+            }}
+            cursor="ns-resize"
+          />
+        </>
+      )}
+    </KonvaLayer>
+  );
+}
+
 let stageInstance: Konva.Stage | null = null;
 export function getStageInstance() { return stageInstance; }
 
@@ -429,6 +552,7 @@ export default function MapCanvas() {
         <RectStampPreview />
         <LineStampPreview />
         <StampPreviewWrapper />
+        <MirrorLineOverlay />
         <TransformOverlay />
         <SelectionOverlay />
       </Stage>

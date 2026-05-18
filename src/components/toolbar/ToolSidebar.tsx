@@ -56,6 +56,10 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
   const setSnapToGrid = useEditorStore((s) => s.setSnapToGrid);
   const mirrorSymmetry = useEditorStore((s) => s.mirrorSymmetry);
   const setMirrorSymmetry = useEditorStore((s) => s.setMirrorSymmetry);
+  const mirrorAxis = useEditorStore((s) => s.mirrorAxis);
+  const setMirrorAxis = useEditorStore((s) => s.setMirrorAxis);
+  const setMirrorLineX = useEditorStore((s) => s.setMirrorLineX);
+  const setMirrorLineY = useEditorStore((s) => s.setMirrorLineY);
   const scatterAssetIds = useEditorStore((s) => s.scatterAssetIds);
   const toggleScatterAsset = useEditorStore((s) => s.toggleScatterAsset);
   const replaceSourceAssetId = useEditorStore((s) => s.replaceSourceAssetId);
@@ -63,7 +67,6 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
   const assets = useMapStore((s) => s.assets);
   const elements = useMapStore((s) => s.elements);
   const activeLayerId = useEditorStore((s) => s.activeLayerId);
-
   const handleShapeClick = (shape: PendingShape) => {
     useHistoryStore.getState().captureSnapshot();
     setTool('polygon');
@@ -298,6 +301,65 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
         {iconSpan('⇔')}
         {labelSpan('Mirror')}
       </button>
+
+      {mirrorSymmetry && (
+        <>
+          {/* Axis selector: H / V / Both */}
+          <div style={{ display: 'flex', gap: 2, padding: '0 4px', width: '100%', boxSizing: 'border-box' as const }}>
+            {(['x', 'y', 'both'] as const).map((axis) => {
+              const label = axis === 'x' ? 'V' : axis === 'y' ? 'H' : '⊕';
+              const tip = axis === 'x' ? 'Vertical (left-right)' : axis === 'y' ? 'Horizontal (top-bottom)' : 'Both axes';
+              const isActive = mirrorAxis === axis;
+              return (
+                <button
+                  key={axis}
+                  onClick={() => setMirrorAxis(axis)}
+                  title={tip}
+                  style={{
+                    flex: 1, height: 22, fontSize: 11, border: 'none', cursor: 'pointer',
+                    borderRadius: theme.radius,
+                    background: isActive ? theme.primary : theme.surface,
+                    color: isActive ? theme.bg : theme.textMuted,
+                    fontFamily: theme.fontHeading, fontWeight: isActive ? 'bold' : 'normal',
+                    transition: 'background 0.15s',
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          {/* Snap to center */}
+          <div style={{ display: 'flex', gap: 2, padding: '0 4px', width: '100%', boxSizing: 'border-box' as const }}>
+            {(mirrorAxis === 'x' || mirrorAxis === 'both') && (
+              <button
+                onClick={() => setMirrorLineX(null)}
+                title="Snap vertical mirror to center"
+                style={{
+                  flex: 1, height: 20, fontSize: 9, border: 'none', cursor: 'pointer',
+                  borderRadius: theme.radius, background: theme.surface, color: theme.textMuted,
+                  fontFamily: theme.fontHeading,
+                }}
+              >
+                {expanded ? 'Center V' : '↔'}
+              </button>
+            )}
+            {(mirrorAxis === 'y' || mirrorAxis === 'both') && (
+              <button
+                onClick={() => setMirrorLineY(null)}
+                title="Snap horizontal mirror to center"
+                style={{
+                  flex: 1, height: 20, fontSize: 9, border: 'none', cursor: 'pointer',
+                  borderRadius: theme.radius, background: theme.surface, color: theme.textMuted,
+                  fontFamily: theme.fontHeading,
+                }}
+              >
+                {expanded ? 'Center H' : '↕'}
+              </button>
+            )}
+          </div>
+        </>
+      )}
 
       <div style={{ flex: 1 }} />
 

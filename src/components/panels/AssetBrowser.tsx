@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
+import { usePrefabStore } from '../../stores/prefabStore';
 import { getManifestEntries } from '../../utils/assetLoader';
 import ImportDialog from '../dialogs/ImportDialog';
 import { theme } from '../../theme';
@@ -39,7 +40,7 @@ interface ObjectEntry {
   gridSize: [number, number];
 }
 
-type Tab = 'presets' | 'textures' | 'objects' | 'imported' | 'map';
+type Tab = 'presets' | 'textures' | 'objects' | 'imported' | 'map' | 'prefabs';
 
 interface PendingImport {
   file: File;
@@ -57,6 +58,8 @@ export default function AssetBrowser() {
   const [objCategory, setObjCategory] = useState('all');
   const [objVibe, setObjVibe] = useState('all');
   const [tagMap, setTagMap] = useState<Record<string, string[]>>({});
+  const [prefabRenamingId, setPrefabRenamingId] = useState<string | null>(null);
+  const [prefabRenameValue, setPrefabRenameValue] = useState('');
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL;
@@ -78,6 +81,9 @@ export default function AssetBrowser() {
       .catch(() => {});
   }, []);
 
+  const prefabs = usePrefabStore((s) => s.prefabs);
+  const deletePrefab = usePrefabStore((s) => s.deletePrefab);
+  const renamePrefab = usePrefabStore((s) => s.renamePrefab);
   const stampAssetId = useEditorStore((s) => s.stampAssetId);
   const setStampAsset = useEditorStore((s) => s.setStampAsset);
   const setTool = useEditorStore((s) => s.setTool);
@@ -312,6 +318,9 @@ export default function AssetBrowser() {
         <button data-tab="map" style={tabStyle('map')} onClick={() => setTab('map')}>
           Map{mapAssetEntries.length > 0 ? ` (${mapAssetEntries.length})` : ''}
         </button>
+        <button data-tab="prefabs" style={tabStyle('prefabs')} onClick={() => setTab('prefabs')}>
+          Prefabs{prefabs.length > 0 ? ` (${prefabs.length})` : ''}
+        </button>
       </div>
 
       {/* Presets tab: category filter + grid */}
@@ -458,6 +467,87 @@ export default function AssetBrowser() {
                   <span style={{ fontSize: 9, color: theme.textMuted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{asset.name}</span>
                 </div>
               ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Prefabs tab */}
+      {tab === 'prefabs' && (
+        <div style={{ flex: 1, overflow: 'auto', padding: '8px 12px' }}>
+          {prefabs.length === 0 ? (
+            <div style={{ color: theme.textMuted, fontSize: 11, textAlign: 'center', marginTop: 16 }}>
+              No prefabs saved yet.<br />
+              <span style={{ color: theme.textMuted, fontSize: 10 }}>Select tiles and use "Save as Prefab" in the properties panel.</span>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {prefabs
+                .filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()))
+                .map((prefab) => {
+                  const previewAssets = [...new Set(prefab.template.map(e => e.assetId))].slice(0, 4);
+                  return (
+                    <div key={prefab.id} style={{ display: 'flex', alignItems: 'center', gap: 6, background: theme.surface, borderRadius: theme.radius, padding: '6px 8px', border: theme.borderLight }}>
+                      {/* Thumbnail strip */}
+                      <div style={{ display: 'flex', gap: 2, flexShrink: 0 }}>
+                        {previewAssets.map(id => {
+                          const asset = useMapStore.getState().assets[id];
+                          return asset ? (
+                            <img key={id} src={asset.src} alt={asset.name} style={{ width: 24, height: 24, objectFit: 'contain', background: theme.bg, borderRadius: 2 }} />
+                          ) : null;
+                        })}
+                      </div>
+                      {/* Name / rename input */}
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        {prefabRenamingId === prefab.id ? (
+                          <input
+                            autoFocus
+                            value={prefabRenameValue}
+                            onChange={(e) => setPrefabRenameValue(e.target.value)}
+                            onBlur={() => { if (prefabRenameValue.trim()) renamePrefab(prefab.id, prefabRenameValue.trim()); setPrefabRenamingId(null); }}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') { if (prefabRenameValue.trim()) renamePrefab(prefab.id, prefabRenameValue.trim()); setPrefabRenamingId(null); }
+                              if (e.key === 'Escape') setPrefabRenamingId(null);
+                            }}
+                            style={{ width: '100%', fontSize: 11, background: theme.bg, color: theme.text, border: `1px solid ${theme.primary}`, borderRadius: theme.radius, padding: '2px 4px', boxSizing: 'border-box' as const }}
+                          />
+                        ) : (
+                          <>
+                            <div style={{ fontSize: 11, color: theme.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prefab.name}</div>
+                            <div style={{ fontSize: 9, color: theme.textMuted }}>{prefab.template.length} tile{prefab.template.length !== 1 ? 's' : ''}</div>
+                          </>
+                        )}
+                      </div>
+                      {/* Actions */}
+                      <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
+                        <button
+                          onClick={() => {
+                            useEditorStore.getState().setStampTemplate(prefab.template);
+                            useEditorStore.getState().setTool('copy-stamp');
+                          }}
+                          title={`Place "${prefab.name}"`}
+                          style={{ background: theme.primary, color: theme.bg, border: 'none', borderRadius: theme.radius, padding: '3px 8px', fontSize: 10, cursor: 'pointer', fontFamily: theme.fontHeading }}
+                        >
+                          Place
+                        </button>
+                        <button
+                          onClick={() => { setPrefabRenamingId(prefab.id); setPrefabRenameValue(prefab.name); }}
+                          title="Rename"
+                          style={{ background: 'none', border: 'none', color: theme.textMuted, cursor: 'pointer', fontSize: 13, padding: '0 2px', lineHeight: 1 }}
+                        >
+                          ✎
+                        </button>
+                        <button
+                          onClick={() => deletePrefab(prefab.id)}
+                          title="Delete prefab"
+                          style={{ background: 'none', border: 'none', color: theme.danger, cursor: 'pointer', fontSize: 15, padding: '0 2px', lineHeight: 1 }}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
           )}
         </div>

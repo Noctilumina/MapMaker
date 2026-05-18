@@ -36,7 +36,9 @@ interface EditorState {
   replaceTargetAssetId: string | null;
   stampTemplate: StampTemplateEntry[] | null;
   mirrorSymmetry: boolean;
-  mirrorAxis: 'x' | 'y';
+  mirrorAxis: 'x' | 'y' | 'both';
+  mirrorLineX: number | null;
+  mirrorLineY: number | null;
   showHotkeys: boolean;
 
   setTool: (tool: ToolName) => void;
@@ -58,7 +60,9 @@ interface EditorState {
   setReplaceTarget: (assetId: string | null) => void;
   setStampTemplate: (template: StampTemplateEntry[] | null) => void;
   setMirrorSymmetry: (enabled: boolean) => void;
-  setMirrorAxis: (axis: 'x' | 'y') => void;
+  setMirrorAxis: (axis: 'x' | 'y' | 'both') => void;
+  setMirrorLineX: (x: number | null) => void;
+  setMirrorLineY: (y: number | null) => void;
   setShowHotkeys: (show: boolean) => void;
   reset: () => void;
 }
@@ -82,7 +86,9 @@ const initialState = {
   replaceTargetAssetId: null as string | null,
   stampTemplate: null as StampTemplateEntry[] | null,
   mirrorSymmetry: false,
-  mirrorAxis: 'x' as 'x' | 'y',
+  mirrorAxis: 'x' as 'x' | 'y' | 'both',
+  mirrorLineX: null as number | null,
+  mirrorLineY: null as number | null,
   showHotkeys: false,
 };
 
@@ -116,6 +122,8 @@ export const useEditorStore = create<EditorState>((set) => ({
   setStampTemplate: (template) => set({ stampTemplate: template }),
   setMirrorSymmetry: (enabled) => set({ mirrorSymmetry: enabled }),
   setMirrorAxis: (axis) => set({ mirrorAxis: axis }),
+  setMirrorLineX: (x) => set({ mirrorLineX: x }),
+  setMirrorLineY: (y) => set({ mirrorLineY: y }),
   setShowHotkeys: (show) => set({ showHotkeys: show }),
   reset: () => set({ ...initialState, selectionBox: null, snapToGrid: true, renamingGroupId: null, pendingShape: null, pendingOpening: null, pendingInnerWall: false }),
 }));
