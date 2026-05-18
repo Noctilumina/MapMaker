@@ -138,7 +138,7 @@ export class SelectTool implements Tool {
 
     this.lastClickPos = { x: canvasX, y: canvasY };
 
-    if (!selected.includes(hitId) || selected.length !== 1) {
+    if (!selected.includes(hitId)) {
       useEditorStore.getState().select([hitId]);
     }
 
