@@ -1,8 +1,21 @@
 import { create } from 'zustand';
 import type { Viewport } from '../types';
 
-export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace';
+export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace' | 'fill' | 'copy-stamp';
 export type PendingShape = 'circle' | 'rect' | 'hexagon' | null;
+
+export interface StampTemplateEntry {
+  dx: number;
+  dy: number;
+  assetId: string;
+  width: number;
+  height: number;
+  rotation: number;
+  flipX: boolean;
+  flipY: boolean;
+  tint: string | null;
+  opacity: number;
+}
 
 interface EditorState {
   activeTool: ToolName;
@@ -21,6 +34,10 @@ interface EditorState {
   scatterAssetIds: string[];
   replaceSourceAssetId: string | null;
   replaceTargetAssetId: string | null;
+  stampTemplate: StampTemplateEntry[] | null;
+  mirrorSymmetry: boolean;
+  mirrorAxis: 'x' | 'y';
+  showHotkeys: boolean;
 
   setTool: (tool: ToolName) => void;
   setActiveLayer: (id: string) => void;
@@ -39,6 +56,10 @@ interface EditorState {
   toggleScatterAsset: (assetId: string) => void;
   setReplaceSource: (assetId: string | null) => void;
   setReplaceTarget: (assetId: string | null) => void;
+  setStampTemplate: (template: StampTemplateEntry[] | null) => void;
+  setMirrorSymmetry: (enabled: boolean) => void;
+  setMirrorAxis: (axis: 'x' | 'y') => void;
+  setShowHotkeys: (show: boolean) => void;
   reset: () => void;
 }
 
@@ -59,6 +80,10 @@ const initialState = {
   scatterAssetIds: [] as string[],
   replaceSourceAssetId: null as string | null,
   replaceTargetAssetId: null as string | null,
+  stampTemplate: null as StampTemplateEntry[] | null,
+  mirrorSymmetry: false,
+  mirrorAxis: 'x' as 'x' | 'y',
+  showHotkeys: false,
 };
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -88,5 +113,9 @@ export const useEditorStore = create<EditorState>((set) => ({
   })),
   setReplaceSource: (assetId) => set({ replaceSourceAssetId: assetId }),
   setReplaceTarget: (assetId) => set({ replaceTargetAssetId: assetId }),
+  setStampTemplate: (template) => set({ stampTemplate: template }),
+  setMirrorSymmetry: (enabled) => set({ mirrorSymmetry: enabled }),
+  setMirrorAxis: (axis) => set({ mirrorAxis: axis }),
+  setShowHotkeys: (show) => set({ showHotkeys: show }),
   reset: () => set({ ...initialState, selectionBox: null, snapToGrid: true, renamingGroupId: null, pendingShape: null, pendingOpening: null, pendingInnerWall: false }),
 }));

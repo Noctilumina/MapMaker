@@ -12,7 +12,9 @@ import StatusBar from './components/toolbar/StatusBar';
 import ExportDialog from './components/dialogs/ExportDialog';
 import PrintDialog from './components/dialogs/PrintDialog';
 import NewProjectDialog from './components/dialogs/NewProjectDialog';
+import HotkeysDialog from './components/dialogs/HotkeysDialog';
 import { useMapStore } from './stores/mapStore';
+import { useEditorStore } from './stores/editorStore';
 import { loadPresetAssets } from './utils/assetLoader';
 import { exportToPng } from './utils/export';
 import { computeOcclusionHull } from './utils/convexHull';
@@ -25,6 +27,8 @@ import { migrateProject } from './utils/migration';
 export default function App() {
   const { mode } = useTheme();
   const mapName = useMapStore((s) => s.name);
+  const showHotkeys = useEditorStore((s) => s.showHotkeys);
+  const setShowHotkeys = useEditorStore((s) => s.setShowHotkeys);
   const [showExport, setShowExport] = useState(false);
   const [showPrint, setShowPrint] = useState(false);
   const [showNewProject, setShowNewProject] = useState(false);
@@ -120,7 +124,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="toolbar">
-        <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} />
+        <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} onShowHotkeys={() => setShowHotkeys(true)} />
       </header>
       <div className="workspace">
         <aside className="tool-sidebar">
@@ -173,6 +177,9 @@ export default function App() {
       )}
       {showPrint && (
         <PrintDialog getStage={getStageInstance} onClose={() => setShowPrint(false)} />
+      )}
+      {showHotkeys && (
+        <HotkeysDialog onClose={() => setShowHotkeys(false)} />
       )}
       {showNewProject && (
         <NewProjectDialog

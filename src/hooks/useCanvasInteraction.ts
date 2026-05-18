@@ -15,6 +15,8 @@ import { RectStampTool } from '../tools/RectStampTool';
 import { LineStampTool } from '../tools/LineStampTool';
 import { ScatterTool } from '../tools/ScatterTool';
 import { ReplaceTool } from '../tools/ReplaceTool';
+import { FillTool } from '../tools/FillTool';
+import { CopyStampTool } from '../tools/CopyStampTool';
 
 const polygonTool = new PolygonTool();
 const pathTool = new PathTool();
@@ -33,6 +35,8 @@ const toolInstances: Record<ToolName, Tool> = {
   'line-stamp': lineStampTool,
   scatter: new ScatterTool(),
   replace: new ReplaceTool(),
+  fill: new FillTool(),
+  'copy-stamp': new CopyStampTool(),
 };
 
 export function getPolygonTool() { return polygonTool; }
@@ -59,6 +63,33 @@ export function useCanvasInteraction() {
     cursor: tool.getCursor(),
     onMouseDown: (e: Konva.KonvaEventObject<MouseEvent>) => {
       if (activeTool === 'pan') return;
+
+      // Alt+click: eyedropper — pick topmost tile asset and switch to stamp
+      if (e.evt.altKey) {
+        e.evt.preventDefault();
+        const stage = e.target.getStage();
+        if (stage) {
+          const pointer = stage.getPointerPosition();
+          if (pointer) {
+            const transform = stage.getAbsoluteTransform().copy().invert();
+            const pos = transform.point(pointer);
+            const { elements } = useMapStore.getState();
+            const activeLayerId = useEditorStore.getState().activeLayerId;
+            const tiles = elements.filter(el =>
+              el.type === 'tile' &&
+              el.layerId === activeLayerId &&
+              pos.x >= el.x && pos.x < el.x + (el as any).width * useMapStore.getState().grid.cellSize &&
+              pos.y >= el.y && pos.y < el.y + (el as any).height * useMapStore.getState().grid.cellSize
+            ).sort((a, b) => (b.zIndex ?? 0) - (a.zIndex ?? 0));
+            if (tiles.length > 0 && tiles[0].type === 'tile') {
+              useEditorStore.getState().setStampAsset((tiles[0] as any).assetId);
+              useEditorStore.getState().setTool('stamp');
+            }
+          }
+        }
+        return;
+      }
+
       tool.onMouseDown(getGridPos(e), e);
     },
     onMouseMove: (e: Konva.KonvaEventObject<MouseEvent>) => {

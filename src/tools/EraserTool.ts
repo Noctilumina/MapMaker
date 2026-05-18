@@ -13,6 +13,7 @@ export class EraserTool implements Tool {
 
   onMouseDown(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
     this.erasing = true;
+    useHistoryStore.getState().captureSnapshot();
     this.eraseAt(gridPos, e);
   }
 
@@ -33,7 +34,6 @@ export class EraserTool implements Tool {
     const hit = elements.find((el) => el.id === elementId && el.layerId === activeLayerId);
 
     if (hit) {
-      useHistoryStore.getState().captureSnapshot();
       useMapStore.getState().removeElement(hit.id);
     }
   }

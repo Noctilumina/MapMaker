@@ -9,9 +9,10 @@ interface Props {
   onExportPng: () => void;
   onNewProject: () => void;
   onPrint: () => void;
+  onShowHotkeys: () => void;
 }
 
-export default function Toolbar({ onExportPng, onNewProject, onPrint }: Props) {
+export default function Toolbar({ onExportPng, onNewProject, onPrint, onShowHotkeys }: Props) {
   const { mode, toggle } = useTheme();
   const canUndo = useHistoryStore((s) => s.canUndo);
   const canRedo = useHistoryStore((s) => s.canRedo);
@@ -46,6 +47,17 @@ export default function Toolbar({ onExportPng, onNewProject, onPrint }: Props) {
       </div>
       <ChipButton variant="secondary" onClick={onPrint} style={{ padding: '4px 12px', fontSize: 11 }}>Print</ChipButton>
       <ChipButton variant="success" selected onClick={onExportPng} style={{ padding: '4px 12px', fontSize: 11, fontWeight: 'bold', boxShadow: theme.shadowSm }}>Export PNG</ChipButton>
+      <button
+        onClick={onShowHotkeys}
+        title="Keyboard shortcuts (?)"
+        style={{
+          background: 'transparent', border: theme.borderLight,
+          borderRadius: theme.radius, color: theme.textMuted,
+          cursor: 'pointer', width: 28, height: 24, fontSize: 13,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'color 0.15s',
+        }}
+      >?</button>
       <button
         onClick={toggle}
         title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}

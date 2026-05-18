@@ -2,21 +2,24 @@ import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
 import { useHistoryStore } from '../../stores/historyStore';
 import { theme } from '../../theme';
+import { TOOL_KEYS } from '../../hotkeys';
 
 import type { ToolName, PendingShape } from '../../stores/editorStore';
 
-const tools: { name: ToolName; icon: string; shortcut: string }[] = [
-  { name: 'select', icon: '\u2196', shortcut: 'V' },
-  { name: 'pan', icon: '\u270B', shortcut: 'H' },
-  { name: 'stamp', icon: '\uD83D\uDD8C', shortcut: 'B' },
-  { name: 'rect-stamp', icon: '\u25A3', shortcut: 'F' },
-  { name: 'line-stamp', icon: '\u2500', shortcut: 'N' },
-  { name: 'scatter', icon: '\u2234', shortcut: 'X' },
-  { name: 'replace', icon: '\u21C4', shortcut: '-' },
-  { name: 'polygon', icon: '\u2B21', shortcut: 'P' },
-  { name: 'path', icon: '\u2935', shortcut: 'R' },
-  { name: 'eraser', icon: '\uD83E\uDDF9', shortcut: 'E' },
-  { name: 'light', icon: '\u2600', shortcut: 'L' },
+const tools: { name: ToolName; icon: string }[] = [
+  { name: 'select', icon: '\u2196' },
+  { name: 'pan', icon: '\u270B' },
+  { name: 'stamp', icon: '\uD83D\uDD8C' },
+  { name: 'rect-stamp', icon: '\u25A3' },
+  { name: 'line-stamp', icon: '\u2500' },
+  { name: 'scatter', icon: '\u2234' },
+  { name: 'replace', icon: '\u21C4' },
+  { name: 'polygon', icon: '\u2B21' },
+  { name: 'path', icon: '\u2935' },
+  { name: 'eraser', icon: '\uD83E\uDDF9' },
+  { name: 'fill', icon: '\uD83E\uDEA3' },
+  { name: 'copy-stamp', icon: '\u2750' },
+  { name: 'light', icon: '\u2600' },
 ];
 
 const shapes: { name: PendingShape; icon: string; label: string }[] = [
@@ -38,6 +41,8 @@ export default function ToolSidebar() {
   const setGrid = useMapStore((s) => s.setGrid);
   const snapToGrid = useEditorStore((s) => s.snapToGrid);
   const setSnapToGrid = useEditorStore((s) => s.setSnapToGrid);
+  const mirrorSymmetry = useEditorStore((s) => s.mirrorSymmetry);
+  const setMirrorSymmetry = useEditorStore((s) => s.setMirrorSymmetry);
   const scatterAssetIds = useEditorStore((s) => s.scatterAssetIds);
   const toggleScatterAsset = useEditorStore((s) => s.toggleScatterAsset);
   const replaceSourceAssetId = useEditorStore((s) => s.replaceSourceAssetId);
@@ -86,7 +91,7 @@ export default function ToolSidebar() {
       {tools.map((t) => {
         const isActive = activeTool === t.name;
         return (
-          <button key={t.name} onClick={() => handleToolClick(t.name)} title={`${t.name} (${t.shortcut})`}
+          <button key={t.name} onClick={() => handleToolClick(t.name)} title={`${t.name}${TOOL_KEYS[t.name] ? ` (${TOOL_KEYS[t.name]})` : ''}`}
             style={{
               width: TOOL_SIZE, height: TOOL_SIZE,
               borderRadius: theme.radius,
@@ -227,6 +232,22 @@ export default function ToolSidebar() {
         }}
       >
         <span>🧲</span>
+      </button>
+      <button
+        onClick={() => setMirrorSymmetry(!mirrorSymmetry)}
+        title={`Mirror symmetry (M) — ${mirrorSymmetry ? 'ON' : 'OFF'}`}
+        style={{
+          width: TOOL_SIZE, height: TOOL_SIZE, borderRadius: theme.radius, border: 'none',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 14, cursor: 'pointer',
+          background: mirrorSymmetry ? theme.primaryAlphaLow : 'transparent',
+          color: mirrorSymmetry ? theme.primary : theme.textMuted,
+          borderLeft: mirrorSymmetry ? `3px solid ${theme.primary}` : '3px solid transparent',
+          boxShadow: mirrorSymmetry ? `0 0 8px ${theme.primaryAlphaMid}` : 'none',
+          transition: 'all 0.15s',
+        }}
+      >
+        ⇔
       </button>
     </div>
   );

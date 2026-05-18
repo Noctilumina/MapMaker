@@ -39,7 +39,7 @@ export class StampTool implements Tool {
   }
 
   private placeAt(gridPos: GridPos, e: Konva.KonvaEventObject<MouseEvent>) {
-    const { stampAssetId, stampRotation, activeLayerId, snapToGrid } = useEditorStore.getState();
+    const { stampAssetId, stampRotation, activeLayerId, snapToGrid, mirrorSymmetry, mirrorAxis } = useEditorStore.getState();
     if (!stampAssetId) return;
 
     const asset = useMapStore.getState().assets[stampAssetId];
@@ -95,13 +95,11 @@ export class StampTool implements Tool {
       ? overlapping.reduce((m, e) => Math.max(m, e.zIndex ?? 0), -Infinity)
       : undefined;
 
-    useMapStore.getState().addElement({
-      type: 'tile',
+    const tileData = {
+      type: 'tile' as const,
       layerId: activeLayerId,
       assetId: stampAssetId,
       groupId: null,
-      x,
-      y,
       width: asset.gridSize[0],
       height: asset.gridSize[1],
       rotation: stampRotation,
@@ -110,6 +108,27 @@ export class StampTool implements Tool {
       tint: null,
       opacity: 1.0,
       ...(maxOverlapZ !== undefined ? { zIndex: maxOverlapZ + 1 } : {}),
-    });
+    };
+
+    useMapStore.getState().addElement({ ...tileData, x, y });
+
+    // Mirror symmetry: place a second tile mirrored about the map center axis
+    if (mirrorSymmetry) {
+      const { width: gridW, height: gridH } = useMapStore.getState().grid;
+      let mx = x, my = y, mFlipX = false, mFlipY = false;
+      if (mirrorAxis === 'x') {
+        // Mirror left-right about vertical center
+        mx = gridW * cellSize - x - w;
+        mFlipX = true;
+      } else {
+        // Mirror top-bottom about horizontal center
+        my = gridH * cellSize - y - h;
+        mFlipY = true;
+      }
+      // Don't place on same spot
+      if (mx !== x || my !== y) {
+        useMapStore.getState().addElement({ ...tileData, x: mx, y: my, flipX: mFlipX, flipY: mFlipY });
+      }
+    }
   }
 }
