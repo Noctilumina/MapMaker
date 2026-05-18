@@ -409,6 +409,17 @@ export default function PropertiesPanel() {
           <button
             onClick={() => {
               useHistoryStore.getState().captureSnapshot();
+              const cellSize = useMapStore.getState().grid.cellSize;
+              const newIds = useMapStore.getState().duplicateElements(selectedIds, { x: cellSize, y: cellSize });
+              useEditorStore.getState().select(newIds);
+            }}
+            style={btnStyle}
+          >
+            Duplicate
+          </button>
+          <button
+            onClick={() => {
+              useHistoryStore.getState().captureSnapshot();
               selectedIds.forEach((id) => removeElement(id));
               useEditorStore.getState().deselect();
             }}
