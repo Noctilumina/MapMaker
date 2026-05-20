@@ -99,7 +99,7 @@ export default function MapTabs() {
     fontFamily: theme.fontHeading,
     cursor: 'pointer',
     userSelect: 'none',
-    background: isActive ? theme.surface : 'transparent',
+    background: isActive ? theme.surfaceHover : 'transparent',
     color: isActive ? theme.text : theme.textMuted,
     borderRight: theme.borderLight,
     borderBottom: isActive ? `2px solid ${theme.primary}` : '2px solid transparent',
@@ -138,8 +138,8 @@ export default function MapTabs() {
   return (
     <div style={{
       height: 30,
-      background: theme.bg,
-      borderBottom: theme.borderHeavy,
+      background: theme.surface,
+      borderBottom: theme.borderLight,
       display: 'flex',
       alignItems: 'stretch',
       overflowX: 'auto',

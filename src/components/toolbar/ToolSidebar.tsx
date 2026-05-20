@@ -76,7 +76,7 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
         transition: 'color 0.15s', position: 'relative', zIndex: 1,
       }
     : {
-        width: TOOL_SIZE, height: TOOL_SIZE,
+        width: '100%', height: TOOL_SIZE,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         borderRadius: theme.radius, border: 'none', cursor: 'pointer',
         background: 'transparent',
@@ -98,7 +98,7 @@ export default function ToolSidebar({ expanded, onToggle }: Props) {
   return (
     <div style={{
       display: 'flex', flexDirection: 'column',
-      alignItems: expanded ? 'stretch' : 'center',
+      alignItems: 'stretch',
       paddingTop: PAD_TOP, gap: TOOL_GAP,
       position: 'relative', height: '100%',
     }}>

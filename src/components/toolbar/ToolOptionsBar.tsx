@@ -197,13 +197,20 @@ export default function ToolOptionsBar() {
       {STAMP_TOOL_NAMES.includes(activeTool) && <>
         <Sep />
         <Lbl text="Type" />
-        {STAMP_SUBTYPES.map(s => (
-          <MBtn key={s.name} active={activeTool === s.name}
-            onClick={() => { useHistoryStore.getState().captureSnapshot(); setTool(s.name); if (s.name !== 'polygon') setPendingShape(null); }}
-            title={`${s.label} stamp (${s.key})`}>
-            {s.label}
-          </MBtn>
-        ))}
+        <select
+          value={activeTool}
+          onChange={e => { useHistoryStore.getState().captureSnapshot(); setTool(e.target.value as ToolName); setPendingShape(null); }}
+          style={{
+            height: 22, padding: '0 4px', fontSize: 9,
+            fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.05em',
+            border: '1px solid var(--color-border-subtle)', borderRadius: 2, cursor: 'pointer', flexShrink: 0,
+            background: 'var(--color-surface-hover)', color: 'var(--color-text)',
+          }}
+        >
+          {STAMP_SUBTYPES.map(s => (
+            <option key={s.name} value={s.name}>{s.label} ({s.key})</option>
+          ))}
+        </select>
       </>}
 
       {/* ── Stamp ── */}
