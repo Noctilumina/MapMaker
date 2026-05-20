@@ -5,7 +5,7 @@ import { theme } from '../../theme';
 import { TOOL_KEYS, HOTKEYS } from '../../hotkeys';
 import { KEYS } from '../../keys';
 
-import type { ToolName, PendingShape } from '../../stores/editorStore';
+import type { ToolName } from '../../stores/editorStore';
 
 // Derive human-readable labels from the hotkeys registry
 const toolLabels: Record<string, string> = Object.fromEntries(
