@@ -17509,6 +17509,96 @@
         1,
         1
       ]
+    },
+    {
+      "id": "rugs/rug_black_green_rect.png",
+      "name": "Rug Black Green Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_black_green_rect.png",
+      "gridSize": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "rugs/rug_black_paint_rect.png",
+      "name": "Rug Black Paint Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_black_paint_rect.png",
+      "gridSize": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "rugs/rug_black_techCyan_rect.png",
+      "name": "Rug Black TechCyan Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_black_techCyan_rect.png",
+      "gridSize": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "rugs/rug_black_yellow_corp_sato_rect.png",
+      "name": "Rug Black Yellow Corp Sato Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_black_yellow_corp_sato_rect.png",
+      "gridSize": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "rugs/rug_fuzz_white_hex.png",
+      "name": "Rug Fuzz White Hex",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_fuzz_white_hex.png",
+      "gridSize": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "rugs/rug_red_yellow_chinese_circle.png",
+      "name": "Rug Red Yellow Chinese Circle",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_red_yellow_chinese_circle.png",
+      "gridSize": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "rugs/rug_tiger_purple_rect.png",
+      "name": "Rug Tiger Purple Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_tiger_purple_rect.png",
+      "gridSize": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "rugs/rug_white_dirty_grime_rect.png",
+      "name": "Rug White Dirty Grime Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_white_dirty_grime_rect.png",
+      "gridSize": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": "rugs/rug_yellow_indian_rect.png",
+      "name": "Rug Yellow Indian Rect",
+      "category": "rugs",
+      "path": "/assets/rugs/rug_yellow_indian_rect.png",
+      "gridSize": [
+        2,
+        3
+      ]
     }
   ]
 }

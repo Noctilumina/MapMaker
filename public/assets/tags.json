@@ -14359,5 +14359,59 @@
     "vibe_tags": [
       "generic"
     ]
+  },
+  {
+    "rel_path": "rugs/rug_black_green_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_black_paint_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_black_techCyan_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_black_yellow_corp_sato_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_fuzz_white_hex.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_red_yellow_chinese_circle.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_tiger_purple_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_white_dirty_grime_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
+  },
+  {
+    "rel_path": "rugs/rug_yellow_indian_rect.png",
+    "vibe_tags": [
+      "modern"
+    ]
   }
 ]
