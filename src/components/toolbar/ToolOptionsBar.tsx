@@ -1,8 +1,97 @@
+import { useState, useEffect, useRef } from 'react';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
 import { useHistoryStore } from '../../stores/historyStore';
 import { getRandomStampTool } from '../../hooks/useCanvasInteraction';
 import type { PendingShape, ToolName } from '../../stores/editorStore';
+
+const MAX_POOL_VISIBLE = 5;
+
+interface PoolModalProps {
+  title: string;
+  assetIds: string[];
+  assets: Record<string, { src: string; name: string }>;
+  onRemove: (id: string) => void;
+  onClearAll: () => void;
+  onClose: () => void;
+  anchorRef: React.RefObject<HTMLButtonElement | null>;
+}
+
+function PoolModal({ title, assetIds, assets, onRemove, onClearAll, onClose, anchorRef }: PoolModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const handleClick = (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node) &&
+          anchorRef.current && !anchorRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('mousedown', handleClick);
+    return () => { document.removeEventListener('keydown', handleKey); document.removeEventListener('mousedown', handleClick); };
+  }, [onClose, anchorRef]);
+
+  // Position below anchor
+  const anchor = anchorRef.current?.getBoundingClientRect();
+  const top = anchor ? anchor.bottom + 6 : 48;
+  const left = anchor ? Math.max(8, anchor.left) : 8;
+
+  return (
+    <div ref={modalRef} style={{
+      position: 'fixed', top, left, zIndex: 9999,
+      background: 'var(--color-surface)', border: '1px solid var(--color-border-subtle)',
+      borderRadius: 4, boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+      minWidth: 260, maxWidth: 400, padding: 12,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+        <span style={{ fontSize: 10, fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.08em', color: 'var(--color-primary)' }}>
+          {title}
+        </span>
+        <div style={{ display: 'flex', gap: 6 }}>
+          {assetIds.length > 0 && (
+            <button onClick={onClearAll} style={{
+              fontSize: 9, fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const,
+              background: 'none', border: '1px solid var(--color-danger)', borderRadius: 2,
+              color: 'var(--color-danger)', cursor: 'pointer', padding: '2px 6px', letterSpacing: '0.05em',
+            }}>Clear all</button>
+          )}
+          <button onClick={onClose} style={{
+            background: 'none', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: '0 2px',
+          }}>×</button>
+        </div>
+      </div>
+      {assetIds.length === 0
+        ? <span style={{ fontSize: 9, color: 'var(--color-danger)', fontFamily: "'Space Mono', monospace" }}>
+            Pool is empty — click assets in browser or alt+click tiles on canvas
+          </span>
+        : <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: 6 }}>
+            {assetIds.map(id => {
+              const asset = assets[id];
+              if (!asset) return null;
+              return (
+                <div key={id} style={{ position: 'relative', flexShrink: 0 }} title={asset.name}>
+                  <img src={asset.src} alt={asset.name}
+                    style={{ width: 40, height: 40, objectFit: 'contain', borderRadius: 3, background: 'var(--color-surface-hover)', display: 'block' }} />
+                  <button onClick={() => onRemove(id)} title={`Remove ${asset.name}`} style={{
+                    position: 'absolute', top: -4, right: -4,
+                    width: 14, height: 14, borderRadius: '50%',
+                    background: 'var(--color-danger)', color: '#fff',
+                    border: 'none', cursor: 'pointer', fontSize: 9, lineHeight: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
+                  }}>×</button>
+                </div>
+              );
+            })}
+          </div>
+      }
+      <div style={{ marginTop: 8, fontSize: 9, color: 'var(--color-muted)', fontFamily: "'Space Mono', monospace" }}>
+        {assetIds.length} asset{assetIds.length !== 1 ? 's' : ''} in pool
+      </div>
+    </div>
+  );
+}
 
 const STAMP_SUBTYPES: { name: ToolName; label: string; key: string }[] = [
   { name: 'stamp',        label: 'Basic',    key: 'B' },
@@ -81,6 +170,11 @@ export default function ToolOptionsBar() {
   const elements     = useMapStore(s => s.elements);
   const activeLayerId = useEditorStore(s => s.activeLayerId);
 
+  const [scatterModalOpen, setScatterModalOpen] = useState(false);
+  const [randomModalOpen, setRandomModalOpen] = useState(false);
+  const scatterModalAnchor = useRef<HTMLButtonElement | null>(null);
+  const randomModalAnchor = useRef<HTMLButtonElement | null>(null);
+
   return (
     <div style={{
       height: 36,
@@ -139,21 +233,35 @@ export default function ToolOptionsBar() {
         <Sep />
         <Lbl text="Pool" />
         {scatterAssetIds.length === 0
-          ? <span style={{ fontSize: 9, color: 'var(--color-danger)' }}>Empty — click assets in browser to add</span>
-          : scatterAssetIds.map(id => {
+          ? <span style={{ fontSize: 9, color: 'var(--color-danger)', whiteSpace: 'nowrap' as const }}>Empty — click assets in browser to add</span>
+          : scatterAssetIds.slice(0, MAX_POOL_VISIBLE).map(id => {
               const asset = assets[id];
               if (!asset) return null;
               return (
-                <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}>
-                  <img src={asset.src} alt={asset.name} title={asset.name}
-                    style={{ width: 22, height: 22, objectFit: 'contain', borderRadius: 2, background: 'var(--color-surface-hover)' }} />
-                  <button onClick={() => toggleScatterAsset(id)} title={`Remove ${asset.name}`}
-                    style={{ background: 'none', border: 'none', color: 'var(--color-danger)', cursor: 'pointer', fontSize: 11, padding: 0, lineHeight: 1 }}>
-                    ×
-                  </button>
-                </div>
+                <img key={id} src={asset.src} alt={asset.name} title={asset.name}
+                  style={{ width: 22, height: 22, objectFit: 'contain', borderRadius: 2, background: 'var(--color-surface-hover)', flexShrink: 0 }} />
               );
             })}
+        <button ref={scatterModalAnchor} onClick={() => setScatterModalOpen(v => !v)} style={{
+          height: 22, padding: '0 6px', fontSize: 9,
+          fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.05em',
+          border: '1px solid var(--color-border-subtle)', borderRadius: 2, cursor: 'pointer', flexShrink: 0,
+          background: scatterModalOpen ? 'var(--color-primary-alpha-low)' : 'var(--color-surface-hover)',
+          color: scatterModalOpen ? 'var(--color-primary)' : 'var(--color-muted)',
+        }}>
+          {scatterAssetIds.length > MAX_POOL_VISIBLE ? `+${scatterAssetIds.length - MAX_POOL_VISIBLE} · Edit` : 'Edit'}
+        </button>
+        {scatterModalOpen && (
+          <PoolModal
+            title="Scatter Pool"
+            assetIds={scatterAssetIds}
+            assets={assets}
+            onRemove={toggleScatterAsset}
+            onClearAll={() => { [...scatterAssetIds].forEach(id => toggleScatterAsset(id)); }}
+            onClose={() => setScatterModalOpen(false)}
+            anchorRef={scatterModalAnchor}
+          />
+        )}
       </>}
 
       {/* ── Replace ── */}
@@ -210,20 +318,34 @@ export default function ToolOptionsBar() {
         <Lbl text="Pool" />
         {randomStampAssetIds.length === 0
           ? <span style={{ fontSize: 9, color: 'var(--color-danger)', whiteSpace: 'nowrap' as const }}>Empty — click browser or alt+click tiles</span>
-          : randomStampAssetIds.map(id => {
+          : randomStampAssetIds.slice(0, MAX_POOL_VISIBLE).map(id => {
               const asset = assets[id];
               if (!asset) return null;
               return (
-                <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}>
-                  <img src={asset.src} alt={asset.name} title={asset.name}
-                    style={{ width: 22, height: 22, objectFit: 'contain', borderRadius: 2, background: 'var(--color-surface-hover)' }} />
-                  <button onClick={() => toggleRandomStampAsset(id)} title={`Remove ${asset.name}`}
-                    style={{ background: 'none', border: 'none', color: 'var(--color-danger)', cursor: 'pointer', fontSize: 11, padding: 0, lineHeight: 1 }}>
-                    ×
-                  </button>
-                </div>
+                <img key={id} src={asset.src} alt={asset.name} title={asset.name}
+                  style={{ width: 22, height: 22, objectFit: 'contain', borderRadius: 2, background: 'var(--color-surface-hover)', flexShrink: 0 }} />
               );
             })}
+        <button ref={randomModalAnchor} onClick={() => setRandomModalOpen(v => !v)} style={{
+          height: 22, padding: '0 6px', fontSize: 9,
+          fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.05em',
+          border: '1px solid var(--color-border-subtle)', borderRadius: 2, cursor: 'pointer', flexShrink: 0,
+          background: randomModalOpen ? 'var(--color-primary-alpha-low)' : 'var(--color-surface-hover)',
+          color: randomModalOpen ? 'var(--color-primary)' : 'var(--color-muted)',
+        }}>
+          {randomStampAssetIds.length > MAX_POOL_VISIBLE ? `+${randomStampAssetIds.length - MAX_POOL_VISIBLE} · Edit` : 'Edit'}
+        </button>
+        {randomModalOpen && (
+          <PoolModal
+            title="Random Stamp Pool"
+            assetIds={randomStampAssetIds}
+            assets={assets}
+            onRemove={toggleRandomStampAsset}
+            onClearAll={() => { [...randomStampAssetIds].forEach(id => toggleRandomStampAsset(id)); }}
+            onClose={() => setRandomModalOpen(false)}
+            anchorRef={randomModalAnchor}
+          />
+        )}
         <Sep />
         <Lbl text="Mode" />
         <MBtn active={randomStampShuffleMode === 'bag'}          onClick={() => setRandomStampShuffleMode('bag')}          title="Shuffle bag: cycle all before repeating">Bag</MBtn>
