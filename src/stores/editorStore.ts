@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Viewport } from '../types';
 
-export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace' | 'fill' | 'copy-stamp' | 'measure';
+export type ToolName = 'select' | 'stamp' | 'eraser' | 'pan' | 'polygon' | 'path' | 'light' | 'rect-stamp' | 'line-stamp' | 'scatter' | 'replace' | 'fill' | 'copy-stamp' | 'measure' | 'random-stamp';
 export type PendingShape = 'circle' | 'rect' | 'hexagon' | null;
 
 export interface StampTemplateEntry {
@@ -43,6 +43,11 @@ interface EditorState {
   showHotkeys: boolean;
   measureStart: { x: number; y: number } | null;
   measureEnd: { x: number; y: number } | null;
+  randomStampAssetIds: string[];
+  randomStampShuffleMode: 'bag' | 'pure' | 'round-robin';
+  randomStampRotationMode: 'full' | 'cardinal' | 'none';
+  randomStampScaleEnabled: boolean;
+  randomStampScaleRange: number;
 
   setTool: (tool: ToolName) => void;
   setActiveLayer: (id: string) => void;
@@ -70,6 +75,11 @@ interface EditorState {
   setShowHotkeys: (show: boolean) => void;
   setMeasureStart: (pos: { x: number; y: number } | null) => void;
   setMeasureEnd: (pos: { x: number; y: number } | null) => void;
+  toggleRandomStampAsset: (assetId: string) => void;
+  setRandomStampShuffleMode: (mode: 'bag' | 'pure' | 'round-robin') => void;
+  setRandomStampRotationMode: (mode: 'full' | 'cardinal' | 'none') => void;
+  setRandomStampScaleEnabled: (enabled: boolean) => void;
+  setRandomStampScaleRange: (range: number) => void;
   reset: () => void;
 }
 
@@ -99,6 +109,11 @@ const initialState = {
   showHotkeys: false,
   measureStart: null as { x: number; y: number } | null,
   measureEnd: null as { x: number; y: number } | null,
+  randomStampAssetIds: [] as string[],
+  randomStampShuffleMode: 'bag' as 'bag' | 'pure' | 'round-robin',
+  randomStampRotationMode: 'full' as 'full' | 'cardinal' | 'none',
+  randomStampScaleEnabled: false,
+  randomStampScaleRange: 25,
 };
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -137,5 +152,14 @@ export const useEditorStore = create<EditorState>((set) => ({
   setShowHotkeys: (show) => set({ showHotkeys: show }),
   setMeasureStart: (pos) => set({ measureStart: pos }),
   setMeasureEnd: (pos) => set({ measureEnd: pos }),
+  toggleRandomStampAsset: (assetId) => set((state) => ({
+    randomStampAssetIds: state.randomStampAssetIds.includes(assetId)
+      ? state.randomStampAssetIds.filter(id => id !== assetId)
+      : [...state.randomStampAssetIds, assetId],
+  })),
+  setRandomStampShuffleMode: (mode) => set({ randomStampShuffleMode: mode }),
+  setRandomStampRotationMode: (mode) => set({ randomStampRotationMode: mode }),
+  setRandomStampScaleEnabled: (enabled) => set({ randomStampScaleEnabled: enabled }),
+  setRandomStampScaleRange: (range) => set({ randomStampScaleRange: range }),
   reset: () => set({ ...initialState, selectionBox: null, snapToGrid: true, renamingGroupId: null, pendingShape: null, pendingOpening: null, pendingInnerWall: false }),
 }));

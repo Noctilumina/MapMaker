@@ -18,11 +18,13 @@ import { ReplaceTool } from '../tools/ReplaceTool';
 import { FillTool } from '../tools/FillTool';
 import { CopyStampTool } from '../tools/CopyStampTool';
 import { MeasureTool } from '../tools/MeasureTool';
+import { RandomStampTool } from '../tools/RandomStampTool';
 
 const polygonTool = new PolygonTool();
 const pathTool = new PathTool();
 const rectStampTool = new RectStampTool();
 const lineStampTool = new LineStampTool();
+const randomStampTool = new RandomStampTool();
 
 const toolInstances: Record<ToolName, Tool> = {
   select: new SelectTool(),
@@ -39,12 +41,14 @@ const toolInstances: Record<ToolName, Tool> = {
   fill: new FillTool(),
   'copy-stamp': new CopyStampTool(),
   measure: new MeasureTool(),
+  'random-stamp': randomStampTool,
 };
 
 export function getPolygonTool() { return polygonTool; }
 export function getPathTool() { return pathTool; }
 export function getRectStampTool() { return rectStampTool; }
 export function getLineStampTool() { return lineStampTool; }
+export function getRandomStampTool() { return randomStampTool; }
 
 export function useCanvasInteraction() {
   const activeTool = useEditorStore((s) => s.activeTool);
@@ -66,7 +70,7 @@ export function useCanvasInteraction() {
     onMouseDown: (e: Konva.KonvaEventObject<MouseEvent>) => {
       if (activeTool === 'pan') return;
 
-      // Alt+click: eyedropper — pick topmost tile asset and switch to stamp
+      // Alt+click: eyedropper — pick topmost tile asset
       if (e.evt.altKey) {
         e.evt.preventDefault();
         const stage = e.target.getStage();
@@ -84,8 +88,14 @@ export function useCanvasInteraction() {
               pos.y >= el.y && pos.y < el.y + (el as any).height * useMapStore.getState().grid.cellSize
             ).sort((a, b) => (b.zIndex ?? 0) - (a.zIndex ?? 0));
             if (tiles.length > 0 && tiles[0].type === 'tile') {
-              useEditorStore.getState().setStampAsset((tiles[0] as any).assetId);
-              useEditorStore.getState().setTool('stamp');
+              const pickedId = (tiles[0] as any).assetId as string;
+              if (activeTool === 'random-stamp') {
+                // Add to random stamp pool instead of switching tools
+                useEditorStore.getState().toggleRandomStampAsset(pickedId);
+              } else {
+                useEditorStore.getState().setStampAsset(pickedId);
+                useEditorStore.getState().setTool('stamp');
+              }
             }
           }
         }

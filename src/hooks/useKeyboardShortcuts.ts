@@ -6,6 +6,7 @@ import type { StampTemplateEntry } from '../stores/editorStore';
 import type { ToolName } from '../stores/editorStore';
 import type { TileElement } from '../types/index';
 import { KEYS, KEY_EVENTS, matchesKey } from '../keys';
+import { getRandomStampTool } from './useCanvasInteraction';
 
 export function useKeyboardShortcuts() {
   const setTool = useEditorStore((s) => s.setTool);
@@ -174,8 +175,11 @@ export function useKeyboardShortcuts() {
         [KEYS.SCATTER,          () => switchTool('scatter')],
         [KEYS.REPLACE,          () => switchTool('replace')],
         [KEYS.POLYGON,          () => switchTool('polygon')],
-        [KEYS.PATH,             () => {
-          if (useEditorStore.getState().activeTool === 'stamp') {
+        [KEYS.RANDOM_STAMP_RESHUFFLE, () => {
+          // R key: context-sensitive
+          const tool = useEditorStore.getState().activeTool;
+          if (tool === 'random-stamp') { getRandomStampTool().reshuffle(); return; }
+          if (tool === 'stamp') {
             const store = useEditorStore.getState();
             store.setStampRotation((store.stampRotation + 90) % 360);
           } else {
@@ -187,6 +191,7 @@ export function useKeyboardShortcuts() {
         [KEYS.FILL,             () => switchTool('fill')],
         [KEYS.COPY_STAMP,       () => switchTool('copy-stamp')],
         [KEYS.MEASURE,          () => switchTool('measure')],
+        [KEYS.RANDOM_STAMP,     () => switchTool('random-stamp')],
         [KEYS.PAN,              () => switchTool('pan')],
         [KEYS.SNAP,             () => { useHistoryStore.getState().captureSnapshot(); useEditorStore.getState().setSnapToGrid(!useEditorStore.getState().snapToGrid); }],
         [KEYS.MIRROR,           () => useEditorStore.getState().setMirrorSymmetry(!useEditorStore.getState().mirrorSymmetry)],

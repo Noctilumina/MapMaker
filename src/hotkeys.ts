@@ -22,8 +22,10 @@ export const HOTKEYS: HotkeyDef[] = [
   { id: 'tool-light',       key: KEYS.LIGHT,        label: 'Light',                         category: 'Tools' },
   { id: 'tool-fill',        key: KEYS.FILL,         label: 'Flood fill',                    category: 'Tools' },
   { id: 'tool-copy-stamp',  key: KEYS.COPY_STAMP,   label: 'Template stamp',                category: 'Tools' },
-  { id: 'tool-measure',     key: KEYS.MEASURE,      label: 'Measure distance',              category: 'Tools' },
-  { id: 'tool-pan-temp',    key: KEYS.PAN_TEMP,     label: 'Pan (temporary)',               category: 'Tools' },
+  { id: 'tool-measure',       key: KEYS.MEASURE,              label: 'Measure distance',              category: 'Tools' },
+  { id: 'tool-random-stamp',  key: KEYS.RANDOM_STAMP,         label: 'Random stamp',                  category: 'Tools' },
+  { id: 'random-stamp-reshuffle', key: KEYS.RANDOM_STAMP_RESHUFFLE, label: 'Reshuffle (random stamp)', category: 'Tools' },
+  { id: 'tool-pan-temp',      key: KEYS.PAN_TEMP,             label: 'Pan (temporary)',               category: 'Tools' },
   { id: 'eyedropper',       key: KEYS.EYEDROPPER,   label: 'Pick asset (eyedropper)',       category: 'Tools' },
 
   // Edit

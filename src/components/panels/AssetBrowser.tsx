@@ -90,6 +90,8 @@ export default function AssetBrowser() {
   const activeTool = useEditorStore((s) => s.activeTool);
   const scatterAssetIds = useEditorStore((s) => s.scatterAssetIds);
   const toggleScatterAsset = useEditorStore((s) => s.toggleScatterAsset);
+  const randomStampAssetIds = useEditorStore((s) => s.randomStampAssetIds);
+  const toggleRandomStampAsset = useEditorStore((s) => s.toggleRandomStampAsset);
   const setReplaceTarget = useEditorStore((s) => s.setReplaceTarget);
   const assets = useMapStore((s) => s.assets);
   const elements = useMapStore((s) => s.elements);
@@ -126,14 +128,9 @@ export default function AssetBrowser() {
   }, [assets, elements, search]);
 
   const handleSelect = (assetId: string) => {
-    if (activeTool === 'scatter') {
-      toggleScatterAsset(assetId);
-      return;
-    }
-    if (activeTool === 'replace') {
-      setReplaceTarget(assetId);
-      return;
-    }
+    if (activeTool === 'scatter') { toggleScatterAsset(assetId); return; }
+    if (activeTool === 'random-stamp') { toggleRandomStampAsset(assetId); return; }
+    if (activeTool === 'replace') { setReplaceTarget(assetId); return; }
     setStampAsset(assetId);
     setTool('stamp' as ToolName);
   };
@@ -141,6 +138,7 @@ export default function AssetBrowser() {
   // Highlight state for asset buttons varies by mode
   const isSelected = (assetId: string) => {
     if (activeTool === 'scatter') return scatterAssetIds.includes(assetId);
+    if (activeTool === 'random-stamp') return randomStampAssetIds.includes(assetId);
     return stampAssetId === assetId;
   };
 

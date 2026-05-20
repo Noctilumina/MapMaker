@@ -28,3 +28,5 @@ Always update both `package.json` and the `v{version}` label in `src/components/
 - `1.3.5` — measure tool (U): click-drag distance overlay in cells + real-world units
 - `1.3.6` — line-stamp axis lock: Free/H/V buttons + Shift auto-lock to dominant axis
 - `1.4.0` — multi-map tabs: open multiple maps simultaneously, quick switching, open file in new tab
+- `1.4.1` — random stamp tool (S): shuffle-bag/pure/round-robin selection, rotation jitter, scale jitter, R reshuffle
+- `1.4.2` — random stamp: alt+click map tiles to add to pool, mini asset browser + search in sidebar panel

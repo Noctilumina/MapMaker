@@ -19,6 +19,8 @@ export const KEYS = {
   FILL:         'K',
   COPY_STAMP:   'T',
   MEASURE:      'U',
+  RANDOM_STAMP: 'S',
+  RANDOM_STAMP_RESHUFFLE: 'R',
   PAN_TEMP:     'Space',
   EYEDROPPER:   'Alt+Click',
 
