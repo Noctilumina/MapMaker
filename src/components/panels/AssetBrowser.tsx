@@ -288,6 +288,29 @@ export default function AssetBrowser() {
         </button>
       </div>
 
+      {/* Context hint */}
+      {activeTool !== 'scatter' && activeTool !== 'random-stamp' && (
+        <div style={{ padding: '3px 12px', background: theme.surfaceHover, borderBottom: theme.borderLight }}>
+          <span style={{ fontSize: 9, fontFamily: theme.fontHeading, color: theme.textMuted, letterSpacing: '0.04em' }}>
+            Click asset to select for stamp tool
+          </span>
+        </div>
+      )}
+      {activeTool === 'scatter' && (
+        <div style={{ padding: '3px 12px', background: theme.surfaceHover, borderBottom: theme.borderLight }}>
+          <span style={{ fontSize: 9, fontFamily: theme.fontHeading, color: theme.textMuted, letterSpacing: '0.04em' }}>
+            Click to add/remove from scatter pool
+          </span>
+        </div>
+      )}
+      {activeTool === 'random-stamp' && (
+        <div style={{ padding: '3px 12px', background: theme.surfaceHover, borderBottom: theme.borderLight }}>
+          <span style={{ fontSize: 9, fontFamily: theme.fontHeading, color: theme.textMuted, letterSpacing: '0.04em' }}>
+            Click to add/remove from random stamp pool
+          </span>
+        </div>
+      )}
+
       {/* Tabs */}
       <div ref={tabsRef} style={{ display: 'flex', borderBottom: theme.borderLight, position: 'relative' }}>
         {/* Sliding underline indicator */}

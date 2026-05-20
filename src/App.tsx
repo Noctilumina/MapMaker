@@ -9,6 +9,7 @@ import LayerBar from './components/panels/LayerBar';
 import Toolbar from './components/toolbar/Toolbar';
 import MapTabs from './components/toolbar/MapTabs';
 import ToolSidebar from './components/toolbar/ToolSidebar';
+import ToolOptionsBar from './components/toolbar/ToolOptionsBar';
 import StatusBar from './components/toolbar/StatusBar';
 import ExportDialog from './components/dialogs/ExportDialog';
 import PrintDialog from './components/dialogs/PrintDialog';
@@ -38,18 +39,24 @@ export default function App() {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [assetPanelWidth, setAssetPanelWidth] = useState(260);
   const [rightPanelWidth, setRightPanelWidth] = useState(240);
-  const dragRef = useRef<{ target: 'asset' | 'right'; startX: number; startWidth: number } | null>(null);
+  const [propertiesPanelHeight, setPropertiesPanelHeight] = useState(280);
+  const dragRef = useRef<{ target: 'asset' | 'right' | 'vsplit'; startX: number; startY: number; startWidth: number } | null>(null);
 
   // Compute stripe color based on theme mode (canvas 2D context can't use CSS variables)
   const stripeColor = mode === 'dark' ? 'rgba(255, 64, 129, 0.18)' : 'rgba(233, 30, 99, 0.15)';
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!dragRef.current) return;
-    const delta = e.clientX - dragRef.current.startX;
-    if (dragRef.current.target === 'asset') {
-      setAssetPanelWidth(Math.max(160, Math.min(500, dragRef.current.startWidth + delta)));
+    if (dragRef.current.target === 'vsplit') {
+      const delta = e.clientY - dragRef.current.startY;
+      setPropertiesPanelHeight(Math.max(80, Math.min(700, dragRef.current.startWidth + delta)));
     } else {
-      setRightPanelWidth(Math.max(160, Math.min(500, dragRef.current.startWidth - delta)));
+      const delta = e.clientX - dragRef.current.startX;
+      if (dragRef.current.target === 'asset') {
+        setAssetPanelWidth(Math.max(160, Math.min(500, dragRef.current.startWidth + delta)));
+      } else {
+        setRightPanelWidth(Math.max(160, Math.min(500, dragRef.current.startWidth - delta)));
+      }
     }
   }, []);
 
@@ -132,6 +139,7 @@ export default function App() {
         <Toolbar onExportPng={() => setShowExport(true)} onNewProject={() => setShowNewProject(true)} onPrint={() => setShowPrint(true)} onShowHotkeys={() => setShowHotkeys(true)} onOpen={handleOpenInNewTab} />
       </header>
       <MapTabs />
+      <ToolOptionsBar />
       <div className="workspace">
         <aside className="tool-sidebar" style={{ width: sidebarExpanded ? 160 : 48, transition: 'width 0.2s ease' }}>
           <ToolSidebar expanded={sidebarExpanded} onToggle={() => setSidebarExpanded(v => !v)} />
@@ -140,19 +148,21 @@ export default function App() {
         <aside className="asset-panel" style={{ width: assetPanelWidth }}>
           <AssetBrowser />
           <div className="resize-handle resize-handle-right"
-            onMouseDown={(e) => { dragRef.current = { target: 'asset', startX: e.clientX, startWidth: assetPanelWidth }; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; }} />
+            onMouseDown={(e) => { dragRef.current = { target: 'asset', startX: e.clientX, startY: e.clientY, startWidth: assetPanelWidth }; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; }} />
         </aside>
         <main className="canvas-area">
           <MapCanvas />
         </main>
         <aside className="right-panel" style={{ width: rightPanelWidth, display: 'flex', flexDirection: 'column' }}>
           <div className="resize-handle resize-handle-left"
-            onMouseDown={(e) => { dragRef.current = { target: 'right', startX: e.clientX, startWidth: rightPanelWidth }; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; }} />
-          <div style={{ flex: 1, borderBottom: 'var(--border-light)', overflow: 'auto' }}>
+            onMouseDown={(e) => { dragRef.current = { target: 'right', startX: e.clientX, startY: e.clientY, startWidth: rightPanelWidth }; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; }} />
+          <div style={{ height: propertiesPanelHeight, minHeight: 80, overflow: 'auto', position: 'relative', flexShrink: 0 }}>
             <PropertiesPanel />
+            <div className="resize-handle resize-handle-bottom"
+              onMouseDown={(e) => { dragRef.current = { target: 'vsplit', startX: e.clientX, startY: e.clientY, startWidth: propertiesPanelHeight }; document.body.style.cursor = 'row-resize'; document.body.style.userSelect = 'none'; }} />
           </div>
           <LayerBar />
-          <div style={{ flex: 1, overflow: 'auto' }}>
+          <div style={{ flex: 1, minHeight: 80, overflow: 'auto' }}>
             <HierarchyPanel />
           </div>
         </aside>
