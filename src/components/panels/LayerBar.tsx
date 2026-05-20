@@ -24,11 +24,13 @@ export default function LayerBar() {
           }}>
             <button
               onClick={(e) => { e.stopPropagation(); useHistoryStore.getState().captureSnapshot(); updateLayer(layer.id, { visible: !layer.visible }); }}
+              title={layer.visible ? `Hide ${layer.name} layer` : `Show ${layer.name} layer`}
               style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 10, opacity: layer.visible ? 1 : 0.3, padding: 0 }}
             >👁</button>
             <span
               onClick={() => { useHistoryStore.getState().captureSnapshot(); setActiveLayer(layer.id); }}
               onContextMenu={(e) => { e.preventDefault(); setPopoverId(popoverId === layer.id ? null : layer.id); }}
+              title={`Click to set active layer · Right-click for opacity/lock controls`}
               style={{ color: activeLayerId === layer.id ? theme.text : theme.textMuted, fontFamily: theme.fontHeading, fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.05em' }}
             >{layer.name}</span>
           </div>

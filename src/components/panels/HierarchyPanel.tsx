@@ -67,6 +67,7 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
       <div
         onClick={handleClick}
         onContextMenu={(e) => { e.preventDefault(); e.stopPropagation(); setShowContext(!showContext); }}
+        title={`Click to select all elements in "${group.name}" · Right-click for options · Double-click name to rename · Drag to reparent`}
         draggable
         onDragStart={handleDragStart}
         onDrop={handleDrop}
@@ -80,10 +81,12 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
         onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
       >
         <span onClick={(e) => { e.stopPropagation(); updateGroup(group.id, { collapsed: !group.collapsed }); }}
+          title={group.collapsed ? 'Expand group' : 'Collapse group'}
           style={{ cursor: 'pointer', fontSize: 8, width: 12, textAlign: 'center' }}>
           {group.collapsed ? '▶' : '▼'}
         </span>
         <button onClick={(e) => { e.stopPropagation(); updateGroup(group.id, { visible: !group.visible }); }}
+          title={group.visible ? 'Hide group' : 'Show group'}
           style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 9, opacity: group.visible ? 1 : 0.3, padding: 0 }}>
           👁
         </button>
@@ -100,6 +103,7 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
           </span>
         )}
         <button onClick={(e) => { e.stopPropagation(); updateGroup(group.id, { locked: !group.locked }); }}
+          title={group.locked ? 'Unlock group (allow editing)' : 'Lock group (prevent editing)'}
           style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 8, opacity: group.locked ? 1 : 0.3, padding: 0 }}>
           🔒
         </button>
@@ -110,16 +114,17 @@ function GroupNode({ group, depth }: { group: Group; depth: number }) {
           borderRadius: theme.radius, padding: 4, minWidth: 120, marginLeft: depth * 16 + 6, boxShadow: theme.shadowMd,
         }}>
           {[
-            { label: 'Rename', action: () => { setRenameName(group.name); setRenaming(true); setShowContext(false); } },
-            { label: 'Duplicate', action: () => { useHistoryStore.getState().captureSnapshot(); duplicateGroup(group.id, { x: 64, y: 64 }); setShowContext(false); } },
-            { label: 'Ungroup', action: () => { useHistoryStore.getState().captureSnapshot(); removeGroup(group.id); setShowContext(false); } },
-            { label: 'Delete All', action: () => {
+            { label: 'Rename', tip: 'Rename this group', action: () => { setRenameName(group.name); setRenaming(true); setShowContext(false); } },
+            { label: 'Duplicate', tip: 'Duplicate this group and all its elements (offset by 64px)', action: () => { useHistoryStore.getState().captureSnapshot(); duplicateGroup(group.id, { x: 64, y: 64 }); setShowContext(false); } },
+            { label: 'Ungroup', tip: 'Dissolve the group — elements remain on the map', action: () => { useHistoryStore.getState().captureSnapshot(); removeGroup(group.id); setShowContext(false); } },
+            { label: 'Delete All', tip: 'Delete the group and all its elements from the map', action: () => {
               useHistoryStore.getState().captureSnapshot();
               getAllDescendantElementIds(group.id).forEach(id => useMapStore.getState().removeElement(id));
               removeGroup(group.id); setShowContext(false);
             }},
           ].map(item => (
             <div key={item.label} onClick={(e) => { e.stopPropagation(); item.action(); }}
+              title={item.tip}
               style={{ padding: '4px 8px', cursor: 'pointer', fontSize: 11, color: theme.textMuted, borderRadius: theme.radius, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
               onMouseEnter={(e) => (e.currentTarget.style.background = theme.surface)}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
@@ -153,6 +158,7 @@ function ElementNode({ element, depth }: { element: MapElement; depth: number })
 
   return (
     <div onClick={() => select([element.id])} draggable onDragStart={handleDragStart}
+      title={`Click to select · Drag to move into a group · ${element.type}${asset ? ': ' + asset.name : ''}`}
       style={{
         display: 'flex', alignItems: 'center', gap: 4,
         padding: '2px 6px', paddingLeft: depth * 16 + 18,

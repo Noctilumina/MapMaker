@@ -22,7 +22,7 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
       var(--color-primary-alpha-stripe) 36px
     ),
     var(--color-bg);
-  border-bottom: var(--border-heavy);
+  border-bottom: none;
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -71,7 +71,7 @@ html, body, #root { height: 100%; width: 100%; overflow: hidden; }
 .status-bar {
   height: 24px;
   background: var(--color-bg);
-  border-top: var(--border-heavy);
+  border-top: var(--border-light);
   display: flex;
   align-items: center;
   padding: 0 16px;

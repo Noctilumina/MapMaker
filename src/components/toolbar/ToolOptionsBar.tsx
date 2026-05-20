@@ -51,7 +51,7 @@ function PoolModal({ title, assetIds, assets, onRemove, onClearAll, onClose, anc
         </span>
         <div style={{ display: 'flex', gap: 6 }}>
           {assetIds.length > 0 && (
-            <button onClick={onClearAll} style={{
+            <button onClick={onClearAll} title="Remove all assets from this pool" style={{
               fontSize: 9, fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const,
               background: 'none', border: '1px solid var(--color-danger)', borderRadius: 2,
               color: 'var(--color-danger)', cursor: 'pointer', padding: '2px 6px', letterSpacing: '0.05em',
@@ -249,7 +249,7 @@ export default function ToolOptionsBar() {
                   style={{ width: 22, height: 22, objectFit: 'contain', borderRadius: 2, background: 'var(--color-surface-hover)', flexShrink: 0 }} />
               );
             })}
-        <button ref={scatterModalAnchor} onClick={() => setScatterModalOpen(v => !v)} style={{
+        <button ref={scatterModalAnchor} onClick={() => setScatterModalOpen(v => !v)} title="Edit scatter asset pool" style={{
           height: 22, padding: '0 6px', fontSize: 9,
           fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.05em',
           border: '1px solid var(--color-border-subtle)', borderRadius: 2, cursor: 'pointer', flexShrink: 0,
@@ -292,6 +292,7 @@ export default function ToolOptionsBar() {
               useHistoryStore.getState().captureSnapshot();
               useMapStore.getState().replaceAsset(activeLayerId, replaceSourceAssetId!, replaceTargetAssetId!);
             }}
+            title="Replace all source tiles with target asset on current layer"
             style={{
               height: 22, padding: '0 10px', fontSize: 9,
               fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.06em',
@@ -333,7 +334,7 @@ export default function ToolOptionsBar() {
                   style={{ width: 22, height: 22, objectFit: 'contain', borderRadius: 2, background: 'var(--color-surface-hover)', flexShrink: 0 }} />
               );
             })}
-        <button ref={randomModalAnchor} onClick={() => setRandomModalOpen(v => !v)} style={{
+        <button ref={randomModalAnchor} onClick={() => setRandomModalOpen(v => !v)} title="Edit random stamp asset pool" style={{
           height: 22, padding: '0 6px', fontSize: 9,
           fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.05em',
           border: '1px solid var(--color-border-subtle)', borderRadius: 2, cursor: 'pointer', flexShrink: 0,
@@ -382,7 +383,7 @@ export default function ToolOptionsBar() {
           </div>
         )}
         <Sep />
-        <button onClick={() => getRandomStampTool().reshuffle()}
+        <button onClick={() => getRandomStampTool().reshuffle()} title="Reshuffle the bag to randomise draw order (R)"
           style={{
             height: 22, padding: '0 8px', fontSize: 9,
             fontFamily: "'Space Mono', monospace", textTransform: 'uppercase' as const, letterSpacing: '0.06em',

@@ -12,7 +12,7 @@ import TransformHandles from './TransformHandles';
 import SelectionBox from './SelectionBox';
 import { useEditorStore } from '../../stores/editorStore';
 import { useMapStore } from '../../stores/mapStore';
-import { useCanvasInteraction, getPolygonTool, getPathTool, getRectStampTool, getLineStampTool } from '../../hooks/useCanvasInteraction';
+import { useCanvasInteraction, getPolygonTool, getPathTool, getRectStampTool, getLineStampTool, getRandomStampTool } from '../../hooks/useCanvasInteraction';
 
 const MIN_ZOOM = 0.1;
 const MAX_ZOOM = 5;
@@ -55,14 +55,17 @@ function MapLayers() {
   );
 }
 
-// Stamp preview — ghost wireframe showing where the asset will be placed
+// Placement preview — ghost wireframe showing where the asset will be placed
 let stampPreviewSetPos: ((pos: { x: number; y: number } | null) => void) | null = null;
+
+const PREVIEW_TOOLS = new Set(['stamp', 'random-stamp', 'scatter', 'rect-stamp', 'line-stamp', 'copy-stamp']);
 
 function StampPreviewWrapper() {
   const activeTool = useEditorStore((s) => s.activeTool);
   const stampAssetId = useEditorStore((s) => s.stampAssetId);
   const stampRotation = useEditorStore((s) => s.stampRotation);
   const snapToGrid = useEditorStore((s) => s.snapToGrid);
+  const randomStampAssetIds = useEditorStore((s) => s.randomStampAssetIds);
   const grid = useMapStore((s) => s.grid);
   const assets = useMapStore((s) => s.assets);
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
@@ -74,17 +77,30 @@ function StampPreviewWrapper() {
     return () => { stampPreviewSetPos = null; };
   }, []);
 
+  // Resolve which asset to preview based on active tool
+  let previewAssetId: string | null = null;
+  if (activeTool === 'stamp' || activeTool === 'rect-stamp' || activeTool === 'line-stamp' || activeTool === 'copy-stamp') {
+    previewAssetId = stampAssetId;
+  } else if (activeTool === 'random-stamp') {
+    previewAssetId = getRandomStampTool().getPreviewAssetId();
+  } else if (activeTool === 'scatter') {
+    // show first scatter asset as representative
+    const { scatterAssetIds } = useEditorStore.getState();
+    previewAssetId = scatterAssetIds[0] ?? null;
+  }
+
   // Load preview image when asset changes
-  const asset = stampAssetId ? assets[stampAssetId] : null;
+  const asset = previewAssetId ? assets[previewAssetId] : null;
   useEffect(() => {
     if (!asset || asset.src === prevSrcRef.current) return;
     prevSrcRef.current = asset.src;
     const img = new window.Image();
     img.src = asset.src;
     img.onload = () => setPreviewImage(img);
-  }, [asset?.src]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asset?.src, randomStampAssetIds]);
 
-  if (activeTool !== 'stamp' || !stampAssetId || !pos || !asset) return null;
+  if (!PREVIEW_TOOLS.has(activeTool) || !previewAssetId || !pos || !asset) return null;
 
   const cs = grid.cellSize;
   const w = asset.gridSize[0] * cs;
@@ -101,7 +117,7 @@ function StampPreviewWrapper() {
 
   return (
     <KonvaLayer listening={false}>
-      <Group x={cx} y={cy} rotation={stampRotation} opacity={0.5}>
+      <Group x={cx} y={cy} rotation={activeTool === 'stamp' ? stampRotation : 0} opacity={0.5}>
         {/* Ghost image of the asset */}
         {previewImage && (
           <KonvaImage

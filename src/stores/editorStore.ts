@@ -84,7 +84,7 @@ interface EditorState {
 }
 
 const initialState = {
-  activeTool: 'select' as ToolName,
+  activeTool: 'random-stamp' as ToolName,
   activeLayerId: 'floor',
   selectedElementIds: [] as string[],
   stampAssetId: null as string | null,

@@ -43,6 +43,20 @@ export class RandomStampTool implements Tool {
     return this.bag.pop()!;
   }
 
+  /** Peek at next asset without consuming it (for preview) */
+  getPreviewAssetId(): string | null {
+    const { randomStampAssetIds, randomStampShuffleMode } = useEditorStore.getState();
+    if (randomStampAssetIds.length === 0) return null;
+    if (randomStampShuffleMode === 'round-robin')
+      return randomStampAssetIds[this.roundRobinIndex % randomStampAssetIds.length];
+    if (randomStampShuffleMode === 'bag') {
+      const validBag = this.bag.filter(id => randomStampAssetIds.includes(id));
+      return validBag.length > 0 ? validBag[validBag.length - 1] : randomStampAssetIds[0];
+    }
+    // pure: show first in pool as representative
+    return randomStampAssetIds[0];
+  }
+
   /** Reshuffle the bag (R hotkey — picks new order without placing) */
   reshuffle() {
     const { randomStampAssetIds } = useEditorStore.getState();

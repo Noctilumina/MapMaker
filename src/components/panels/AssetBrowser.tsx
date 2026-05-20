@@ -326,20 +326,20 @@ export default function AssetBrowser() {
           pointerEvents: 'none',
           zIndex: 1,
         }} />
-        <button data-tab="presets" style={tabStyle('presets')} onClick={() => setTab('presets')}>Presets</button>
-        <button data-tab="objects" style={tabStyle('objects')} onClick={() => setTab('objects')}>
+        <button data-tab="presets" style={tabStyle('presets')} onClick={() => setTab('presets')} title="Preset tile assets bundled with MapMaker">Presets</button>
+        <button data-tab="objects" style={tabStyle('objects')} onClick={() => setTab('objects')} title="Prop and object assets (furniture, vehicles, characters, etc.)">
           Objects{objects.length > 0 ? ` (${objects.length})` : ''}
         </button>
-        <button data-tab="textures" style={tabStyle('textures')} onClick={() => setTab('textures')}>
+        <button data-tab="textures" style={tabStyle('textures')} onClick={() => setTab('textures')} title="Tileable floor and wall textures">
           Textures
         </button>
-        <button data-tab="imported" style={tabStyle('imported')} onClick={() => setTab('imported')}>
+        <button data-tab="imported" style={tabStyle('imported')} onClick={() => setTab('imported')} title="Assets you've imported from your own files">
           Imported{importedEntries.length > 0 ? ` (${importedEntries.length})` : ''}
         </button>
-        <button data-tab="map" style={tabStyle('map')} onClick={() => setTab('map')}>
+        <button data-tab="map" style={tabStyle('map')} onClick={() => setTab('map')} title="All assets currently placed on this map, sorted by usage count">
           Map{mapAssetEntries.length > 0 ? ` (${mapAssetEntries.length})` : ''}
         </button>
-        <button data-tab="prefabs" style={tabStyle('prefabs')} onClick={() => setTab('prefabs')}>
+        <button data-tab="prefabs" style={tabStyle('prefabs')} onClick={() => setTab('prefabs')} title="Saved multi-tile prefab templates — place as a single stamp">
           Prefabs{prefabs.length > 0 ? ` (${prefabs.length})` : ''}
         </button>
       </div>

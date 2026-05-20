@@ -105,12 +105,14 @@ export default function PropertiesPanel() {
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               <button
                 onClick={() => setShowBgPicker(!showBgPicker)}
+                title="Browse preset background textures"
                 style={{ background: theme.surface, color: theme.text, border: theme.borderLight, borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
               >
                 {showBgPicker ? 'Hide Presets' : 'Choose'}
               </button>
               <button
                 onClick={handleSetBackgroundImage}
+                title="Upload a custom background image from disk"
                 style={{ background: theme.surface, color: theme.text, border: theme.borderLight, borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
               >
                 Upload
@@ -118,6 +120,7 @@ export default function PropertiesPanel() {
               {grid.backgroundImage && (
                 <button
                   onClick={() => setGrid({ backgroundImage: null })}
+                  title="Remove the background image"
                   style={{ background: theme.danger, color: theme.bg, border: 'none', borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
                 >
                   Remove
@@ -247,6 +250,7 @@ export default function PropertiesPanel() {
               {grid.backgroundRandomize && (
                 <button
                   onClick={() => setGrid({ backgroundRandomSeed: Math.floor(Math.random() * 100000) })}
+                  title="Re-randomize the background tile arrangement"
                   style={{ background: theme.surface, color: theme.text, border: theme.borderLight, borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', marginTop: 2, fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}
                 >
                   Reshuffle
@@ -298,7 +302,7 @@ export default function PropertiesPanel() {
                   flickerAmount: 0,
                   lightShape: 'point',
                 });
-              }} style={{ background: theme.surface, color: theme.warning, border: theme.borderLight, borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              }} title="Add a point light source to the center of the map" style={{ background: theme.surface, color: theme.warning, border: theme.borderLight, borderRadius: theme.radius, padding: '4px 10px', fontSize: 11, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 + Add Light Source
               </button>
             </div>
@@ -446,6 +450,7 @@ export default function PropertiesPanel() {
                 tint: t.tint, opacity: t.opacity ?? 1,
               })));
             }}
+            title="Save selected tiles as a reusable prefab stamp template"
             style={{ ...btnStyle, background: theme.primary, color: theme.bg }}
           >
             Save as Prefab
@@ -458,6 +463,7 @@ export default function PropertiesPanel() {
           <div style={{ display: 'flex', gap: 4 }}>
             {[0, 90, 180, 270].map(r => (
               <button key={r} onClick={() => handleSetAllRotation(r)}
+                title={`Set all selected to ${r}°`}
                 style={{ ...btnStyle, padding: '2px 8px' }}>
                 {r}°
               </button>
@@ -489,7 +495,7 @@ export default function PropertiesPanel() {
                   const baseH = asset ? asset.gridSize[1] : 1;
                   updateElement(el.id, { width: baseW * s, height: baseH * s });
                 });
-              }} style={{ ...btnStyle, padding: '2px 8px' }}>
+              }} title={`Set all selected to ${s}× base asset size`} style={{ ...btnStyle, padding: '2px 8px' }}>
                 {s}x
               </button>
             ))}
@@ -523,10 +529,10 @@ export default function PropertiesPanel() {
                   </div>
                 )}
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  <button onClick={handleRandomize} style={{ ...btnStyle, background: theme.success, color: theme.bg }}>
+                  <button onClick={handleRandomize} title="Randomize rotation, flip, position jitter, and scale of selected tiles" style={{ ...btnStyle, background: theme.success, color: theme.bg }}>
                     Randomize
                   </button>
-                  <button onClick={handleResetTransforms} style={btnStyle}>
+                  <button onClick={handleResetTransforms} title="Snap all selected tiles to grid, reset rotation/flip/scale to defaults" style={btnStyle}>
                     Reset to Grid
                   </button>
                 </div>
@@ -673,6 +679,7 @@ export default function PropertiesPanel() {
             <div style={{ display: 'flex', gap: 3 }}>
               {(['point', 'bar', 'polygon'] as const).map(s => (
                 <button key={s} onClick={() => handleUpdate({ lightShape: s })}
+                  title={s === 'point' ? 'Circular omnidirectional light' : s === 'bar' ? 'Linear bar/tube light between two points' : 'Area light filling a polygon shape'}
                   style={{ flex: 1, background: (el.lightShape || 'point') === s ? theme.warning : theme.surface,
                     color: (el.lightShape || 'point') === s ? theme.bg : theme.textMuted,
                     border: 'none', borderRadius: theme.radius, padding: '3px 0', fontSize: 10, cursor: 'pointer', textTransform: 'capitalize' }}>
@@ -785,6 +792,7 @@ export default function PropertiesPanel() {
               {el.fillRandomize && (
                 <button
                   onClick={() => handleUpdate({ fillRandomSeed: Math.floor(Math.random() * 100000) })}
+                  title="Re-randomize the texture fill arrangement"
                   style={{ background: theme.surface, color: theme.text, border: 'none', borderRadius: theme.radius, padding: '2px 8px', fontSize: 10, cursor: 'pointer' }}>
                   Reshuffle
                 </button>
@@ -847,6 +855,7 @@ export default function PropertiesPanel() {
                   useHistoryStore.getState().captureSnapshot();
                   useMapStore.getState().addElements(inputs);
                 }}
+                title="Auto-place wall tiles along every polygon edge using the selected stamp asset"
                 style={{ width: '100%', background: theme.surface, color: theme.warning, border: `1px solid ${theme.warning}`, borderRadius: theme.radius, padding: '4px 0', fontSize: 10, cursor: 'pointer', fontFamily: theme.fontHeading, textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}
               >
                 Place Border Tiles
@@ -861,7 +870,7 @@ export default function PropertiesPanel() {
                   const pendingOpening = useEditorStore.getState().pendingOpening;
                   useEditorStore.getState().setPendingOpening(pendingOpening === 'door' ? null : 'door');
                   useEditorStore.getState().setPendingInnerWall(false);
-                }} style={{
+                }} title="Click an edge of the polygon to add a door opening" style={{
                   background: useEditorStore.getState().pendingOpening === 'door' ? theme.success : theme.surface,
                   color: useEditorStore.getState().pendingOpening === 'door' ? theme.bg : theme.textMuted,
                   border: 'none', borderRadius: theme.radius, padding: '2px 8px', fontSize: 10, cursor: 'pointer',
@@ -870,7 +879,7 @@ export default function PropertiesPanel() {
                   const pendingOpening = useEditorStore.getState().pendingOpening;
                   useEditorStore.getState().setPendingOpening(pendingOpening === 'window' ? null : 'window');
                   useEditorStore.getState().setPendingInnerWall(false);
-                }} style={{
+                }} title="Click an edge of the polygon to add a window opening" style={{
                   background: useEditorStore.getState().pendingOpening === 'window' ? theme.info : theme.surface,
                   color: useEditorStore.getState().pendingOpening === 'window' ? theme.bg : theme.textMuted,
                   border: 'none', borderRadius: theme.radius, padding: '2px 8px', fontSize: 10, cursor: 'pointer',
@@ -962,7 +971,7 @@ export default function PropertiesPanel() {
                 const pendingInnerWall = useEditorStore.getState().pendingInnerWall;
                 useEditorStore.getState().setPendingInnerWall(!pendingInnerWall);
                 useEditorStore.getState().setPendingOpening(null);
-              }} style={{
+              }} title="Draw an inner wall line across the polygon interior" style={{
                 background: useEditorStore.getState().pendingInnerWall ? theme.warning : theme.surface,
                 color: useEditorStore.getState().pendingInnerWall ? theme.bg : theme.textMuted,
                 border: 'none', borderRadius: theme.radius, padding: '2px 8px', fontSize: 10, cursor: 'pointer',
@@ -973,7 +982,7 @@ export default function PropertiesPanel() {
                   <button onClick={() => {
                     useHistoryStore.getState().captureSnapshot();
                     handleUpdate({ innerWalls: [] });
-                  }} style={{ background: 'none', border: 'none', color: theme.danger, cursor: 'pointer', fontSize: 10, marginLeft: 4 }}>Clear all</button>
+                  }} title="Remove all inner walls from this polygon" style={{ background: 'none', border: 'none', color: theme.danger, cursor: 'pointer', fontSize: 10, marginLeft: 4 }}>Clear all</button>
                 </div>
               )}
             </div>
@@ -1043,6 +1052,7 @@ export default function PropertiesPanel() {
           {'tint' in el && el.tint && (
             <button
               onClick={() => handleUpdate({ tint: null })}
+              title="Remove color tint"
               style={{ background: theme.surface, color: theme.textMuted, border: 'none', borderRadius: theme.radius, padding: '2px 6px', fontSize: 11, cursor: 'pointer' }}
             >
               Clear
