@@ -17599,6 +17599,386 @@
         2,
         3
       ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-1---1x1.png",
+      "name": "Dirt marks 1",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 1 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-1a---1x1.png",
+      "name": "Dirt marks 1a",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 1a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-1b---1x1.png",
+      "name": "Dirt marks 1b",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 1b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-1c---1x1.png",
+      "name": "Dirt marks 1c",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 1c - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-2---1x1.png",
+      "name": "Dirt marks 2",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 2 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-2a---1x1.png",
+      "name": "Dirt marks 2a",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 2a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-2b---1x1.png",
+      "name": "Dirt marks 2b",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 2b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-3---1x1.png",
+      "name": "Dirt marks 3",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 3 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-3a---1x1.png",
+      "name": "Dirt marks 3a",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 3a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-3b---1x1.png",
+      "name": "Dirt marks 3b",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 3b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-4---1x1.png",
+      "name": "Dirt marks 4",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 4 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-5---1x1.png",
+      "name": "Dirt marks 5",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 5 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-5a---1x1.png",
+      "name": "Dirt marks 5a",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 5a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-5b---1x1.png",
+      "name": "Dirt marks 5b",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 5b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-5c---1x1.png",
+      "name": "Dirt marks 5c",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 5c - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-6---1x1.png",
+      "name": "Dirt marks 6",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 6 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-6a---1x1.png",
+      "name": "Dirt marks 6a",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 6a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-6b---1x1.png",
+      "name": "Dirt marks 6b",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 6b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-7---1x1.png",
+      "name": "Dirt marks 7",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 7 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Dirt-marks-8---1x1.png",
+      "name": "Dirt marks 8",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Dirt marks 8 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Oil-spill-1---1x1.png",
+      "name": "Oil spill 1",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Oil spill 1 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Oil-spill-2---1x1.png",
+      "name": "Oil spill 2",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Oil spill 2 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "floor-elements/Oil-spill-3---1x1.png",
+      "name": "Oil spill 3",
+      "category": "floor-elements",
+      "path": "/assets/floor-elements/Oil spill 3 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-4---1x1.png",
+      "name": "Graffiti 4",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 4 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-5---1x1.png",
+      "name": "Graffiti 5",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 5 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-6---1x1.png",
+      "name": "Graffiti 6",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 6 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-4a---1x1.png",
+      "name": "Graffiti 4a",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 4a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-4b---1x1.png",
+      "name": "Graffiti 4b",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 4b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-5a---1x1.png",
+      "name": "Graffiti 5a",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 5a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-5b---1x1.png",
+      "name": "Graffiti 5b",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 5b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-6a---1x1.png",
+      "name": "Graffiti 6a",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 6a - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "graffiti/Graffiti-6b---1x1.png",
+      "name": "Graffiti 6b",
+      "category": "graffiti",
+      "path": "/assets/graffiti/Graffiti 6b - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "street/Pot-hole-1---1x1.png",
+      "name": "Pot hole 1",
+      "category": "street",
+      "path": "/assets/street/Pot hole 1 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "street/Pot-hole-2---1x1.png",
+      "name": "Pot hole 2",
+      "category": "street",
+      "path": "/assets/street/Pot hole 2 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "street/Pot-hole-3---1x1.png",
+      "name": "Pot hole 3",
+      "category": "street",
+      "path": "/assets/street/Pot hole 3 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "furniture/Table-4---1x1.png",
+      "name": "Table 4",
+      "category": "furniture",
+      "path": "/assets/furniture/Table 4 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "furniture/Table-5---1x1.png",
+      "name": "Table 5",
+      "category": "furniture",
+      "path": "/assets/furniture/Table 5 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "furniture/Table-6---1x1.png",
+      "name": "Table 6",
+      "category": "furniture",
+      "path": "/assets/furniture/Table 6 - 1x1.png",
+      "gridSize": [
+        1,
+        1
+      ]
     }
   ]
 }
