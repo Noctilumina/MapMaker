@@ -14363,55 +14363,64 @@
   {
     "rel_path": "rugs/rug_black_green_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_black_paint_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_black_techCyan_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_black_yellow_corp_sato_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_fuzz_white_hex.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_red_yellow_chinese_circle.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_tiger_purple_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_white_dirty_grime_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
     "rel_path": "rugs/rug_yellow_indian_rect.png",
     "vibe_tags": [
-      "modern"
+      "modern",
+      "ai-generated"
     ]
   },
   {
@@ -15208,6 +15217,468 @@
   },
   {
     "rel_path": "ai-generated/Washing machine - 8x10.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 1 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 2 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 3 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 4 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 5 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 6 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 7 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Asphalt patch 8 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Concrete patch 1 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Concrete patch 2 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Concrete patch 3 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Concrete patch 4 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Dirt patch 1 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Dirt patch 2 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Dirt patch 3 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Dirt patch 4 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Grass patch 1 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Grass patch 2 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Grass patch 3 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Grass patch 4 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Gravel patch 1 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Gravel patch 2 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Gravel patch 3 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Gravel patch 4 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Sand patch 1 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Sand patch 2 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Sand patch 3 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "patches/Sand patch 4 - 12x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container security 2 - 16x7.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Arasaka - 21x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Biotechnica - 21x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container chopshop - 20x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Continental brands - 21x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container faded logo damaged - 21x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container freezer - 13x7.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container housing 1 - 12x4.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container housing 2 - 24x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container housing 3 - 24x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container housing 5b - 12x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container housing 5 - 24x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container housing 6 - 24x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container hydroponics - 20x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Militech - 21x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCN - 18x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCPD armory - 15x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA 1b - 18x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA 1 - 14x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA 2 - 18x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA bathroom - 15x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA checkpoint - 15x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA housing - 19x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container NCRA med - 15x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container netrunner hideout - 16x9.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Network54 - 21x4.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Orbital Air - 21x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Orbital Air damaged - 14x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Orbital Air housing - 19x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Petrochem - 21x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Petrochem housing - 19x7.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Petrochem powerbrick - 20x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Ripperdoc - 17x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Rocklin Aug - 18x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container security - 16x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container SovOil damaged - 21x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container sus - 21x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container tattoo shop - 16x7.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container vendor bar - 16x9.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container vendor coffee - 16x7.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container vendor noodles - 16x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container vendor vending machines - 11x7.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container vendor wok - 24x8.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Zetatech 1 - 21x5.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Container Zetatech 2 - 21x6.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Dumpster street - 11x9.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/NCRA waste container - 8x9.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Trash container street - 5x9.png",
+    "vibe_tags": [
+      "ai-generated"
+    ]
+  },
+  {
+    "rel_path": "container/Industrial tank - 8x10.png",
     "vibe_tags": [
       "ai-generated"
     ]
