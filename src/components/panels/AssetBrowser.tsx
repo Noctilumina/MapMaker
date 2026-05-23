@@ -23,7 +23,7 @@ const OBJECT_CATEGORIES = [
   'dungeon-tiles', 'rugs', 'rugs-decor', 'lighting', 'rubble', 'gore',
   'graffiti', 'scrap-debris', 'Door Tiles', 'Stair Tiles',
   'Special Rooms', 'Structures', 'Bloody Assets',
-  'ai-generated', 'container', 'patches',
+  'container', 'patches',
 ];
 
 interface TextureEntry {
@@ -377,7 +377,7 @@ export default function AssetBrowser() {
       {tab === 'objects' && (
         <>
           <div style={{ padding: '4px 12px', display: 'flex', gap: 3, borderBottom: theme.borderLight }}>
-            {['all', 'fantasy', 'modern', 'sci-fi', 'generic'].map((v) => (
+            {['all', 'fantasy', 'modern', 'sci-fi', 'generic', 'ai-generated'].map((v) => (
               <ChipButton key={v} variant="warning" selected={objVibe === v} onClick={() => setObjVibe(v)} style={{ textTransform: 'capitalize' }}>
                 {v}
               </ChipButton>
