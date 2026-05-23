@@ -17601,383 +17601,2103 @@
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-1---1x1.png",
+      "id": "ai-generated/Dirt-marks-1---1x1.png",
       "name": "Dirt marks 1",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 1 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 1 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-1a---1x1.png",
+      "id": "ai-generated/Dirt-marks-1a---1x1.png",
       "name": "Dirt marks 1a",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 1a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 1a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-1b---1x1.png",
+      "id": "ai-generated/Dirt-marks-1b---1x1.png",
       "name": "Dirt marks 1b",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 1b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 1b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-1c---1x1.png",
+      "id": "ai-generated/Dirt-marks-1c---1x1.png",
       "name": "Dirt marks 1c",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 1c - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 1c - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-2---1x1.png",
+      "id": "ai-generated/Dirt-marks-2---1x1.png",
       "name": "Dirt marks 2",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 2 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 2 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-2a---1x1.png",
+      "id": "ai-generated/Dirt-marks-2a---1x1.png",
       "name": "Dirt marks 2a",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 2a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 2a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-2b---1x1.png",
+      "id": "ai-generated/Dirt-marks-2b---1x1.png",
       "name": "Dirt marks 2b",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 2b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 2b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-3---1x1.png",
+      "id": "ai-generated/Dirt-marks-3---1x1.png",
       "name": "Dirt marks 3",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 3 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 3 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-3a---1x1.png",
+      "id": "ai-generated/Dirt-marks-3a---1x1.png",
       "name": "Dirt marks 3a",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 3a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 3a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-3b---1x1.png",
+      "id": "ai-generated/Dirt-marks-3b---1x1.png",
       "name": "Dirt marks 3b",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 3b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 3b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-4---1x1.png",
+      "id": "ai-generated/Dirt-marks-4---1x1.png",
       "name": "Dirt marks 4",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 4 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 4 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-5---1x1.png",
+      "id": "ai-generated/Dirt-marks-5---1x1.png",
       "name": "Dirt marks 5",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 5 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 5 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-5a---1x1.png",
+      "id": "ai-generated/Dirt-marks-5a---1x1.png",
       "name": "Dirt marks 5a",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 5a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 5a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-5b---1x1.png",
+      "id": "ai-generated/Dirt-marks-5b---1x1.png",
       "name": "Dirt marks 5b",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 5b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 5b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-5c---1x1.png",
+      "id": "ai-generated/Dirt-marks-5c---1x1.png",
       "name": "Dirt marks 5c",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 5c - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 5c - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-6---1x1.png",
+      "id": "ai-generated/Dirt-marks-6---1x1.png",
       "name": "Dirt marks 6",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 6 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 6 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-6a---1x1.png",
+      "id": "ai-generated/Dirt-marks-6a---1x1.png",
       "name": "Dirt marks 6a",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 6a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 6a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-6b---1x1.png",
+      "id": "ai-generated/Dirt-marks-6b---1x1.png",
       "name": "Dirt marks 6b",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 6b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 6b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-7---1x1.png",
+      "id": "ai-generated/Dirt-marks-7---1x1.png",
       "name": "Dirt marks 7",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 7 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 7 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Dirt-marks-8---1x1.png",
+      "id": "ai-generated/Dirt-marks-8---1x1.png",
       "name": "Dirt marks 8",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Dirt marks 8 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Dirt marks 8 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Oil-spill-1---1x1.png",
+      "id": "ai-generated/Oil-spill-1---1x1.png",
       "name": "Oil spill 1",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Oil spill 1 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Oil spill 1 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Oil-spill-2---1x1.png",
+      "id": "ai-generated/Oil-spill-2---1x1.png",
       "name": "Oil spill 2",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Oil spill 2 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Oil spill 2 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "floor-elements/Oil-spill-3---1x1.png",
+      "id": "ai-generated/Oil-spill-3---1x1.png",
       "name": "Oil spill 3",
-      "category": "floor-elements",
-      "path": "/assets/floor-elements/Oil spill 3 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Oil spill 3 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-4---1x1.png",
+      "id": "ai-generated/Graffiti-4---1x1.png",
       "name": "Graffiti 4",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 4 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 4 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-5---1x1.png",
+      "id": "ai-generated/Graffiti-5---1x1.png",
       "name": "Graffiti 5",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 5 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 5 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-6---1x1.png",
+      "id": "ai-generated/Graffiti-6---1x1.png",
       "name": "Graffiti 6",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 6 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 6 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-4a---1x1.png",
+      "id": "ai-generated/Graffiti-4a---1x1.png",
       "name": "Graffiti 4a",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 4a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 4a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-4b---1x1.png",
+      "id": "ai-generated/Graffiti-4b---1x1.png",
       "name": "Graffiti 4b",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 4b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 4b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-5a---1x1.png",
+      "id": "ai-generated/Graffiti-5a---1x1.png",
       "name": "Graffiti 5a",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 5a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 5a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-5b---1x1.png",
+      "id": "ai-generated/Graffiti-5b---1x1.png",
       "name": "Graffiti 5b",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 5b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 5b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-6a---1x1.png",
+      "id": "ai-generated/Graffiti-6a---1x1.png",
       "name": "Graffiti 6a",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 6a - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 6a - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "graffiti/Graffiti-6b---1x1.png",
+      "id": "ai-generated/Graffiti-6b---1x1.png",
       "name": "Graffiti 6b",
-      "category": "graffiti",
-      "path": "/assets/graffiti/Graffiti 6b - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Graffiti 6b - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "street/Pot-hole-1---1x1.png",
+      "id": "ai-generated/Pot-hole-1---1x1.png",
       "name": "Pot hole 1",
-      "category": "street",
-      "path": "/assets/street/Pot hole 1 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Pot hole 1 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "street/Pot-hole-2---1x1.png",
+      "id": "ai-generated/Pot-hole-2---1x1.png",
       "name": "Pot hole 2",
-      "category": "street",
-      "path": "/assets/street/Pot hole 2 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Pot hole 2 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "street/Pot-hole-3---1x1.png",
+      "id": "ai-generated/Pot-hole-3---1x1.png",
       "name": "Pot hole 3",
-      "category": "street",
-      "path": "/assets/street/Pot hole 3 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Pot hole 3 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "furniture/Table-4---1x1.png",
+      "id": "ai-generated/Table-4---1x1.png",
       "name": "Table 4",
-      "category": "furniture",
-      "path": "/assets/furniture/Table 4 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Table 4 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "furniture/Table-5---1x1.png",
+      "id": "ai-generated/Table-5---1x1.png",
       "name": "Table 5",
-      "category": "furniture",
-      "path": "/assets/furniture/Table 5 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Table 5 - 1x1.png",
       "gridSize": [
         1,
         1
       ]
     },
     {
-      "id": "furniture/Table-6---1x1.png",
+      "id": "ai-generated/Table-6---1x1.png",
       "name": "Table 6",
-      "category": "furniture",
-      "path": "/assets/furniture/Table 6 - 1x1.png",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Table 6 - 1x1.png",
       "gridSize": [
         1,
         1
+      ]
+    },
+    {
+      "id": "ai-generated/Anti-NCN-graffiti---10x7.png",
+      "name": "Anti NCN graffiti",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Anti NCN graffiti - 10x7.png",
+      "gridSize": [
+        10,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Anti-Rocklin-graffiti---10x7.png",
+      "name": "Anti Rocklin graffiti",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Anti Rocklin graffiti - 10x7.png",
+      "gridSize": [
+        10,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/NCN-graffiti---8x9.png",
+      "name": "NCN graffiti",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCN graffiti - 8x9.png",
+      "gridSize": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Asphalt-cover---9x16.png",
+      "name": "Asphalt cover",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Asphalt cover - 9x16.png",
+      "gridSize": [
+        9,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Asphalt-scoring---8x15.png",
+      "name": "Asphalt scoring",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Asphalt scoring - 8x15.png",
+      "gridSize": [
+        8,
+        15
+      ]
+    },
+    {
+      "id": "ai-generated/Central-crack---9x16.png",
+      "name": "Central crack",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Central crack - 9x16.png",
+      "gridSize": [
+        9,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Central-ground-scoring---7x16.png",
+      "name": "Central ground scoring",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Central ground scoring - 7x16.png",
+      "gridSize": [
+        7,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Feat-trail-1---8x16.png",
+      "name": "Feat trail 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Feat trail 1 - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Feat-trail-2---8x16.png",
+      "name": "Feat trail 2",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Feat trail 2 - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Ground-scoring---8x16.png",
+      "name": "Ground scoring",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Ground scoring - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Hand-path---8x16.png",
+      "name": "Hand path",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Hand path - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Pipe-runoff---7x16.png",
+      "name": "Pipe runoff",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Pipe runoff - 7x16.png",
+      "gridSize": [
+        7,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Rust-grime---8x16.png",
+      "name": "Rust grime",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Rust grime - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Sewage-stains-1---8x14.png",
+      "name": "Sewage stains 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Sewage stains 1 - 8x14.png",
+      "gridSize": [
+        8,
+        14
+      ]
+    },
+    {
+      "id": "ai-generated/Sewage-stains-2---8x12.png",
+      "name": "Sewage stains 2",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Sewage stains 2 - 8x12.png",
+      "gridSize": [
+        8,
+        12
+      ]
+    },
+    {
+      "id": "ai-generated/Sewage-stains-3---8x9.png",
+      "name": "Sewage stains 3",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Sewage stains 3 - 8x9.png",
+      "gridSize": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Splatter-fluid---8x16.png",
+      "name": "Splatter fluid",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Splatter fluid - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tire-tracks-1---8x16.png",
+      "name": "Tire tracks 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Tire tracks 1 - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tire-tracks-3---8x16.png",
+      "name": "Tire tracks 3",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Tire tracks 3 - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tracks-1---8x16.png",
+      "name": "Tracks 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Tracks 1 - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tracks-2---7x16.png",
+      "name": "Tracks 2",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Tracks 2 - 7x16.png",
+      "gridSize": [
+        7,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Duct-tape---7x13.png",
+      "name": "Duct tape",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Duct tape - 7x13.png",
+      "gridSize": [
+        7,
+        13
+      ]
+    },
+    {
+      "id": "ai-generated/Pot-hole-4---8x16.png",
+      "name": "Pot hole 4",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Pot hole 4 - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Arcade-machine---8x15.png",
+      "name": "Arcade machine",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Arcade machine - 8x15.png",
+      "gridSize": [
+        8,
+        15
+      ]
+    },
+    {
+      "id": "ai-generated/Bar-stool---3x4.png",
+      "name": "Bar stool",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Bar stool - 3x4.png",
+      "gridSize": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "ai-generated/Bed-double---10x15.png",
+      "name": "Bed double",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Bed double - 10x15.png",
+      "gridSize": [
+        10,
+        15
+      ]
+    },
+    {
+      "id": "ai-generated/Bed-doubledecker---8x15.png",
+      "name": "Bed doubledecker",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Bed doubledecker - 8x15.png",
+      "gridSize": [
+        8,
+        15
+      ]
+    },
+    {
+      "id": "ai-generated/Bed-single---6x15.png",
+      "name": "Bed single",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Bed single - 6x15.png",
+      "gridSize": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "ai-generated/Big-toolbox---17x9.png",
+      "name": "Big toolbox",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Big toolbox - 17x9.png",
+      "gridSize": [
+        17,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Cabinet---15x5.png",
+      "name": "Cabinet",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Cabinet - 15x5.png",
+      "gridSize": [
+        15,
+        5
+      ]
+    },
+    {
+      "id": "ai-generated/Chair-grimy---8x8.png",
+      "name": "Chair grimy",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Chair grimy - 8x8.png",
+      "gridSize": [
+        8,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/Corner-reception-booth---15x13.png",
+      "name": "Corner reception booth",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Corner reception booth - 15x13.png",
+      "gridSize": [
+        15,
+        13
+      ]
+    },
+    {
+      "id": "ai-generated/Couch-grimy-1---9x8.png",
+      "name": "Couch grimy 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Couch grimy 1 - 9x8.png",
+      "gridSize": [
+        9,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/Couch-grimy-2---15x8.png",
+      "name": "Couch grimy 2",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Couch grimy 2 - 15x8.png",
+      "gridSize": [
+        15,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/DJ-table---15x9.png",
+      "name": "DJ table",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/DJ table - 15x9.png",
+      "gridSize": [
+        15,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Filing-cabinet---6x11.png",
+      "name": "Filing cabinet",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Filing cabinet - 6x11.png",
+      "gridSize": [
+        6,
+        11
+      ]
+    },
+    {
+      "id": "ai-generated/Lockers-metal---15x6.png",
+      "name": "Lockers metal",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Lockers metal - 15x6.png",
+      "gridSize": [
+        15,
+        6
+      ]
+    },
+    {
+      "id": "ai-generated/Pool-table---10x12.png",
+      "name": "Pool table",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Pool table - 10x12.png",
+      "gridSize": [
+        10,
+        12
+      ]
+    },
+    {
+      "id": "ai-generated/Restaurant-booth---13x12.png",
+      "name": "Restaurant booth",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Restaurant booth - 13x12.png",
+      "gridSize": [
+        13,
+        12
+      ]
+    },
+    {
+      "id": "ai-generated/Sleeping-pod---15x6.png",
+      "name": "Sleeping pod",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Sleeping pod - 15x6.png",
+      "gridSize": [
+        15,
+        6
+      ]
+    },
+    {
+      "id": "ai-generated/Storage-rack---19x6.png",
+      "name": "Storage rack",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Storage rack - 19x6.png",
+      "gridSize": [
+        19,
+        6
+      ]
+    },
+    {
+      "id": "ai-generated/Storage-rack-NCRA---20x7.png",
+      "name": "Storage rack NCRA",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Storage rack NCRA - 20x7.png",
+      "gridSize": [
+        20,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Storage-rack-NCRA-med---15x4.png",
+      "name": "Storage rack NCRA med",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Storage rack NCRA med - 15x4.png",
+      "gridSize": [
+        15,
+        4
+      ]
+    },
+    {
+      "id": "ai-generated/Vendor-stand---13x9.png",
+      "name": "Vendor stand",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Vendor stand - 13x9.png",
+      "gridSize": [
+        13,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Workbench---18x7.png",
+      "name": "Workbench",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Workbench - 18x7.png",
+      "gridSize": [
+        18,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Fusebox-NCRA---8x8.png",
+      "name": "Fusebox NCRA",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Fusebox NCRA - 8x8.png",
+      "gridSize": [
+        8,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-power-unit---13x8.png",
+      "name": "NCRA power unit",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA power unit - 13x8.png",
+      "gridSize": [
+        13,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/Server-rack---7x11.png",
+      "name": "Server rack",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Server rack - 7x11.png",
+      "gridSize": [
+        7,
+        11
+      ]
+    },
+    {
+      "id": "ai-generated/Chem-barrel---7x7.png",
+      "name": "Chem barrel",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Chem barrel - 7x7.png",
+      "gridSize": [
+        7,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Crates---9x9.png",
+      "name": "Crates",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Crates - 9x9.png",
+      "gridSize": [
+        9,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-crate---9x14.png",
+      "name": "NCRA crate",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA crate - 9x14.png",
+      "gridSize": [
+        9,
+        14
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-med-crate---6x14.png",
+      "name": "NCRA med crate",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA med crate - 6x14.png",
+      "gridSize": [
+        6,
+        14
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-pallet---8x14.png",
+      "name": "NCRA pallet",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA pallet - 8x14.png",
+      "gridSize": [
+        8,
+        14
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-construction-fence---21x6.png",
+      "name": "NCRA construction fence",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA construction fence - 21x6.png",
+      "gridSize": [
+        21,
+        6
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-construction-tool-display---17x5.png",
+      "name": "NCRA construction tool display",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA construction tool display - 17x5.png",
+      "gridSize": [
+        17,
+        5
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-roadblock-concrete---21x5.png",
+      "name": "NCRA roadblock concrete",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA roadblock concrete - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-roadblock-concrete-single---6x5.png",
+      "name": "NCRA roadblock concrete single",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA roadblock concrete single - 6x5.png",
+      "gridSize": [
+        6,
+        5
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-roadblock-metal---8x4.png",
+      "name": "NCRA roadblock metal",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA roadblock metal - 8x4.png",
+      "gridSize": [
+        8,
+        4
+      ]
+    },
+    {
+      "id": "ai-generated/NCRA-teamster-office---16x8.png",
+      "name": "NCRA teamster office",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/NCRA teamster office - 16x8.png",
+      "gridSize": [
+        16,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/News-box---6x7.png",
+      "name": "News box",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/News box - 6x7.png",
+      "gridSize": [
+        6,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Broken-concrete-rebar-1---8x14.png",
+      "name": "Broken concrete rebar 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Broken concrete rebar 1 - 8x14.png",
+      "gridSize": [
+        8,
+        14
+      ]
+    },
+    {
+      "id": "ai-generated/Broken-concrete-rebar-2---8x8.png",
+      "name": "Broken concrete rebar 2",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Broken concrete rebar 2 - 8x8.png",
+      "gridSize": [
+        8,
+        8
+      ]
+    },
+    {
+      "id": "ai-generated/Broken-concrete-rebar-3---8x9.png",
+      "name": "Broken concrete rebar 3",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Broken concrete rebar 3 - 8x9.png",
+      "gridSize": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Debris-1---8x12.png",
+      "name": "Debris 1",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Debris 1 - 8x12.png",
+      "gridSize": [
+        8,
+        12
+      ]
+    },
+    {
+      "id": "ai-generated/Debris-1b---9x13.png",
+      "name": "Debris 1b",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Debris 1b - 9x13.png",
+      "gridSize": [
+        9,
+        13
+      ]
+    },
+    {
+      "id": "ai-generated/Debris-2---7x10.png",
+      "name": "Debris 2",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Debris 2 - 7x10.png",
+      "gridSize": [
+        7,
+        10
+      ]
+    },
+    {
+      "id": "ai-generated/Debris-3---8x12.png",
+      "name": "Debris 3",
+      "category": "ai-generated",
+      "path": "/assets/ai-generated/Debris 3 - 8x12.png",
+      "gridSize": [
+        8,
+        12
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-1---12x8.png",
+      "name": "Asphalt patch 1 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 1 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-2---12x8.png",
+      "name": "Asphalt patch 2 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 2 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-3---12x8.png",
+      "name": "Asphalt patch 3 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 3 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-4---12x8.png",
+      "name": "Asphalt patch 4 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 4 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-5---12x8.png",
+      "name": "Asphalt patch 5 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 5 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-6---12x8.png",
+      "name": "Asphalt patch 6 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 6 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-7---12x8.png",
+      "name": "Asphalt patch 7 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 7 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Asphalt-patch-8---12x8.png",
+      "name": "Asphalt patch 8 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Asphalt patch 8 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Concrete-patch-1---12x8.png",
+      "name": "Concrete patch 1 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Concrete patch 1 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Concrete-patch-2---12x8.png",
+      "name": "Concrete patch 2 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Concrete patch 2 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Concrete-patch-3---12x8.png",
+      "name": "Concrete patch 3 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Concrete patch 3 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Concrete-patch-4---12x8.png",
+      "name": "Concrete patch 4 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Concrete patch 4 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Dirt-patch-1---12x8.png",
+      "name": "Dirt patch 1 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Dirt patch 1 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Dirt-patch-2---12x8.png",
+      "name": "Dirt patch 2 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Dirt patch 2 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Dirt-patch-3---12x8.png",
+      "name": "Dirt patch 3 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Dirt patch 3 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Dirt-patch-4---12x8.png",
+      "name": "Dirt patch 4 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Dirt patch 4 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Grass-patch-1---12x8.png",
+      "name": "Grass patch 1 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Grass patch 1 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Grass-patch-2---12x8.png",
+      "name": "Grass patch 2 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Grass patch 2 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Grass-patch-3---12x8.png",
+      "name": "Grass patch 3 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Grass patch 3 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Grass-patch-4---12x8.png",
+      "name": "Grass patch 4 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Grass patch 4 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Gravel-patch-1---12x8.png",
+      "name": "Gravel patch 1 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Gravel patch 1 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Gravel-patch-2---12x8.png",
+      "name": "Gravel patch 2 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Gravel patch 2 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Gravel-patch-3---12x8.png",
+      "name": "Gravel patch 3 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Gravel patch 3 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Gravel-patch-4---12x8.png",
+      "name": "Gravel patch 4 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Gravel patch 4 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Sand-patch-1---12x8.png",
+      "name": "Sand patch 1 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Sand patch 1 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Sand-patch-2---12x8.png",
+      "name": "Sand patch 2 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Sand patch 2 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Sand-patch-3---12x8.png",
+      "name": "Sand patch 3 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Sand patch 3 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "patches/Sand-patch-4---12x8.png",
+      "name": "Sand patch 4 - 12x8",
+      "category": "patches",
+      "path": "assets/patches/Sand patch 4 - 12x8.png",
+      "gridSize": [
+        12,
+        8
+      ]
+    },
+    {
+      "id": "container/Container-security-2---16x7.png",
+      "name": "Container security 2 - 16x7",
+      "category": "container",
+      "path": "assets/container/Container security 2 - 16x7.png",
+      "gridSize": [
+        16,
+        7
+      ]
+    },
+    {
+      "id": "container/Container-Arasaka---21x6.png",
+      "name": "Container Arasaka - 21x6",
+      "category": "container",
+      "path": "assets/container/Container Arasaka - 21x6.png",
+      "gridSize": [
+        21,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-Biotechnica---21x5.png",
+      "name": "Container Biotechnica - 21x5",
+      "category": "container",
+      "path": "assets/container/Container Biotechnica - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-chopshop---20x6.png",
+      "name": "Container chopshop - 20x6",
+      "category": "container",
+      "path": "assets/container/Container chopshop - 20x6.png",
+      "gridSize": [
+        20,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-Continental-brands---21x6.png",
+      "name": "Container Continental brands - 21x6",
+      "category": "container",
+      "path": "assets/container/Container Continental brands - 21x6.png",
+      "gridSize": [
+        21,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-faded-logo-damaged---21x6.png",
+      "name": "Container faded logo damaged - 21x6",
+      "category": "container",
+      "path": "assets/container/Container faded logo damaged - 21x6.png",
+      "gridSize": [
+        21,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-freezer---13x7.png",
+      "name": "Container freezer - 13x7",
+      "category": "container",
+      "path": "assets/container/Container freezer - 13x7.png",
+      "gridSize": [
+        13,
+        7
+      ]
+    },
+    {
+      "id": "container/Container-housing-1---12x4.png",
+      "name": "Container housing 1 - 12x4",
+      "category": "container",
+      "path": "assets/container/Container housing 1 - 12x4.png",
+      "gridSize": [
+        12,
+        4
+      ]
+    },
+    {
+      "id": "container/Container-housing-2---24x6.png",
+      "name": "Container housing 2 - 24x6",
+      "category": "container",
+      "path": "assets/container/Container housing 2 - 24x6.png",
+      "gridSize": [
+        24,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-housing-3---24x5.png",
+      "name": "Container housing 3 - 24x5",
+      "category": "container",
+      "path": "assets/container/Container housing 3 - 24x5.png",
+      "gridSize": [
+        24,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-housing-5b---12x5.png",
+      "name": "Container housing 5b - 12x5",
+      "category": "container",
+      "path": "assets/container/Container housing 5b - 12x5.png",
+      "gridSize": [
+        12,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-housing-5---24x5.png",
+      "name": "Container housing 5 - 24x5",
+      "category": "container",
+      "path": "assets/container/Container housing 5 - 24x5.png",
+      "gridSize": [
+        24,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-housing-6---24x6.png",
+      "name": "Container housing 6 - 24x6",
+      "category": "container",
+      "path": "assets/container/Container housing 6 - 24x6.png",
+      "gridSize": [
+        24,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-hydroponics---20x6.png",
+      "name": "Container hydroponics - 20x6",
+      "category": "container",
+      "path": "assets/container/Container hydroponics - 20x6.png",
+      "gridSize": [
+        20,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-Militech---21x5.png",
+      "name": "Container Militech - 21x5",
+      "category": "container",
+      "path": "assets/container/Container Militech - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-NCN---18x5.png",
+      "name": "Container NCN - 18x5",
+      "category": "container",
+      "path": "assets/container/Container NCN - 18x5.png",
+      "gridSize": [
+        18,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-NCPD-armory---15x5.png",
+      "name": "Container NCPD armory - 15x5",
+      "category": "container",
+      "path": "assets/container/Container NCPD armory - 15x5.png",
+      "gridSize": [
+        15,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-1b---18x6.png",
+      "name": "Container NCRA 1b - 18x6",
+      "category": "container",
+      "path": "assets/container/Container NCRA 1b - 18x6.png",
+      "gridSize": [
+        18,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-1---14x5.png",
+      "name": "Container NCRA 1 - 14x5",
+      "category": "container",
+      "path": "assets/container/Container NCRA 1 - 14x5.png",
+      "gridSize": [
+        14,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-2---18x6.png",
+      "name": "Container NCRA 2 - 18x6",
+      "category": "container",
+      "path": "assets/container/Container NCRA 2 - 18x6.png",
+      "gridSize": [
+        18,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-bathroom---15x5.png",
+      "name": "Container NCRA bathroom - 15x5",
+      "category": "container",
+      "path": "assets/container/Container NCRA bathroom - 15x5.png",
+      "gridSize": [
+        15,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-checkpoint---15x6.png",
+      "name": "Container NCRA checkpoint - 15x6",
+      "category": "container",
+      "path": "assets/container/Container NCRA checkpoint - 15x6.png",
+      "gridSize": [
+        15,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-housing---19x5.png",
+      "name": "Container NCRA housing - 19x5",
+      "category": "container",
+      "path": "assets/container/Container NCRA housing - 19x5.png",
+      "gridSize": [
+        19,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-NCRA-med---15x5.png",
+      "name": "Container NCRA med - 15x5",
+      "category": "container",
+      "path": "assets/container/Container NCRA med - 15x5.png",
+      "gridSize": [
+        15,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-netrunner-hideout---16x9.png",
+      "name": "Container netrunner hideout - 16x9",
+      "category": "container",
+      "path": "assets/container/Container netrunner hideout - 16x9.png",
+      "gridSize": [
+        16,
+        9
+      ]
+    },
+    {
+      "id": "container/Container-Network54---21x4.png",
+      "name": "Container Network54 - 21x4",
+      "category": "container",
+      "path": "assets/container/Container Network54 - 21x4.png",
+      "gridSize": [
+        21,
+        4
+      ]
+    },
+    {
+      "id": "container/Container-Orbital-Air---21x6.png",
+      "name": "Container Orbital Air - 21x6",
+      "category": "container",
+      "path": "assets/container/Container Orbital Air - 21x6.png",
+      "gridSize": [
+        21,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-Orbital-Air-damaged---14x5.png",
+      "name": "Container Orbital Air damaged - 14x5",
+      "category": "container",
+      "path": "assets/container/Container Orbital Air damaged - 14x5.png",
+      "gridSize": [
+        14,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-Orbital-Air-housing---19x5.png",
+      "name": "Container Orbital Air housing - 19x5",
+      "category": "container",
+      "path": "assets/container/Container Orbital Air housing - 19x5.png",
+      "gridSize": [
+        19,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-Petrochem---21x5.png",
+      "name": "Container Petrochem - 21x5",
+      "category": "container",
+      "path": "assets/container/Container Petrochem - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-Petrochem-housing---19x7.png",
+      "name": "Container Petrochem housing - 19x7",
+      "category": "container",
+      "path": "assets/container/Container Petrochem housing - 19x7.png",
+      "gridSize": [
+        19,
+        7
+      ]
+    },
+    {
+      "id": "container/Container-Petrochem-powerbrick---20x5.png",
+      "name": "Container Petrochem powerbrick - 20x5",
+      "category": "container",
+      "path": "assets/container/Container Petrochem powerbrick - 20x5.png",
+      "gridSize": [
+        20,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-Ripperdoc---17x8.png",
+      "name": "Container Ripperdoc - 17x8",
+      "category": "container",
+      "path": "assets/container/Container Ripperdoc - 17x8.png",
+      "gridSize": [
+        17,
+        8
+      ]
+    },
+    {
+      "id": "container/Container-Rocklin-Aug---18x5.png",
+      "name": "Container Rocklin Aug - 18x5",
+      "category": "container",
+      "path": "assets/container/Container Rocklin Aug - 18x5.png",
+      "gridSize": [
+        18,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-security---16x6.png",
+      "name": "Container security - 16x6",
+      "category": "container",
+      "path": "assets/container/Container security - 16x6.png",
+      "gridSize": [
+        16,
+        6
+      ]
+    },
+    {
+      "id": "container/Container-SovOil-damaged---21x5.png",
+      "name": "Container SovOil damaged - 21x5",
+      "category": "container",
+      "path": "assets/container/Container SovOil damaged - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-sus---21x5.png",
+      "name": "Container sus - 21x5",
+      "category": "container",
+      "path": "assets/container/Container sus - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-tattoo-shop---16x7.png",
+      "name": "Container tattoo shop - 16x7",
+      "category": "container",
+      "path": "assets/container/Container tattoo shop - 16x7.png",
+      "gridSize": [
+        16,
+        7
+      ]
+    },
+    {
+      "id": "container/Container-vendor-bar---16x9.png",
+      "name": "Container vendor bar - 16x9",
+      "category": "container",
+      "path": "assets/container/Container vendor bar - 16x9.png",
+      "gridSize": [
+        16,
+        9
+      ]
+    },
+    {
+      "id": "container/Container-vendor-coffee---16x7.png",
+      "name": "Container vendor coffee - 16x7",
+      "category": "container",
+      "path": "assets/container/Container vendor coffee - 16x7.png",
+      "gridSize": [
+        16,
+        7
+      ]
+    },
+    {
+      "id": "container/Container-vendor-noodles---16x8.png",
+      "name": "Container vendor noodles - 16x8",
+      "category": "container",
+      "path": "assets/container/Container vendor noodles - 16x8.png",
+      "gridSize": [
+        16,
+        8
+      ]
+    },
+    {
+      "id": "container/Container-vendor-vending-machines---11x7.png",
+      "name": "Container vendor vending machines - 11x7",
+      "category": "container",
+      "path": "assets/container/Container vendor vending machines - 11x7.png",
+      "gridSize": [
+        11,
+        7
+      ]
+    },
+    {
+      "id": "container/Container-vendor-wok---24x8.png",
+      "name": "Container vendor wok - 24x8",
+      "category": "container",
+      "path": "assets/container/Container vendor wok - 24x8.png",
+      "gridSize": [
+        24,
+        8
+      ]
+    },
+    {
+      "id": "container/Container-Zetatech-1---21x5.png",
+      "name": "Container Zetatech 1 - 21x5",
+      "category": "container",
+      "path": "assets/container/Container Zetatech 1 - 21x5.png",
+      "gridSize": [
+        21,
+        5
+      ]
+    },
+    {
+      "id": "container/Container-Zetatech-2---21x6.png",
+      "name": "Container Zetatech 2 - 21x6",
+      "category": "container",
+      "path": "assets/container/Container Zetatech 2 - 21x6.png",
+      "gridSize": [
+        21,
+        6
+      ]
+    },
+    {
+      "id": "container/Dumpster-street---11x9.png",
+      "name": "Dumpster street - 11x9",
+      "category": "container",
+      "path": "assets/container/Dumpster street - 11x9.png",
+      "gridSize": [
+        11,
+        9
+      ]
+    },
+    {
+      "id": "container/NCRA-waste-container---8x9.png",
+      "name": "NCRA waste container - 8x9",
+      "category": "container",
+      "path": "assets/container/NCRA waste container - 8x9.png",
+      "gridSize": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "container/Trash-container-street---5x9.png",
+      "name": "Trash container street - 5x9",
+      "category": "container",
+      "path": "assets/container/Trash container street - 5x9.png",
+      "gridSize": [
+        5,
+        9
+      ]
+    },
+    {
+      "id": "container/Industrial-tank---8x10.png",
+      "name": "Industrial tank - 8x10",
+      "category": "container",
+      "path": "assets/container/Industrial tank - 8x10.png",
+      "gridSize": [
+        8,
+        10
+      ]
+    },
+    {
+      "id": "ai-generated/Bathtub-grimy---8x13.png",
+      "name": "Bathtub grimy - 8x13",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Bathtub grimy - 8x13.png",
+      "gridSize": [
+        8,
+        13
+      ]
+    },
+    {
+      "id": "ai-generated/Cable-bundle-corner---5x5.png",
+      "name": "Cable bundle corner - 5x5",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Cable bundle corner - 5x5.png",
+      "gridSize": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "ai-generated/Cable-bundle-straight---7x3.png",
+      "name": "Cable bundle straight - 7x3",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Cable bundle straight - 7x3.png",
+      "gridSize": [
+        7,
+        3
+      ]
+    },
+    {
+      "id": "ai-generated/Cable-bundle-T-junction---7x5.png",
+      "name": "Cable bundle T junction - 7x5",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Cable bundle T junction - 7x5.png",
+      "gridSize": [
+        7,
+        5
+      ]
+    },
+    {
+      "id": "ai-generated/Cable-bundle-X-crossing---5x6.png",
+      "name": "Cable bundle X crossing - 5x6",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Cable bundle X crossing - 5x6.png",
+      "gridSize": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": "ai-generated/Chair-office---6x7.png",
+      "name": "Chair office - 6x7",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Chair office - 6x7.png",
+      "gridSize": [
+        6,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Desk-office---12x7.png",
+      "name": "Desk office - 12x7",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Desk office - 12x7.png",
+      "gridSize": [
+        12,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Folding-chair---5x7.png",
+      "name": "Folding chair - 5x7",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Folding chair - 5x7.png",
+      "gridSize": [
+        5,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Fridge---8x16.png",
+      "name": "Fridge - 8x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Fridge - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Light-fixture-cable---24x2.png",
+      "name": "Light fixture cable - 24x2",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Light fixture cable - 24x2.png",
+      "gridSize": [
+        24,
+        2
+      ]
+    },
+    {
+      "id": "ai-generated/Locked-safe---8x10.png",
+      "name": "Locked safe - 8x10",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Locked safe - 8x10.png",
+      "gridSize": [
+        8,
+        10
+      ]
+    },
+    {
+      "id": "ai-generated/Net-fishing---8x16.png",
+      "name": "Net fishing - 8x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Net fishing - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Net-thick---8x16.png",
+      "name": "Net thick - 8x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Net thick - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Shower-grimy---9x11.png",
+      "name": "Shower grimy - 9x11",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Shower grimy - 9x11.png",
+      "gridSize": [
+        9,
+        11
+      ]
+    },
+    {
+      "id": "ai-generated/Sink---9x16.png",
+      "name": "Sink - 9x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Sink - 9x16.png",
+      "gridSize": [
+        9,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Sink-grimy---7x13.png",
+      "name": "Sink grimy - 7x13",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Sink grimy - 7x13.png",
+      "gridSize": [
+        7,
+        13
+      ]
+    },
+    {
+      "id": "ai-generated/Stove---7x16.png",
+      "name": "Stove - 7x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Stove - 7x16.png",
+      "gridSize": [
+        7,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tarp-big-blue---10x16.png",
+      "name": "Tarp big blue - 10x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tarp big blue - 10x16.png",
+      "gridSize": [
+        10,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tarp-medium-blue---9x10.png",
+      "name": "Tarp medium blue - 9x10",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tarp medium blue - 9x10.png",
+      "gridSize": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": "ai-generated/Tarp-medium-green-patches---7x16.png",
+      "name": "Tarp medium green patches - 7x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tarp medium green patches - 7x16.png",
+      "gridSize": [
+        7,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tarp-small-NCRA---6x9.png",
+      "name": "Tarp small NCRA - 6x9",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tarp small NCRA - 6x9.png",
+      "gridSize": [
+        6,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Tent-traditional-b---8x9.png",
+      "name": "Tent traditional b - 8x9",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tent traditional b - 8x9.png",
+      "gridSize": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "ai-generated/Tent-traditional---8x16.png",
+      "name": "Tent traditional - 8x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tent traditional - 8x16.png",
+      "gridSize": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Tent-Zetatech-small---7x16.png",
+      "name": "Tent Zetatech small - 7x16",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Tent Zetatech small - 7x16.png",
+      "gridSize": [
+        7,
+        16
+      ]
+    },
+    {
+      "id": "ai-generated/Vending-Biotechnica---8x7.png",
+      "name": "Vending Biotechnica - 8x7",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Vending Biotechnica - 8x7.png",
+      "gridSize": [
+        8,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Vending-Continental---10x7.png",
+      "name": "Vending Continental - 10x7",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Vending Continental - 10x7.png",
+      "gridSize": [
+        10,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Vending-Zetatech---6x7.png",
+      "name": "Vending Zetatech - 6x7",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Vending Zetatech - 6x7.png",
+      "gridSize": [
+        6,
+        7
+      ]
+    },
+    {
+      "id": "ai-generated/Washing-machine---8x10.png",
+      "name": "Washing machine - 8x10",
+      "category": "ai-generated",
+      "path": "assets/ai-generated/Washing machine - 8x10.png",
+      "gridSize": [
+        8,
+        10
       ]
     }
   ]

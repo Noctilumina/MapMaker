@@ -23,6 +23,7 @@ const OBJECT_CATEGORIES = [
   'dungeon-tiles', 'rugs', 'rugs-decor', 'lighting', 'rubble', 'gore',
   'graffiti', 'scrap-debris', 'Door Tiles', 'Stair Tiles',
   'Special Rooms', 'Structures', 'Bloody Assets',
+  'ai-generated', 'container', 'patches',
 ];
 
 interface TextureEntry {
