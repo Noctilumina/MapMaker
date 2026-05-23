@@ -16,15 +16,18 @@ function withBase(path: string): string {
 
 const CATEGORIES = ['all', 'floors', 'walls', 'furniture', 'props', 'doors'];
 const TEXTURE_CATEGORIES = ['all', 'drawn', 'grass', 'ground', 'rock', 'stone-wall', 'wood', 'paving', 'roof', 'misc', 'numbered'];
-const OBJECT_CATEGORIES = [
-  'all', 'furniture', 'decor', 'characters', 'Bloody Assets', 'gore',
-  'street', 'buildings', 'vehicles', 'container', 'graffiti',
-  'nature', 'scrap-debris',
-  'floor-elements', 'patches',
-  'crates', 'trash',
-  'lighting', 'tech', 'security',
-  'wall-elements', 'fencing', 'stairs', 'doors-hatches',
-  'dungeon-tiles', 'Door Tiles', 'Stair Tiles', 'Special Rooms', 'Structures',
+const OBJECT_GROUPS = [
+  { label: 'All',       categories: [] as string[] },
+  { label: 'People',    categories: ['characters', 'Bloody Assets', 'gore'] },
+  { label: 'Nature',    categories: ['nature'] },
+  { label: 'Debris',    categories: ['scrap-debris', 'trash'] },
+  { label: 'Urban',     categories: ['street', 'buildings', 'vehicles', 'container', 'graffiti'] },
+  { label: 'Ground',    categories: ['floor-elements', 'patches'] },
+  { label: 'Interior',  categories: ['furniture', 'decor', 'lighting'] },
+  { label: 'Storage',   categories: ['crates'] },
+  { label: 'Equipment', categories: ['tech', 'security'] },
+  { label: 'Structure', categories: ['wall-elements', 'fencing', 'stairs', 'doors-hatches'] },
+  { label: 'Dungeon',   categories: ['dungeon-tiles', 'Door Tiles', 'Stair Tiles', 'Special Rooms', 'Structures'] },
 ];
 
 interface TextureEntry {
@@ -57,7 +60,8 @@ export default function AssetBrowser() {
   const [textures, setTextures] = useState<TextureEntry[]>([]);
   const [texCategory, setTexCategory] = useState('all');
   const [objects, setObjects] = useState<ObjectEntry[]>([]);
-  const [objCategory, setObjCategory] = useState('all');
+  const [objGroup, setObjGroup] = useState('All');
+  const [objSubCategory, setObjSubCategory] = useState('all');
   const [objVibe, setObjVibe] = useState('all');
   const [tagMap, setTagMap] = useState<Record<string, string[]>>({});
   const [prefabRenamingId, setPrefabRenamingId] = useState<string | null>(null);
@@ -175,7 +179,14 @@ export default function AssetBrowser() {
 
   const filteredObjects = useMemo(() => {
     let items = objects;
-    if (objCategory !== 'all') items = items.filter(o => o.category === objCategory);
+    const group = OBJECT_GROUPS.find(g => g.label === objGroup);
+    if (group && group.categories.length > 0) {
+      if (objSubCategory !== 'all') {
+        items = items.filter(o => o.category === objSubCategory);
+      } else {
+        items = items.filter(o => group.categories.includes(o.category));
+      }
+    }
     if (objVibe !== 'all') {
       items = items.filter(o => {
         const relPath = o.path.replace('/assets/', '');
@@ -384,13 +395,31 @@ export default function AssetBrowser() {
               </ChipButton>
             ))}
           </div>
-          <div style={{ padding: '4px 12px', display: 'flex', flexWrap: 'wrap', gap: 2 }}>
-            {OBJECT_CATEGORIES.map((cat) => (
-              <ChipButton key={cat} variant="primary" selected={objCategory === cat} onClick={() => setObjCategory(cat)} style={{ padding: '1px 6px', textTransform: 'capitalize' }}>
-                {cat}
+          <div style={{ padding: '4px 12px', display: 'flex', flexWrap: 'wrap', gap: 2, borderBottom: theme.borderLight }}>
+            {OBJECT_GROUPS.map((g) => (
+              <ChipButton key={g.label} variant="primary" selected={objGroup === g.label}
+                onClick={() => { setObjGroup(g.label); setObjSubCategory('all'); }}
+                style={{ padding: '1px 6px' }}>
+                {g.label}
               </ChipButton>
             ))}
           </div>
+          {(() => {
+            const group = OBJECT_GROUPS.find(g => g.label === objGroup);
+            if (!group || group.categories.length <= 1) return null;
+            return (
+              <div style={{ padding: '3px 12px', display: 'flex', flexWrap: 'wrap', gap: 2, borderBottom: theme.borderLight }}>
+                <ChipButton variant="secondary" selected={objSubCategory === 'all'} onClick={() => setObjSubCategory('all')} style={{ padding: '1px 6px' }}>
+                  all
+                </ChipButton>
+                {group.categories.map((cat) => (
+                  <ChipButton key={cat} variant="secondary" selected={objSubCategory === cat} onClick={() => setObjSubCategory(cat)} style={{ padding: '1px 6px', textTransform: 'capitalize' }}>
+                    {cat}
+                  </ChipButton>
+                ))}
+              </div>
+            );
+          })()}
           <div style={{ flex: 1, overflow: 'auto', padding: '0 12px 12px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, alignContent: 'start' }}>
             {filteredObjects.map((obj) => (
               <button key={obj.id} onClick={() => handleObjectSelect(obj)} title={`${obj.name} (${obj.gridSize[0]}x${obj.gridSize[1]})`}
