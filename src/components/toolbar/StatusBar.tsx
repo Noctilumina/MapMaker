@@ -20,7 +20,7 @@ export default function StatusBar() {
       <span style={{ margin: '0 8px', color: theme.borderSubtle }}>&middot;</span>
       <span>Snap: {snapToGrid ? 'ON' : 'OFF'}</span>
       <span style={{ flex: 1 }} />
-      <span style={{ color: theme.textMuted, fontSize: 10 }}>v1.4.9</span>
+      <span style={{ color: theme.textMuted, fontSize: 10 }}>v1.4.10</span>
     </>
   );
 }

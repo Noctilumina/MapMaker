@@ -21,7 +21,7 @@ const OBJECT_CATEGORIES = [
   'security', 'tech', 'vehicles', 'buildings', 'nature',
   'wall-elements', 'floor-elements', 'doors-hatches', 'railings-stairs',
   'dungeon-tiles', 'rugs', 'rugs-decor', 'lighting', 'rubble', 'gore',
-  'graffiti', 'scrap-debris', 'Door Tiles', 'Stair Tiles',
+  'graffiti', 'scrap-debris', 'fencing', 'Door Tiles', 'Stair Tiles',
   'Special Rooms', 'Structures', 'Bloody Assets',
   'container', 'patches',
 ];
