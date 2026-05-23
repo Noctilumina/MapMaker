@@ -19,7 +19,7 @@ const TEXTURE_CATEGORIES = ['all', 'drawn', 'grass', 'ground', 'rock', 'stone-wa
 const OBJECT_CATEGORIES = [
   'all', 'furniture', 'decor', 'characters', 'Bloody Assets', 'gore',
   'street', 'buildings', 'vehicles', 'container', 'graffiti',
-  'nature', 'rubble', 'scrap-debris',
+  'nature', 'scrap-debris',
   'floor-elements', 'patches',
   'crates', 'trash',
   'lighting', 'tech', 'security',

@@ -9663,7 +9663,7 @@
     {
       "id": "rubble/Clutter---Anvil-1.png",
       "name": "Clutter - Anvil 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Anvil 1.png",
       "gridSize": [
         1,
@@ -9673,7 +9673,7 @@
     {
       "id": "rubble/Clutter---Anvil-2.png",
       "name": "Clutter - Anvil 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Anvil 2.png",
       "gridSize": [
         1,
@@ -9683,7 +9683,7 @@
     {
       "id": "rubble/Clutter---Bird-nest.png",
       "name": "Clutter - Bird nest",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Bird nest.png",
       "gridSize": [
         1,
@@ -9693,7 +9693,7 @@
     {
       "id": "rubble/Clutter---Book-1.a.png",
       "name": "Clutter - Book 1.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Book 1.a.png",
       "gridSize": [
         1,
@@ -9703,7 +9703,7 @@
     {
       "id": "rubble/Clutter---Book-pile-1.a.png",
       "name": "Clutter - Book pile 1.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Book pile 1.a.png",
       "gridSize": [
         1,
@@ -9713,7 +9713,7 @@
     {
       "id": "rubble/Clutter---Book-pile-2.a.png",
       "name": "Clutter - Book pile 2.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Book pile 2.a.png",
       "gridSize": [
         1,
@@ -9723,7 +9723,7 @@
     {
       "id": "rubble/Clutter---Book-pile-3.a.png",
       "name": "Clutter - Book pile 3.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Book pile 3.a.png",
       "gridSize": [
         1,
@@ -9733,7 +9733,7 @@
     {
       "id": "rubble/Clutter---Book-pile-4.a.png",
       "name": "Clutter - Book pile 4.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Book pile 4.a.png",
       "gridSize": [
         1,
@@ -9743,7 +9743,7 @@
     {
       "id": "rubble/Clutter---Book-pile-5.a.png",
       "name": "Clutter - Book pile 5.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Book pile 5.a.png",
       "gridSize": [
         1,
@@ -9753,7 +9753,7 @@
     {
       "id": "rubble/Clutter---Broken-boards-1---Dark.png",
       "name": "Clutter - Broken boards 1 - Dark",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Broken boards 1 - Dark.png",
       "gridSize": [
         1,
@@ -9763,7 +9763,7 @@
     {
       "id": "rubble/Clutter---Broken-boards-2---Dark.png",
       "name": "Clutter - Broken boards 2 - Dark",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Broken boards 2 - Dark.png",
       "gridSize": [
         1,
@@ -9773,7 +9773,7 @@
     {
       "id": "rubble/Clutter---Bucket-1---Dark.png",
       "name": "Clutter - Bucket 1 - Dark",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Bucket 1 - Dark.png",
       "gridSize": [
         1,
@@ -9783,7 +9783,7 @@
     {
       "id": "rubble/Clutter---Bucket-2---Dark.png",
       "name": "Clutter - Bucket 2 - Dark",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Bucket 2 - Dark.png",
       "gridSize": [
         1,
@@ -9793,7 +9793,7 @@
     {
       "id": "rubble/Clutter---Clay-jars-1.png",
       "name": "Clutter - Clay jars 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Clay jars 1.png",
       "gridSize": [
         1,
@@ -9803,7 +9803,7 @@
     {
       "id": "rubble/Clutter---Clay-jars-2.png",
       "name": "Clutter - Clay jars 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Clay jars 2.png",
       "gridSize": [
         1,
@@ -9813,7 +9813,7 @@
     {
       "id": "rubble/Clutter---Covered.png",
       "name": "Clutter - Covered",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Covered.png",
       "gridSize": [
         1,
@@ -9823,7 +9823,7 @@
     {
       "id": "rubble/Clutter---Crystal-ball.png",
       "name": "Clutter - Crystal ball",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Crystal ball.png",
       "gridSize": [
         1,
@@ -9833,7 +9833,7 @@
     {
       "id": "rubble/Clutter---Cutlery.png",
       "name": "Clutter - Cutlery",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Cutlery.png",
       "gridSize": [
         1,
@@ -9843,7 +9843,7 @@
     {
       "id": "rubble/Clutter---Firewood-1.png",
       "name": "Clutter - Firewood 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Firewood 1.png",
       "gridSize": [
         1,
@@ -9853,7 +9853,7 @@
     {
       "id": "rubble/Clutter---Firewood-2.png",
       "name": "Clutter - Firewood 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Firewood 2.png",
       "gridSize": [
         1,
@@ -9863,7 +9863,7 @@
     {
       "id": "rubble/Clutter---Flowers---No-flowers.png",
       "name": "Clutter - Flowers - No flowers",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Flowers - No flowers.png",
       "gridSize": [
         1,
@@ -9873,7 +9873,7 @@
     {
       "id": "rubble/Clutter---Flowers-1.a.png",
       "name": "Clutter - Flowers 1.a",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Flowers 1.a.png",
       "gridSize": [
         1,
@@ -9883,7 +9883,7 @@
     {
       "id": "rubble/Clutter---Flowers-1.b.png",
       "name": "Clutter - Flowers 1.b",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Flowers 1.b.png",
       "gridSize": [
         1,
@@ -9893,7 +9893,7 @@
     {
       "id": "rubble/Clutter---Flowers-1.c.png",
       "name": "Clutter - Flowers 1.c",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Flowers 1.c.png",
       "gridSize": [
         1,
@@ -9903,7 +9903,7 @@
     {
       "id": "rubble/Clutter---Food-1.png",
       "name": "Clutter - Food 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Food 1.png",
       "gridSize": [
         1,
@@ -9913,7 +9913,7 @@
     {
       "id": "rubble/Clutter---Food-2.png",
       "name": "Clutter - Food 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Food 2.png",
       "gridSize": [
         1,
@@ -9923,7 +9923,7 @@
     {
       "id": "rubble/Clutter---Globe.png",
       "name": "Clutter - Globe",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Globe.png",
       "gridSize": [
         1,
@@ -9933,7 +9933,7 @@
     {
       "id": "rubble/Clutter---Grindstone---Dark.png",
       "name": "Clutter - Grindstone - Dark",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Grindstone - Dark.png",
       "gridSize": [
         1,
@@ -9943,7 +9943,7 @@
     {
       "id": "rubble/Clutter---Grindstone---Light.png",
       "name": "Clutter - Grindstone - Light",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Grindstone - Light.png",
       "gridSize": [
         1,
@@ -9953,7 +9953,7 @@
     {
       "id": "rubble/Clutter---Hammer-and-nails.png",
       "name": "Clutter - Hammer and nails",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Hammer and nails.png",
       "gridSize": [
         1,
@@ -9963,7 +9963,7 @@
     {
       "id": "rubble/Clutter---Inkwell.png",
       "name": "Clutter - Inkwell",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Inkwell.png",
       "gridSize": [
         1,
@@ -9973,7 +9973,7 @@
     {
       "id": "rubble/Clutter---Papers.png",
       "name": "Clutter - Papers",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Papers.png",
       "gridSize": [
         1,
@@ -9983,7 +9983,7 @@
     {
       "id": "rubble/Clutter---Pictures-1.png",
       "name": "Clutter - Pictures 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Pictures 1.png",
       "gridSize": [
         1,
@@ -9993,7 +9993,7 @@
     {
       "id": "rubble/Clutter---Pictures-2.png",
       "name": "Clutter - Pictures 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Pictures 2.png",
       "gridSize": [
         1,
@@ -10003,7 +10003,7 @@
     {
       "id": "rubble/Clutter---Pictures-3.png",
       "name": "Clutter - Pictures 3",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Pictures 3.png",
       "gridSize": [
         1,
@@ -10013,7 +10013,7 @@
     {
       "id": "rubble/Clutter---Pictures-4.png",
       "name": "Clutter - Pictures 4",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Pictures 4.png",
       "gridSize": [
         1,
@@ -10023,7 +10023,7 @@
     {
       "id": "rubble/Clutter---Playing-cards.png",
       "name": "Clutter - Playing cards",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Playing cards.png",
       "gridSize": [
         1,
@@ -10033,7 +10033,7 @@
     {
       "id": "rubble/Clutter---Pumpkin---Jack-o-lantern.png",
       "name": "Clutter - Pumpkin - Jack-o-lantern",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Pumpkin - Jack-o-lantern.png",
       "gridSize": [
         1,
@@ -10043,7 +10043,7 @@
     {
       "id": "rubble/Clutter---Pumpkin.png",
       "name": "Clutter - Pumpkin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Pumpkin.png",
       "gridSize": [
         1,
@@ -10053,7 +10053,7 @@
     {
       "id": "rubble/Clutter---Sacks-1.png",
       "name": "Clutter - Sacks 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Sacks 1.png",
       "gridSize": [
         1,
@@ -10063,7 +10063,7 @@
     {
       "id": "rubble/Clutter---Sacks-2.png",
       "name": "Clutter - Sacks 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Sacks 2.png",
       "gridSize": [
         1,
@@ -10073,7 +10073,7 @@
     {
       "id": "rubble/Clutter---Scales---Gold.png",
       "name": "Clutter - Scales - Gold",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Scales - Gold.png",
       "gridSize": [
         1,
@@ -10083,7 +10083,7 @@
     {
       "id": "rubble/Clutter---Scroll-1.png",
       "name": "Clutter - Scroll 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Scroll 1.png",
       "gridSize": [
         1,
@@ -10093,7 +10093,7 @@
     {
       "id": "rubble/Clutter---Scroll-2.png",
       "name": "Clutter - Scroll 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Scroll 2.png",
       "gridSize": [
         1,
@@ -10103,7 +10103,7 @@
     {
       "id": "rubble/Clutter---Scroll-3.png",
       "name": "Clutter - Scroll 3",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Scroll 3.png",
       "gridSize": [
         1,
@@ -10113,7 +10113,7 @@
     {
       "id": "rubble/Clutter---Scroll-4.png",
       "name": "Clutter - Scroll 4",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Scroll 4.png",
       "gridSize": [
         1,
@@ -10123,7 +10123,7 @@
     {
       "id": "rubble/Clutter---Scrolls.png",
       "name": "Clutter - Scrolls",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Scrolls.png",
       "gridSize": [
         1,
@@ -10133,7 +10133,7 @@
     {
       "id": "rubble/Clutter---Skull---Giant.png",
       "name": "Clutter - Skull - Giant",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Skull - Giant.png",
       "gridSize": [
         1,
@@ -10143,7 +10143,7 @@
     {
       "id": "rubble/Clutter---Skull---Human.png",
       "name": "Clutter - Skull - Human",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Skull - Human.png",
       "gridSize": [
         1,
@@ -10153,7 +10153,7 @@
     {
       "id": "rubble/Clutter---Tankards---Empty.png",
       "name": "Clutter - Tankards - Empty",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Tankards - Empty.png",
       "gridSize": [
         1,
@@ -10163,7 +10163,7 @@
     {
       "id": "rubble/Clutter---Tankards---Full.png",
       "name": "Clutter - Tankards - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Tankards - Full.png",
       "gridSize": [
         1,
@@ -10173,7 +10173,7 @@
     {
       "id": "rubble/Clutter---Webs-1---Full.png",
       "name": "Clutter - Webs 1 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 1 - Full.png",
       "gridSize": [
         1,
@@ -10183,7 +10183,7 @@
     {
       "id": "rubble/Clutter---Webs-1---Thin.png",
       "name": "Clutter - Webs 1 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 1 - Thin.png",
       "gridSize": [
         1,
@@ -10193,7 +10193,7 @@
     {
       "id": "rubble/Clutter---Webs-10---Full.png",
       "name": "Clutter - Webs 10 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 10 - Full.png",
       "gridSize": [
         1,
@@ -10203,7 +10203,7 @@
     {
       "id": "rubble/Clutter---Webs-10---Thin.png",
       "name": "Clutter - Webs 10 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 10 - Thin.png",
       "gridSize": [
         1,
@@ -10213,7 +10213,7 @@
     {
       "id": "rubble/Clutter---Webs-11---Full.png",
       "name": "Clutter - Webs 11 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 11 - Full.png",
       "gridSize": [
         1,
@@ -10223,7 +10223,7 @@
     {
       "id": "rubble/Clutter---Webs-11---Thin.png",
       "name": "Clutter - Webs 11 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 11 - Thin.png",
       "gridSize": [
         1,
@@ -10233,7 +10233,7 @@
     {
       "id": "rubble/Clutter---Webs-12---Full.png",
       "name": "Clutter - Webs 12 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 12 - Full.png",
       "gridSize": [
         1,
@@ -10243,7 +10243,7 @@
     {
       "id": "rubble/Clutter---Webs-12---Thin.png",
       "name": "Clutter - Webs 12 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 12 - Thin.png",
       "gridSize": [
         1,
@@ -10253,7 +10253,7 @@
     {
       "id": "rubble/Clutter---Webs-13---Full.png",
       "name": "Clutter - Webs 13 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 13 - Full.png",
       "gridSize": [
         1,
@@ -10263,7 +10263,7 @@
     {
       "id": "rubble/Clutter---Webs-13---Thin.png",
       "name": "Clutter - Webs 13 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 13 - Thin.png",
       "gridSize": [
         1,
@@ -10273,7 +10273,7 @@
     {
       "id": "rubble/Clutter---Webs-14---Full.png",
       "name": "Clutter - Webs 14 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 14 - Full.png",
       "gridSize": [
         1,
@@ -10283,7 +10283,7 @@
     {
       "id": "rubble/Clutter---Webs-14---Thin.png",
       "name": "Clutter - Webs 14 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 14 - Thin.png",
       "gridSize": [
         1,
@@ -10293,7 +10293,7 @@
     {
       "id": "rubble/Clutter---Webs-15---Full.png",
       "name": "Clutter - Webs 15 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 15 - Full.png",
       "gridSize": [
         1,
@@ -10303,7 +10303,7 @@
     {
       "id": "rubble/Clutter---Webs-15---Thin.png",
       "name": "Clutter - Webs 15 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 15 - Thin.png",
       "gridSize": [
         1,
@@ -10313,7 +10313,7 @@
     {
       "id": "rubble/Clutter---Webs-16---Full.png",
       "name": "Clutter - Webs 16 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 16 - Full.png",
       "gridSize": [
         1,
@@ -10323,7 +10323,7 @@
     {
       "id": "rubble/Clutter---Webs-16---Thin.png",
       "name": "Clutter - Webs 16 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 16 - Thin.png",
       "gridSize": [
         1,
@@ -10333,7 +10333,7 @@
     {
       "id": "rubble/Clutter---Webs-2---Full.png",
       "name": "Clutter - Webs 2 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 2 - Full.png",
       "gridSize": [
         1,
@@ -10343,7 +10343,7 @@
     {
       "id": "rubble/Clutter---Webs-2---Thin.png",
       "name": "Clutter - Webs 2 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 2 - Thin.png",
       "gridSize": [
         1,
@@ -10353,7 +10353,7 @@
     {
       "id": "rubble/Clutter---Webs-3---Full.png",
       "name": "Clutter - Webs 3 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 3 - Full.png",
       "gridSize": [
         1,
@@ -10363,7 +10363,7 @@
     {
       "id": "rubble/Clutter---Webs-3---Thin.png",
       "name": "Clutter - Webs 3 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 3 - Thin.png",
       "gridSize": [
         1,
@@ -10373,7 +10373,7 @@
     {
       "id": "rubble/Clutter---Webs-4---Full.png",
       "name": "Clutter - Webs 4 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 4 - Full.png",
       "gridSize": [
         1,
@@ -10383,7 +10383,7 @@
     {
       "id": "rubble/Clutter---Webs-4---Thin.png",
       "name": "Clutter - Webs 4 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 4 - Thin.png",
       "gridSize": [
         1,
@@ -10393,7 +10393,7 @@
     {
       "id": "rubble/Clutter---Webs-5---Full.png",
       "name": "Clutter - Webs 5 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 5 - Full.png",
       "gridSize": [
         1,
@@ -10403,7 +10403,7 @@
     {
       "id": "rubble/Clutter---Webs-5---Thin.png",
       "name": "Clutter - Webs 5 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 5 - Thin.png",
       "gridSize": [
         1,
@@ -10413,7 +10413,7 @@
     {
       "id": "rubble/Clutter---Webs-6---Full.png",
       "name": "Clutter - Webs 6 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 6 - Full.png",
       "gridSize": [
         1,
@@ -10423,7 +10423,7 @@
     {
       "id": "rubble/Clutter---Webs-6---Thin.png",
       "name": "Clutter - Webs 6 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 6 - Thin.png",
       "gridSize": [
         1,
@@ -10433,7 +10433,7 @@
     {
       "id": "rubble/Clutter---Webs-7---Full.png",
       "name": "Clutter - Webs 7 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 7 - Full.png",
       "gridSize": [
         1,
@@ -10443,7 +10443,7 @@
     {
       "id": "rubble/Clutter---Webs-7---Thin.png",
       "name": "Clutter - Webs 7 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 7 - Thin.png",
       "gridSize": [
         1,
@@ -10453,7 +10453,7 @@
     {
       "id": "rubble/Clutter---Webs-8---Full.png",
       "name": "Clutter - Webs 8 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 8 - Full.png",
       "gridSize": [
         1,
@@ -10463,7 +10463,7 @@
     {
       "id": "rubble/Clutter---Webs-8---Thin.png",
       "name": "Clutter - Webs 8 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 8 - Thin.png",
       "gridSize": [
         1,
@@ -10473,7 +10473,7 @@
     {
       "id": "rubble/Clutter---Webs-9---Full.png",
       "name": "Clutter - Webs 9 - Full",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 9 - Full.png",
       "gridSize": [
         1,
@@ -10483,7 +10483,7 @@
     {
       "id": "rubble/Clutter---Webs-9---Thin.png",
       "name": "Clutter - Webs 9 - Thin",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Webs 9 - Thin.png",
       "gridSize": [
         1,
@@ -10493,7 +10493,7 @@
     {
       "id": "rubble/Clutter---Writing.png",
       "name": "Clutter - Writing",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Clutter - Writing.png",
       "gridSize": [
         1,
@@ -10503,7 +10503,7 @@
     {
       "id": "rubble/Debris---Axe.png",
       "name": "Debris - Axe",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Axe.png",
       "gridSize": [
         1,
@@ -10513,7 +10513,7 @@
     {
       "id": "rubble/Debris---Shield-1.png",
       "name": "Debris - Shield 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Shield 1.png",
       "gridSize": [
         1,
@@ -10523,7 +10523,7 @@
     {
       "id": "rubble/Debris---Shield-2.png",
       "name": "Debris - Shield 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Shield 2.png",
       "gridSize": [
         1,
@@ -10533,7 +10533,7 @@
     {
       "id": "rubble/Debris---Shield-3.png",
       "name": "Debris - Shield 3",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Shield 3.png",
       "gridSize": [
         1,
@@ -10543,7 +10543,7 @@
     {
       "id": "rubble/Debris---Spear-1.png",
       "name": "Debris - Spear 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Spear 1.png",
       "gridSize": [
         1,
@@ -10553,7 +10553,7 @@
     {
       "id": "rubble/Debris---Spear-2.png",
       "name": "Debris - Spear 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Spear 2.png",
       "gridSize": [
         1,
@@ -10563,7 +10563,7 @@
     {
       "id": "rubble/Debris---Sword-1.png",
       "name": "Debris - Sword 1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Sword 1.png",
       "gridSize": [
         1,
@@ -10573,7 +10573,7 @@
     {
       "id": "rubble/Debris---Sword-2.png",
       "name": "Debris - Sword 2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Sword 2.png",
       "gridSize": [
         1,
@@ -10583,7 +10583,7 @@
     {
       "id": "rubble/Debris---Sword-3.png",
       "name": "Debris - Sword 3",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Debris - Sword 3.png",
       "gridSize": [
         1,
@@ -10593,7 +10593,7 @@
     {
       "id": "rubble/Rubble-A.1---4x3.png",
       "name": "Rubble A.1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble A.1 - 4x3.png",
       "gridSize": [
         4,
@@ -10603,7 +10603,7 @@
     {
       "id": "rubble/Rubble-A.2---4x3.png",
       "name": "Rubble A.2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble A.2 - 4x3.png",
       "gridSize": [
         4,
@@ -10613,7 +10613,7 @@
     {
       "id": "rubble/Rubble-B.1---3x3.png",
       "name": "Rubble B.1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble B.1 - 3x3.png",
       "gridSize": [
         3,
@@ -10623,7 +10623,7 @@
     {
       "id": "rubble/Rubble-B.2---3x3.png",
       "name": "Rubble B.2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble B.2 - 3x3.png",
       "gridSize": [
         3,
@@ -10633,7 +10633,7 @@
     {
       "id": "rubble/Rubble-C.1---3x3.png",
       "name": "Rubble C.1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble C.1 - 3x3.png",
       "gridSize": [
         3,
@@ -10643,7 +10643,7 @@
     {
       "id": "rubble/Rubble-C.2---3x3.png",
       "name": "Rubble C.2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble C.2 - 3x3.png",
       "gridSize": [
         3,
@@ -10653,7 +10653,7 @@
     {
       "id": "rubble/Rubble-D.1---4x3.png",
       "name": "Rubble D.1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble D.1 - 4x3.png",
       "gridSize": [
         4,
@@ -10663,7 +10663,7 @@
     {
       "id": "rubble/Rubble-D.2---4x3.png",
       "name": "Rubble D.2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble D.2 - 4x3.png",
       "gridSize": [
         4,
@@ -10673,7 +10673,7 @@
     {
       "id": "rubble/Rubble-E---2x2.png",
       "name": "Rubble E",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble E - 2x2.png",
       "gridSize": [
         2,
@@ -10683,7 +10683,7 @@
     {
       "id": "rubble/Rubble-F---2x2.png",
       "name": "Rubble F",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble F - 2x2.png",
       "gridSize": [
         2,
@@ -10693,7 +10693,7 @@
     {
       "id": "rubble/Rubble-G---1x1.png",
       "name": "Rubble G",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble G - 1x1.png",
       "gridSize": [
         1,
@@ -10703,7 +10703,7 @@
     {
       "id": "rubble/Rubble-H.1---2x1.png",
       "name": "Rubble H.1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble H.1 - 2x1.png",
       "gridSize": [
         2,
@@ -10713,7 +10713,7 @@
     {
       "id": "rubble/Rubble-H.2---2x1.png",
       "name": "Rubble H.2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble H.2 - 2x1.png",
       "gridSize": [
         2,
@@ -10723,7 +10723,7 @@
     {
       "id": "rubble/Rubble-I.1---3x2.png",
       "name": "Rubble I.1",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble I.1 - 3x2.png",
       "gridSize": [
         3,
@@ -10733,7 +10733,7 @@
     {
       "id": "rubble/Rubble-I.2---3x2.png",
       "name": "Rubble I.2",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble I.2 - 3x2.png",
       "gridSize": [
         3,
@@ -10743,7 +10743,7 @@
     {
       "id": "rubble/Rubble-J---2x2.png",
       "name": "Rubble J",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble J - 2x2.png",
       "gridSize": [
         2,
@@ -10753,7 +10753,7 @@
     {
       "id": "rubble/Rubble-K---2x1.png",
       "name": "Rubble K",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/rubble/Rubble K - 2x1.png",
       "gridSize": [
         2,
@@ -18583,7 +18583,7 @@
     {
       "id": "ai-generated/Broken-concrete-rebar-1---8x14.png",
       "name": "Broken concrete rebar 1 - 8x14",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Broken concrete rebar 1 - 8x14.png",
       "gridSize": [
         8,
@@ -18593,7 +18593,7 @@
     {
       "id": "ai-generated/Broken-concrete-rebar-2---8x8.png",
       "name": "Broken concrete rebar 2 - 8x8",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Broken concrete rebar 2 - 8x8.png",
       "gridSize": [
         8,
@@ -18603,7 +18603,7 @@
     {
       "id": "ai-generated/Broken-concrete-rebar-3---8x9.png",
       "name": "Broken concrete rebar 3 - 8x9",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Broken concrete rebar 3 - 8x9.png",
       "gridSize": [
         8,
@@ -18613,7 +18613,7 @@
     {
       "id": "ai-generated/Debris-1---8x12.png",
       "name": "Debris 1 - 8x12",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Debris 1 - 8x12.png",
       "gridSize": [
         8,
@@ -18623,7 +18623,7 @@
     {
       "id": "ai-generated/Debris-1b---9x13.png",
       "name": "Debris 1b - 9x13",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Debris 1b - 9x13.png",
       "gridSize": [
         9,
@@ -18633,7 +18633,7 @@
     {
       "id": "ai-generated/Debris-2---7x10.png",
       "name": "Debris 2 - 7x10",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Debris 2 - 7x10.png",
       "gridSize": [
         7,
@@ -18643,7 +18643,7 @@
     {
       "id": "ai-generated/Debris-3---8x12.png",
       "name": "Debris 3 - 8x12",
-      "category": "rubble",
+      "category": "scrap-debris",
       "path": "/assets/ai-generated/Debris 3 - 8x12.png",
       "gridSize": [
         8,
