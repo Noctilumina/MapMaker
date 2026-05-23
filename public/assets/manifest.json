@@ -9603,7 +9603,7 @@
     {
       "id": "railings-stairs/Stairs---Angular---Long---7x5.png",
       "name": "Stairs - Angular - Long",
-      "category": "railings-stairs",
+      "category": "stairs",
       "path": "/assets/railings-stairs/Stairs - Angular - Long - 7x5.png",
       "gridSize": [
         7,
@@ -9613,7 +9613,7 @@
     {
       "id": "railings-stairs/Stairs---Angular---Short---4x4.png",
       "name": "Stairs - Angular - Short",
-      "category": "railings-stairs",
+      "category": "stairs",
       "path": "/assets/railings-stairs/Stairs - Angular - Short - 4x4.png",
       "gridSize": [
         4,
@@ -9623,7 +9623,7 @@
     {
       "id": "railings-stairs/Stairs---Narrow---3x3.webp",
       "name": "Stairs - Narrow",
-      "category": "railings-stairs",
+      "category": "stairs",
       "path": "/assets/railings-stairs/Stairs - Narrow - 3x3.webp",
       "gridSize": [
         3,
@@ -9633,7 +9633,7 @@
     {
       "id": "railings-stairs/Stairs---Straight---Long---4x3.png",
       "name": "Stairs - Straight - Long",
-      "category": "railings-stairs",
+      "category": "stairs",
       "path": "/assets/railings-stairs/Stairs - Straight - Long - 4x3.png",
       "gridSize": [
         4,
@@ -9643,7 +9643,7 @@
     {
       "id": "railings-stairs/Stairs---Straight---Short---3x3.png",
       "name": "Stairs - Straight - Short",
-      "category": "railings-stairs",
+      "category": "stairs",
       "path": "/assets/railings-stairs/Stairs - Straight - Short - 3x3.png",
       "gridSize": [
         3,
@@ -9653,7 +9653,7 @@
     {
       "id": "railings-stairs/Stairs---Wide---4x3.webp",
       "name": "Stairs - Wide",
-      "category": "railings-stairs",
+      "category": "stairs",
       "path": "/assets/railings-stairs/Stairs - Wide - 4x3.webp",
       "gridSize": [
         4,
@@ -10763,7 +10763,7 @@
     {
       "id": "rugs-decor/Candle-A.png",
       "name": "Candle A",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Candle A.png",
       "gridSize": [
         1,
@@ -10773,7 +10773,7 @@
     {
       "id": "rugs-decor/Candle-B.png",
       "name": "Candle B",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Candle B.png",
       "gridSize": [
         1,
@@ -10783,7 +10783,7 @@
     {
       "id": "rugs-decor/Candle-C.png",
       "name": "Candle C",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Candle C.png",
       "gridSize": [
         1,
@@ -10793,7 +10793,7 @@
     {
       "id": "rugs-decor/Candle-D.png",
       "name": "Candle D",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Candle D.png",
       "gridSize": [
         1,
@@ -10803,7 +10803,7 @@
     {
       "id": "rugs-decor/Candle-E.png",
       "name": "Candle E",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Candle E.png",
       "gridSize": [
         1,
@@ -10813,7 +10813,7 @@
     {
       "id": "rugs-decor/Candle-F.png",
       "name": "Candle F",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Candle F.png",
       "gridSize": [
         1,
@@ -10823,7 +10823,7 @@
     {
       "id": "rugs-decor/Curtain-1.png",
       "name": "Curtain 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Curtain 1.png",
       "gridSize": [
         1,
@@ -10833,7 +10833,7 @@
     {
       "id": "rugs-decor/Curtains.png",
       "name": "Curtains",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Curtains.png",
       "gridSize": [
         1,
@@ -10843,7 +10843,7 @@
     {
       "id": "rugs-decor/Cushion-A.png",
       "name": "Cushion A",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Cushion A.png",
       "gridSize": [
         1,
@@ -10853,7 +10853,7 @@
     {
       "id": "rugs-decor/Cushion-B.png",
       "name": "Cushion B",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Cushion B.png",
       "gridSize": [
         1,
@@ -10863,7 +10863,7 @@
     {
       "id": "rugs-decor/Cushion-C.png",
       "name": "Cushion C",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Cushion C.png",
       "gridSize": [
         1,
@@ -10873,7 +10873,7 @@
     {
       "id": "rugs-decor/Idol-Elephant.png",
       "name": "Idol Elephant",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Idol Elephant.png",
       "gridSize": [
         1,
@@ -10883,7 +10883,7 @@
     {
       "id": "rugs-decor/Idol-Tabaxi.png",
       "name": "Idol Tabaxi",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Idol Tabaxi.png",
       "gridSize": [
         1,
@@ -10893,7 +10893,7 @@
     {
       "id": "rugs-decor/Rug---Animal-skin.png",
       "name": "Rug - Animal skin",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug - Animal skin.png",
       "gridSize": [
         1,
@@ -10903,7 +10903,7 @@
     {
       "id": "rugs-decor/Rug---Bear-1.png",
       "name": "Rug - Bear 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug - Bear 1.png",
       "gridSize": [
         1,
@@ -10913,7 +10913,7 @@
     {
       "id": "rugs-decor/Rug---Doormat-7.png",
       "name": "Rug - Doormat 7",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug - Doormat 7.png",
       "gridSize": [
         1,
@@ -10923,7 +10923,7 @@
     {
       "id": "rugs-decor/Rug---Wrinkled-1.png",
       "name": "Rug - Wrinkled 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug - Wrinkled 1.png",
       "gridSize": [
         1,
@@ -10933,7 +10933,7 @@
     {
       "id": "rugs-decor/Rug-6.a.png",
       "name": "Rug 6.a",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.a.png",
       "gridSize": [
         1,
@@ -10943,7 +10943,7 @@
     {
       "id": "rugs-decor/Rug-6.b.png",
       "name": "Rug 6.b",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.b.png",
       "gridSize": [
         1,
@@ -10953,7 +10953,7 @@
     {
       "id": "rugs-decor/Rug-6.c.png",
       "name": "Rug 6.c",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.c.png",
       "gridSize": [
         1,
@@ -10963,7 +10963,7 @@
     {
       "id": "rugs-decor/Rug-6.d.png",
       "name": "Rug 6.d",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.d.png",
       "gridSize": [
         1,
@@ -10973,7 +10973,7 @@
     {
       "id": "rugs-decor/Rug-6.e.png",
       "name": "Rug 6.e",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.e.png",
       "gridSize": [
         1,
@@ -10983,7 +10983,7 @@
     {
       "id": "rugs-decor/Rug-6.f.png",
       "name": "Rug 6.f",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.f.png",
       "gridSize": [
         1,
@@ -10993,7 +10993,7 @@
     {
       "id": "rugs-decor/Rug-6.g.png",
       "name": "Rug 6.g",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Rug 6.g.png",
       "gridSize": [
         1,
@@ -11003,7 +11003,7 @@
     {
       "id": "rugs-decor/Sarcophagus-Tabaxi.png",
       "name": "Sarcophagus Tabaxi",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Sarcophagus Tabaxi.png",
       "gridSize": [
         1,
@@ -11013,7 +11013,7 @@
     {
       "id": "rugs-decor/Shrine-Prefab.png",
       "name": "Shrine Prefab",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Shrine Prefab.png",
       "gridSize": [
         1,
@@ -11023,7 +11023,7 @@
     {
       "id": "rugs-decor/Shrine-Table.png",
       "name": "Shrine Table",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Shrine Table.png",
       "gridSize": [
         1,
@@ -11033,7 +11033,7 @@
     {
       "id": "rugs-decor/Statue-platform.png",
       "name": "Statue platform",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Statue platform.png",
       "gridSize": [
         1,
@@ -11043,7 +11043,7 @@
     {
       "id": "rugs-decor/Trophy---Antlers.png",
       "name": "Trophy - Antlers",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Antlers.png",
       "gridSize": [
         1,
@@ -11053,7 +11053,7 @@
     {
       "id": "rugs-decor/Trophy---Bear-1.png",
       "name": "Trophy - Bear 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Bear 1.png",
       "gridSize": [
         1,
@@ -11063,7 +11063,7 @@
     {
       "id": "rugs-decor/Trophy---Deer.png",
       "name": "Trophy - Deer",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Deer.png",
       "gridSize": [
         1,
@@ -11073,7 +11073,7 @@
     {
       "id": "rugs-decor/Trophy---Dragon---Large-1.png",
       "name": "Trophy - Dragon - Large 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Dragon - Large 1.png",
       "gridSize": [
         1,
@@ -11083,7 +11083,7 @@
     {
       "id": "rugs-decor/Trophy---Dragon---Small-1.png",
       "name": "Trophy - Dragon - Small 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Dragon - Small 1.png",
       "gridSize": [
         1,
@@ -11093,7 +11093,7 @@
     {
       "id": "rugs-decor/Trophy---Eyeball.png",
       "name": "Trophy - Eyeball",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Eyeball.png",
       "gridSize": [
         1,
@@ -11103,7 +11103,7 @@
     {
       "id": "rugs-decor/Trophy---Fish-1.a.png",
       "name": "Trophy - Fish 1.a",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Fish 1.a.png",
       "gridSize": [
         1,
@@ -11113,7 +11113,7 @@
     {
       "id": "rugs-decor/Trophy---Fish-2.b.png",
       "name": "Trophy - Fish 2.b",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Fish 2.b.png",
       "gridSize": [
         1,
@@ -11123,7 +11123,7 @@
     {
       "id": "rugs-decor/Trophy---Lion.png",
       "name": "Trophy - Lion",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Lion.png",
       "gridSize": [
         1,
@@ -11133,7 +11133,7 @@
     {
       "id": "rugs-decor/Trophy---Moose.png",
       "name": "Trophy - Moose",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Moose.png",
       "gridSize": [
         1,
@@ -11143,7 +11143,7 @@
     {
       "id": "rugs-decor/Trophy---Tooth.png",
       "name": "Trophy - Tooth",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Tooth.png",
       "gridSize": [
         1,
@@ -11153,7 +11153,7 @@
     {
       "id": "rugs-decor/Trophy---Wolf-1.png",
       "name": "Trophy - Wolf 1",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Wolf 1.png",
       "gridSize": [
         1,
@@ -11163,7 +11163,7 @@
     {
       "id": "rugs-decor/Trophy---Yeti.png",
       "name": "Trophy - Yeti",
-      "category": "rugs-decor",
+      "category": "decor",
       "path": "/assets/rugs-decor/Trophy - Yeti.png",
       "gridSize": [
         1,
@@ -17513,7 +17513,7 @@
     {
       "id": "rugs/rug_black_green_rect.png",
       "name": "Rug Black Green Rect - 2x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_black_green_rect.png",
       "gridSize": [
         2,
@@ -17523,7 +17523,7 @@
     {
       "id": "rugs/rug_black_paint_rect.png",
       "name": "Rug Black Paint Rect - 2x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_black_paint_rect.png",
       "gridSize": [
         2,
@@ -17533,7 +17533,7 @@
     {
       "id": "rugs/rug_black_techCyan_rect.png",
       "name": "Rug Black TechCyan Rect - 2x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_black_techCyan_rect.png",
       "gridSize": [
         2,
@@ -17543,7 +17543,7 @@
     {
       "id": "rugs/rug_black_yellow_corp_sato_rect.png",
       "name": "Rug Black Yellow Corp Sato Rect - 2x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_black_yellow_corp_sato_rect.png",
       "gridSize": [
         2,
@@ -17553,7 +17553,7 @@
     {
       "id": "rugs/rug_fuzz_white_hex.png",
       "name": "Rug Fuzz White Hex - 3x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_fuzz_white_hex.png",
       "gridSize": [
         3,
@@ -17563,7 +17563,7 @@
     {
       "id": "rugs/rug_red_yellow_chinese_circle.png",
       "name": "Rug Red Yellow Chinese Circle - 2x2",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_red_yellow_chinese_circle.png",
       "gridSize": [
         2,
@@ -17573,7 +17573,7 @@
     {
       "id": "rugs/rug_tiger_purple_rect.png",
       "name": "Rug Tiger Purple Rect - 2x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_tiger_purple_rect.png",
       "gridSize": [
         2,
@@ -17583,7 +17583,7 @@
     {
       "id": "rugs/rug_white_dirty_grime_rect.png",
       "name": "Rug White Dirty Grime Rect - 1x4",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_white_dirty_grime_rect.png",
       "gridSize": [
         1,
@@ -17593,7 +17593,7 @@
     {
       "id": "rugs/rug_yellow_indian_rect.png",
       "name": "Rug Yellow Indian Rect - 2x3",
-      "category": "rugs",
+      "category": "furniture",
       "path": "/assets/rugs/rug_yellow_indian_rect.png",
       "gridSize": [
         2,

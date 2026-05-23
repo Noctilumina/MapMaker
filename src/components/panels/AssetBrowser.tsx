@@ -17,13 +17,14 @@ function withBase(path: string): string {
 const CATEGORIES = ['all', 'floors', 'walls', 'furniture', 'props', 'doors'];
 const TEXTURE_CATEGORIES = ['all', 'drawn', 'grass', 'ground', 'rock', 'stone-wall', 'wood', 'paving', 'roof', 'misc', 'numbered'];
 const OBJECT_CATEGORIES = [
-  'all', 'furniture', 'characters', 'street', 'crates', 'trash',
-  'security', 'tech', 'vehicles', 'buildings', 'nature',
-  'wall-elements', 'floor-elements', 'doors-hatches', 'railings-stairs',
-  'dungeon-tiles', 'rugs', 'rugs-decor', 'lighting', 'rubble', 'gore',
-  'graffiti', 'scrap-debris', 'fencing', 'Door Tiles', 'Stair Tiles',
-  'Special Rooms', 'Structures', 'Bloody Assets',
-  'container', 'patches',
+  'all', 'furniture', 'decor', 'characters', 'Bloody Assets', 'gore',
+  'street', 'buildings', 'vehicles', 'container', 'graffiti',
+  'nature', 'rubble', 'scrap-debris',
+  'floor-elements', 'patches',
+  'crates', 'trash',
+  'lighting', 'tech', 'security',
+  'wall-elements', 'fencing', 'stairs', 'doors-hatches',
+  'dungeon-tiles', 'Door Tiles', 'Stair Tiles', 'Special Rooms', 'Structures',
 ];
 
 interface TextureEntry {
