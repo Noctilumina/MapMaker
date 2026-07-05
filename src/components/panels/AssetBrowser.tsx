@@ -199,7 +199,7 @@ export default function AssetBrowser() {
       items = items.filter(o => o.name.toLowerCase().includes(lower));
     }
     return items;
-  }, [objects, objCategory, objVibe, search, tagMap]);
+  }, [objects, objSubCategory, objVibe, search, tagMap]);
 
   const filteredTextures = useMemo(() => {
     let items = textures;
